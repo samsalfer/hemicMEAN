@@ -1,17 +1,17 @@
 /**
  * Using Rails-like standard naming convention for endpoints.
- * GET     /api/structures              ->  index
- * POST    /api/structures              ->  create
- * GET     /api/structures/:id          ->  show
- * PUT     /api/structures/:id          ->  upsert
- * PATCH   /api/structures/:id          ->  patch
- * DELETE  /api/structures/:id          ->  destroy
+ * GET     /api/elements              ->  index
+ * POST    /api/elements              ->  create
+ * GET     /api/elements/:id          ->  show
+ * PUT     /api/elements/:id          ->  upsert
+ * PATCH   /api/elements/:id          ->  patch
+ * DELETE  /api/elements/:id          ->  destroy
  */
 
 'use strict';
 
 import jsonpatch from 'fast-json-patch';
-import Structure from './structure.model';
+import Element from './element.model';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -20,22 +20,6 @@ function respondWithResult(res, statusCode) {
       return res.status(statusCode).json(entity);
     }
     return null;
-  };
-}
-
-function validationError(res, statusCode) {
-  statusCode = statusCode || 409;
-  return function(err) {
-    if(err.errors) {
-      let keys = Object.keys(err.errors);
-      if(err.errors[keys[0]].kind === 'required') {
-        return res.status(472).json(err);
-      } else {
-        return res.status(statusCode).json(err);
-      }
-    } else {
-      return res.status(statusCode).json('Validation error');
-    }
   };
 }
 
@@ -80,56 +64,54 @@ function handleError(res, statusCode) {
   };
 }
 
-// Gets a list of Structures
+// Gets a list of Elements
 export function index(req, res) {
-  return Structure.find()
-    .populate({path: 'elements', model: 'Element'})
-    .exec()
+  return Element.find().exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
-// Gets a single Structure from the DB
+// Gets a single Element from the DB
 export function show(req, res) {
-  return Structure.findById(req.params.id).exec()
+  return Element.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
-// Creates a new Structure in the DB
+// Creates a new Element in the DB
 export function create(req, res) {
-  return Structure.create(req.body)
+  return Element.create(req.body)
     .then(respondWithResult(res, 201))
-    .catch(validationError(res));
+    .catch(handleError(res));
 }
 
-// Upserts the given Structure in the DB at the specified ID
+// Upserts the given Element in the DB at the specified ID
 export function upsert(req, res) {
   if(req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
   }
-  return Structure.findOneAndUpdate({_id: req.params.id}, req.body, {new: true, upsert: true, setDefaultsOnInsert: true, runValidators: true}).exec()
+  return Element.findOneAndUpdate({_id: req.params.id}, req.body, {new: true, upsert: true, setDefaultsOnInsert: true, runValidators: true}).exec()
 
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
-// Updates an existing Structure in the DB
+// Updates an existing Element in the DB
 export function patch(req, res) {
   if(req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
   }
-  return Structure.findById(req.params.id).exec()
+  return Element.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(patchUpdates(req.body))
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
-// Deletes a Structure from the DB
+// Deletes a Element from the DB
 export function destroy(req, res) {
-  return Structure.findById(req.params.id).exec()
+  return Element.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));

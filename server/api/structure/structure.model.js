@@ -1,18 +1,42 @@
 'use strict';
 
-import mongoose from 'mongoose';
+import mongoose, {Schema} from 'mongoose';
 import {registerEvents} from './structure.events';
 
 var StructureSchema = new mongoose.Schema({
-  type: {
+  idStructure: {
     type: String,
-    unique: true,
-    required: 'Please fill type'
+    required: 'Please fill IDStructure'
   },
-  data: {
-    type: Object,
-    required: 'Please fill Object'
-  }
+  version: {
+    type: String,
+    required: 'Please fill version'
+  },
+  name: {
+    type: String,
+    required: 'Please fill name'
+  },
+  codeTerm: {
+    type: String,
+    required: 'Please fill codeTerm'
+  },
+  idPath: {
+    type: String,
+    required: 'Please fill idPath'
+  },
+  lifeCycle: {
+    type: String,
+    required: 'Please fill lifeCycle'
+  },
+  language: {
+    type: String,
+    required: 'Please fill language'
+  },
+  elements: [{
+    type: Schema.ObjectId,
+    ref: 'Element',
+    // required: 'Please fill id_element'
+  }]
 });
 
 registerEvents(StructureSchema);
