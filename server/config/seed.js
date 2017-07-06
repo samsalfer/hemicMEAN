@@ -126,23 +126,23 @@ export default function seedDatabaseIfNeeded() {
     User.find({}).remove()
       .then(() => {
         return Structure.find({}).remove()
-        .then(() => console.log('remove structures'))
-        .catch(err => console.log('error remove structures: ', err));
+          .then(() => console.log('remove structures'))
+          .catch(err => console.log('error remove structures: ', err));
       })
       .then(() => {
         return Element.find({}).remove()
-        .then(() => console.log('remove elements'))
-        .catch(err => console.log('error remove elements: ', err));
+          .then(() => console.log('remove elements'))
+          .catch(err => console.log('error remove elements: ', err));
       })
       .then(() => {
         return User.create(users)
-        .then(() => console.log('finished populating users'))
-        .catch(err => console.log('error populating users', err));
+          .then(() => console.log('finished populating users'))
+          .catch(err => console.log('error populating users', err));
       })
       .then(() => {
         return Structure.create(structures)
-        .then(() => console.log('finished populating structures'))
-        .catch(err => console.log('error populating structures', err));
+          .then(() => console.log('finished populating structures'))
+          .catch(err => console.log('error populating structures', err));
       })
       .then(() => {
         return Structure.findOne({idStructure: 'Medicamentos'}).exec()

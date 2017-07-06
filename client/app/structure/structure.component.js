@@ -20,7 +20,6 @@ export class StructureComponent {
       });
   }
   selected(id){
-    console.log('ENTRAAA');
     this.idSelected = id;
   }
 }

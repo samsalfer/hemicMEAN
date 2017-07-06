@@ -80,7 +80,7 @@ export function show(req, res) {
 }
 
 // Creates a new Thing in the DB
-export function create(req, res) {
+export function  create(req, res) {
   return Thing.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
