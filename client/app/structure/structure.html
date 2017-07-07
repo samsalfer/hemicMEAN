@@ -25,17 +25,25 @@
               </p>
               <!--ng-if="$ctrl.idStructure != '' && $ctrl.idStructure == st.idStructure"-->
               <div ng-show="$ctrl.idSelected == st._id">
-                <p  style="padding-left: 20px" ng-repeat="e in st.elements">{{e.name}} </p>
+                <p  style="padding-left: 20px" ng-repeat="e in st.elements">
+                  <a ng-click="$ctrl.elementSelected(e._id)">{{e.name}}</a>
+                </p>
               </div>
 
             </div>
         </div>
-        <div class="col-sm-6">.col-sm-6</div>
+        <div class="col-sm-6">
+          <div ng-repeat="el in $ctrl.elements.terms">
+            <p>
+                {{el.name}}
+
+            </p>
+         </div>
+        </div>
+
+
+
       </div>
-
-
-
-
     </div>
   </div>
 </div>

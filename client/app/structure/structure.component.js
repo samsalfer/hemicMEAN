@@ -9,18 +9,25 @@ export class StructureComponent {
   /*@ngInject*/
   constructor($http) {
     this.$http = $http;
-    this.message = 'Hello';
     this.idSelected = '';
+    this.idElementSelected = '';
   }
   $onInit() {
     this.$http.get('api/structures')
       .then(res => {
-        console.log(res);
         this.structures = res.data;
       });
   }
-  selected(id){
+  selected(id) {
     this.idSelected = id;
+  }
+
+  elementSelected(id) {
+    this.idElementSelected = id;
+    this.$http.get('api/elements/' + id)
+      .then(res => {
+        this.elements = res.data;
+      });
   }
 }
 
