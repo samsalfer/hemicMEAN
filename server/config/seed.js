@@ -102,7 +102,7 @@ export default function seedDatabaseIfNeeded() {
         structures: [],
         name: 'Principio activo',
         codeTerm: 'cccc',
-        typeData: 'CS',
+        typeData: 'pq',
         terms: [
           {
             name: 'Termino 1',
@@ -118,7 +118,7 @@ export default function seedDatabaseIfNeeded() {
         structures: [],
         name: 'Dosis',
         codeTerm: 'cccc',
-        typeData: 'INT',
+        typeData: 'real',
         terms: [1, 2, 3, 4, 5, 6]
       }
     ];

@@ -5,7 +5,6 @@ import angular from 'angular';
 import ngCookies from 'angular-cookies';
 import ngResource from 'angular-resource';
 import ngSanitize from 'angular-sanitize';
-import {MdButtonModule, MdCheckboxModule} from '@angular/material';
 import 'angular-socket-io';
 
 import uiRouter from 'angular-ui-router';
@@ -32,7 +31,7 @@ import './app.css';
 
 angular.module('hemicApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
   uiBootstrap, _Auth, account, admin, 'validation.match', navbar, footer, main, structure, constants,
-  socket, util, MdButtonModule, MdCheckboxModule
+  socket, util
 ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {
