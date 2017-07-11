@@ -105,12 +105,12 @@ export default function seedDatabaseIfNeeded() {
         typeData: 'pq',
         terms: [
           {
-            name: 'Termino 1',
-            codigo: 'trm0001'
+            name: 'Units',
+            datas: ['mg', 'g', 'kg']
           },
           {
-            name: 'Termino 2',
-            codigo: 'trm0002'
+            name: 'Amount',
+            datas: [10, 100, 1000]
           }
         ]
       },
