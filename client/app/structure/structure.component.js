@@ -38,6 +38,12 @@ export class StructureComponent {
     });
   }
 
+  addItemFromArr(arr, item) {
+    if(arr.indexOf(item) === -1) {
+      arr.push(item);
+    }
+  }
+
   removeItemFromArr(arr, item) {
     let i = arr.indexOf(item);
     arr.splice(i, 1);

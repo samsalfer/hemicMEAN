@@ -3,81 +3,107 @@
     <div class="col-lg-12">
       <h1 class="page-header">Estructuras:</h1>
 
-      <div class="row">
-        <div class="col-sm-6">
 
 
-            <form class="search-form">
-              <label>Search</label>
-              <p class="input-group">
-                <input type="text" class="form-control" placeholder="Add a new thing here." ng-model="searchText">
-                <span class="input-group-btn">
+      <div class="container-fluid container-fixed-lg">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <div class="panel-title">Estructura de información
+                </div>
+              </div>
+              <div class="panel-body">
+                <form class="search-form">
+                  <label>Search</label>
+                  <p class="input-group">
+                    <input type="text" class="form-control" placeholder="Add a new thing here." ng-model="searchText">
+                    <span class="input-group-btn">
                  </span>
-              </p>
-            </form>
+                  </p>
+                </form>
+                <div ng-show="searchText" ng-repeat="st in $ctrl.structures | filter:searchText">
+                  <p>
+                    <a ng-click="$ctrl.selected(st)">
 
-            <div ng-show="searchText" ng-repeat="st in $ctrl.structures | filter:searchText">
-              <p>
-                <a ng-click="$ctrl.selected(st)">
-
-                  <!--<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>-->
-                  {{st.idStructure}}
-                </a>
-              </p>
-              <!--ng-if="$ctrl.idStructure != '' && $ctrl.idStructure == st.idStructure"-->
-              <!--<div ng-show="$ctrl.selected == st._id">-->
-                <!--<p  style="padding-left: 20px" ng-repeat="e in st.elements">-->
+                      <!--<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>-->
+                      {{st.idStructure}}
+                    </a>
+                  </p>
+                  <!--ng-if="$ctrl.idStructure != '' && $ctrl.idStructure == st.idStructure"-->
+                  <!--<div ng-show="$ctrl.selected == st._id">-->
+                  <!--<p  style="padding-left: 20px" ng-repeat="e in st.elements">-->
                   <!--<a ng-click="$ctrl.elementSelected(e._id)">{{e.name}}</a>-->
-                <!--</p>-->
-              <!--</div>-->
+                  <!--</p>-->
+                  <!--</div>-->
 
-            </div>
-        </div>
-        <!--<div class="col-sm-6">-->
-          <!--<div ng-repeat="el in $ctrl.elements.terms">-->
-            <!--<p>-->
-                <!--{{el.name}}-->
+                </div>
 
-            <!--</p>-->
-          <!--</div>-->
-        <!--</div>-->
-      </div>
-      <div class="row">
-        <div class="col-sm-6">
-          <div ng-repeat="select in $ctrl.selection">
-            <p>{{select.idStructure}}</p>
-            <p style="padding-left: 20px" ng-repeat="e in select.elements">
-              <a ng-click="$ctrl.elementOfStructureSelected(select._id,e._id)"> >{{e.name}}</a>
-            </p>
-          </div>
-        </div>
-        </hr>
-        <div class="col-sm-6">
-          <div ng-if="$ctrl.elementSelected.typeData == 'pq'">
-            <div ng-repeat="term in $ctrl.elementSelected.terms">
-              <p class="test"> {{term.name}}: </p>
-              <input type="text" class="form-control" placeholder="term.name especific" ng-model="especific">
-              <a ng-if="especific" ng-click="term.datas.push(especific)"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
-              <div ng-repeat="d in term.datas">
-                <span>{{d}}</span><a ng-click="$ctrl.removeItemFromArr(term.datas, d)"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></a>
+                //////////////////////////////////////////////////////
+                <div ng-repeat="select in $ctrl.selection">
+                  <p>{{select.idStructure}}</p>
+                  <p style="padding-left: 20px" ng-repeat="e in select.elements">
+                    <a ng-click="$ctrl.elementOfStructureSelected(select._id,e._id)"> >{{e.name}}</a>
+                  </p>
+                </div>
               </div>
             </div>
-            <!--<form class="search-form">-->
-              <!--<span class="input-group">-->
-                <!--<input type="text" class="form-control" placeholder="Add a new thing here." ng-model="searchText">-->
-                <!--<span class="input-group-btn">-->
-                 <!--</span>-->
-              <!--</span>-->
-              <!--<select type="text" class="form-control" ng-model="searchText"> -->
-              <!--</select>-->
-                <!---->
-            <!--</form>-->
-            <!--<p>-->
-              <!--{{el.name}}-->
+          </div>
+          <div class="col-sm-6">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <div class="panel-title">Conjunto de valores
+                </div>
+              </div>
+              <div class="panel-body">
+                <table ng-repeat="term in $ctrl.elementSelected.terms" class="table table-hover">
+                  <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>{{term.name}}</th>
+                    <th><input type="text" class="form-control" placeholder="Add term" ng-model="especific"></th>
+                    <th><a ng-if="especific" ng-click="$ctrl.addItemFromArr(term.datas, especific)"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr ng-repeat="d in term.datas">
+                    <td></td>
+                    <td class="test">{{d}}</td>
+                    <td><button type="button" ng-click="$ctrl.removeItemFromArr(term.datas, d)" class="btn btn-danger btn-xs center">Delete</button></td>
+                  </tr>
+                  </tbody>
+                </table>
+                <!--<div ng-if="$ctrl.elementSelected.typeData == 'pq'">-->
+                  <!--<div ng-repeat="term in $ctrl.elementSelected.terms">-->
+                    <!--<p class="test"> {{term.name}}: </p>-->
+                    <!--<input type="text" class="form-control" placeholder="term.name especific" ng-model="especific">-->
+                    <!--<a ng-if="especific" ng-click="$ctrl.addItemFromArr(term.datas, especific)"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>-->
+                    <!--<div ng-repeat="d in term.datas">-->
+                      <!--<span>{{d}}</span><a ng-click="$ctrl.removeItemFromArr(term.datas, d)"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></a>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                  <!--<form class="search-form">-->
+                  <!--<span class="input-group">-->
+                  <!--<input type="text" class="form-control" placeholder="Add a new thing here." ng-model="searchText">-->
+                  <!--<span class="input-group-btn">-->
+                  <!--</span>-->
+                  <!--</span>-->
+                  <!--<select type="text" class="form-control" ng-model="searchText"> -->
+                  <!--</select>-->
+                  <!---->
+                  <!--</form>-->
+                  <!--<p>-->
+                  <!--{{el.name}}-->
 
-            <!--</p>-->
+                  <!--</p>-->
+                </div>
+
+
+              </div>
+            </div>
           </div>
         </div>
+
       </div>
     </div>
   </div>
