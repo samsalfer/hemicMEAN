@@ -73,6 +73,36 @@
                   </tr>
                   </tbody>
                 </table>
+
+
+
+
+                Combinar
+                <div ng-repeat="select in $ctrl.selection">
+                  <!--{{select}}-->
+                  <div ng-repeat="element in select.elements">
+                    <div  ng-repeat="term in element.terms">
+                      <md-checkbox ng-show="term.name" type="checkbox" checklist-model="element.specificterms.names" checklist-value="term.name"> {{term.name}} </md-checkbox>
+                    </div>
+                  </div>
+                </div>
+                <button ng-click="$ctrl.combineTerms()">Siguiente</button>
+                <div ng-repeat="combi in $ctrl.combination">
+                  {{combi.name}}
+                  <select name="singleSelect" ng-model="$ctrl.test2">
+                    <option ng-repeat="d in combi.datas" value="{{d}}">{{d}}</option>
+                  </select>
+                </div>
+                <!--{{$ctrl.user.test}}-->
+                <!--<label ng-repeat=" t in $ctrl.test">-->
+                  <!--<input type="checkbox" checklist-model="$ctrl.user.test" checklist-value="t">{{t}}</br>-->
+                <!--</label>-->
+
+
+
+
+
+
                 <!--<div ng-if="$ctrl.elementSelected.typeData == 'pq'">-->
                   <!--<div ng-repeat="term in $ctrl.elementSelected.terms">-->
                     <!--<p class="test"> {{term.name}}: </p>-->

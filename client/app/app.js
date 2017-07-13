@@ -6,6 +6,7 @@ import ngCookies from 'angular-cookies';
 import ngResource from 'angular-resource';
 import ngSanitize from 'angular-sanitize';
 import ngMaterial from 'angular-material';
+import checklist from 'checklist-model';
 import 'angular-socket-io';
 
 import uiRouter from 'angular-ui-router';
@@ -27,12 +28,11 @@ import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
 import structure from './structure/structure.component';
 
-
 import './app.css';
 
 angular.module('hemicApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
   uiBootstrap, _Auth, account, admin, 'validation.match', navbar, footer, main, structure, constants,
-  ngMaterial, socket, util
+  ngMaterial, checklist, socket, util
 ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {
