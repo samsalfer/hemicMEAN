@@ -3,15 +3,16 @@ const angular = require('angular');
 
 const uiRouter = require('angular-ui-router');
 
-import routes from './structure.routes';
+import routes from './combine.routes';
 
-export class StructureComponent {
+export class CombineComponent {
   /*@ngInject*/
   constructor($http) {
     this.$http = $http;
     this.selection = [];
     this.idElementSelected = '';
     this.searchText = '';
+
   }
   $onInit() {
     this.user = {
@@ -21,6 +22,7 @@ export class StructureComponent {
     this.combination = [];
     this.showChecks = false
     this.showFirst = true;
+    this.showCombination = false;
     this.$http.get('api/structures')
       .then(res => {
         this.structures = res.data;
@@ -36,21 +38,9 @@ export class StructureComponent {
         };
       });
       this.selection.push(structure);
-    }
-    this.searchText = "";
-  }
+      this.searchText = "";
 
-  elementOfStructureSelected(idStructure, idElement) {
-    this.selection.forEach(s => {
-      if(s._id === idStructure) {
-        s.elements.forEach(e => {
-          if(e._id === idElement) {
-            console.log(e);
-            this.elementSelected = e;
-          }
-        });
-      }
-    });
+    }
   }
 
   addItemFromArr(arr, item) {
@@ -70,6 +60,8 @@ export class StructureComponent {
 
   combineTerms() {
     this.combination = [];
+    this.showCombination = true;
+
     this.selection.forEach(structure => {
       structure.elements.forEach(element => {
         console.log('eeee');
@@ -88,11 +80,11 @@ export class StructureComponent {
   }
 }
 
-export default angular.module('hemicApp.structure', [uiRouter])
+export default angular.module('hemicApp.combine', [uiRouter])
   .config(routes)
-  .component('structure', {
-    template: require('./structure.html'),
-    controller: StructureComponent
-    // controllerAs: 'structureCtrl'
+  .component('combine', {
+    template: require('./combine.html'),
+    controller: CombineComponent,
+ //   controllerAs: 'combineCtrl'
   })
   .name;

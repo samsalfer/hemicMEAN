@@ -62,17 +62,8 @@ export default function seedDatabaseIfNeeded() {
       }];
     let structures = [
       {
-        idStructure: 'Medicamentos',
+        idStructure: 'Prescripción',
         version: '0',
-        name: 'Escala APGAR',
-        codeTerm: 'xxxx',
-        idPath: 'at0001',
-        lifeCycle: 'lifeCycle1',
-        language: 'Spanish'
-      },
-      {
-        idStructure: 'Medicamentos',
-        version: '1',
         name: 'Escala APGAR',
         codeTerm: 'xxxx',
         idPath: 'at0001',
@@ -100,7 +91,7 @@ export default function seedDatabaseIfNeeded() {
     let elements = [
       {
         structures: [],
-        name: 'Principio activo',
+        name: 'Dosis',
         codeTerm: 'cccc',
         typeData: 'pq',
         terms: [
@@ -116,11 +107,20 @@ export default function seedDatabaseIfNeeded() {
       },
       {
         structures: [],
-        name: 'Dosis',
+        name: 'Principio activo',
         codeTerm: 'cccc',
         typeData: 'real',
-        terms: [1, 2, 3, 4, 5, 6]
+        terms: [
+          {
+            name: 'Principio activo',
+            datas: ['Bilastina', 'Cetirizina']
+          }, {
+            name: 'Presentación',
+            datas: ['Comprimido', 'Pulv Nasal']
+          }
+        ]
       }
+
     ];
 
     User.find({}).remove()
@@ -145,7 +145,7 @@ export default function seedDatabaseIfNeeded() {
           .catch(err => console.log('error populating structures', err));
       })
       .then(() => {
-        return Structure.findOne({idStructure: 'Medicamentos'}).exec()
+        return Structure.findOne({idStructure: 'Prescripción'}).exec()
           .then(structure => {
             elements.forEach(element => {
               element.structures.push(structure._id);

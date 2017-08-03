@@ -5,11 +5,14 @@ import angular from 'angular';
 
 export class NavbarComponent {
   menu = [{
-    title: 'Home',
-    state: 'main'
-  }, {
     title: 'Structure',
     state: 'structure'
+  }, {
+    title: 'Personalize',
+    state: 'combine'
+  }, {
+    title: 'Form',
+    state: 'composition'
   }];
   isLoggedIn: Function;
   isAdmin: Function;

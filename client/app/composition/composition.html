@@ -1,0 +1,129 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">Personalizar formulario:</h1>
+
+
+      <div class="container-fluid container-fixed-lg">
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <div class="panel-title">Autoformulario
+                </div>
+
+              </div>
+              <div class="panel-body">
+                <form class="search-form">
+                  <label>Search</label>
+                  <p class="input-group">
+                    <input type="text" class="form-control" placeholder="" ng-model="$ctrl.searchText">
+                    <span class="input-group-btn">
+                 </span>
+                  </p>
+                </form>
+                <div ng-show="$ctrl.searchText" ng-repeat="st in $ctrl.data | filter:$ctrl.searchText">
+                  <p>
+                    <a ng-click="$ctrl.selected()">
+
+                      <!--<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>-->
+                      {{st.name}}
+                    </a>
+                  </p>
+                  <!--ng-if="$ctrl.idStructure != '' && $ctrl.idStructure == st.idStructure"-->
+                  <!--<div ng-show="$ctrl.selected == st._id">-->
+                  <!--<p  style="padding-left: 20px" ng-repeat="e in st.elements">-->
+                  <!--<a ng-click="$ctrl.elementSelected(e._id)">{{e.name}}</a>-->
+                  <!--</p>-->
+                  <!--</div>-->
+
+                </div>
+
+                <hr>
+                <div ng-repeat="select in $ctrl.selection">
+                  <!--{{select}}-->
+                  <div ng-repeat="element in select.elements">
+                    <div  ng-repeat="term in element.terms">
+                      <md-checkbox ng-show="term.name" type="checkbox" checklist-model="element.specificterms.names" checklist-value="term.name"> {{term.name}} </md-checkbox>
+                    </div>
+                  </div>
+                </div>
+                <md-button class="md-raised md-primary" ng-click="$ctrl.select2 ()">Seleccionar</md-button>
+                <hr>
+
+                <!--<div ng-repeat="combi in $ctrl.combination">-->
+                <!--<md-input-container>-->
+                <!--<label>{{combi.name}}</label>-->
+                <!--<md-select name="singleSelect" ng-model="$ctrl.test2">-->
+                <!--<md-option ng-repeat="d in combi.datas" value="{{d}}">{{d}}</md-option>-->
+                <!--</md-select>-->
+
+                <!--</md-input-container>-->
+
+                <!--&lt;!&ndash;<select name="singleSelect" ng-model="$ctrl.test2">&ndash;&gt;-->
+                <!--&lt;!&ndash;<option ng-repeat="d in combi.datas" value="{{d}}">{{d}}</option>&ndash;&gt;-->
+                <!--&lt;!&ndash;</select>&ndash;&gt;-->
+                <!--</div>-->
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-9">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <div class="panel-title">Término Combinado
+                </div>
+              </div>
+              <div class="panel-body">
+
+                </md-input-container>
+                <div ng-repeat="combi in $ctrl.data2" ng-show="$ctrl.showCombination">
+                <md-input-container>
+                <label>{{combi.name}}</label>
+                <md-select name="singleSelect" ng-model="$ctrl.test2">
+                <md-option ng-repeat="d in combi.value" value="{{d}}">{{d}}</md-option>
+                </md-select>
+
+                </md-input-container>
+
+                <!--<select name="singleSelect" ng-model="$ctrl.test2">-->
+                <!--<option ng-repeat="d in combi.datas" value="{{d}}">{{d}}</option>-->
+                <!--</select>-->
+                </div>
+
+                <!--<table class="table table-hover" ng-show="$ctrl.showCombination">-->
+                  <!--<thead>-->
+                  <!--<tr>-->
+                    <!--<th ng-repeat ="name in $ctrl.selection[0].elements[1].specificterms.names">{{name}}</th>-->
+                  <!--</tr>-->
+                  <!--</thead>-->
+                  <!--<tbody>-->
+                  <!--<tr>-->
+                    <!--<td>Blastina</td>-->
+                    <!--<td class="test">Comprimido</td>-->
+                    <!--<td><button type="button" ng-click="$ctrl.removeItemFromArr(term.datas, d)" class="btn btn-danger btn-xs center">Delete</button></td>-->
+                  <!--</tr>-->
+                  <!--<tr>-->
+                    <!--<td>Blastina</td>-->
+                    <!--<td class="test">Pulv Nasal</td>-->
+                    <!--<td><button type="button" ng-click="$ctrl.removeItemFromArr(term.datas, d)" class="btn btn-danger btn-xs center">Delete</button></td>-->
+                  <!--</tr>-->
+                  <!--<tr>-->
+                    <!--<td>Comprimido</td>-->
+                    <!--<td class="test">Pulv Nasal</td>-->
+                    <!--<td><button type="button" ng-click="$ctrl.removeItemFromArr(term.datas, d)" class="btn btn-danger btn-xs center">Delete</button></td>-->
+                  <!--</tr>-->
+                  <!--</tbody>-->
+                <!--</table>-->
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
