@@ -5,7 +5,29 @@
     <img src="assets/images/yeoman.png" alt="I'm Yeoman">
   </div>
 </header>
+--------------------------------------------------------------------------------------------
 
+<div ng-repeat="(i,m) in $ctrl.modelForm">
+  <input style="border:0px; font-size: 16px; font-style: bold" type="text" ng-model="m.header" />:
+  <div ng-if="m.typeStructure === 'simple' ">
+    <input type="{{m.type}}" ng-model="m.options" />
+  </div>
+  <div ng-if="m.typeStructure === 'complex' ">
+    <div ng-repeat="(j, v) in m.options">
+      <input type="text" ng-model="v.name" />
+      <input type="{{m.type}}" ng-model="v.value" />
+      <button ng-if="m.type === 'checkbox'" ng-click="$ctrl.deleteOptionInCheck(i,j)">-</button>
+    </div>
+    <button ng-if="m.type === 'checkbox'" ng-click="$ctrl.addOptionInCheck(i)">Añadir mas opciones al checkbox</button>
+  </div>
+</div>
+<div>
+  <button ng-click="$ctrl.addText()">Añadir Texto</button>
+  <button ng-click="$ctrl.addNumber()">Añadir Number</button>
+  <button ng-click="$ctrl.addCheck()">Añadir Check</button>
+</div>
+
+--------------------------------------------------------------------------------------------
 <div class="container">
   <div class="row">
     <div class="col-lg-12">
