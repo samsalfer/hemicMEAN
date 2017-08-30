@@ -19,13 +19,14 @@ export class CompositionComponent {
       typeStructure: 'simple',
       class: 'form_model',
       header: 'Text Field',
-      options: ''
+      value: '',
+      maxLength: 2
     }, {
       type: 'number',
       typeStructure: 'simple',
       class: 'form_model',
       header: 'Number',
-      options: 0
+      value: 0
     }, {
       type: 'checkbox',
       typeStructure: 'complex',
@@ -43,6 +44,7 @@ export class CompositionComponent {
     }, {
       type: 'select',
       typeStructure: 'complex',
+      value: '',
       class: 'form_model',
       header: 'Select',
       options: [
@@ -54,6 +56,46 @@ export class CompositionComponent {
           value: 'Option 2'
         }
       ]
+    }, {
+      type: 'textArea',
+      typeStructure: 'textArea',
+      class: 'form_model',
+      header: 'Text Area',
+      value: '',
+      rows: 4
+    }, {
+      type: 'radioGroup',
+      typeStructure: 'complex',
+      class: 'form_model',
+      header: 'Radio Group',
+      value: '',
+      options: [
+        {
+          name: 'Option 1',
+          value: 'Option 1'
+        }, {
+          name: 'Option 2',
+          value: 'Option 2'
+        }
+      ]
+    }, {
+      type: 'header',
+      typeStructure: 'text',
+      class: 'header',
+      header: 'Header',
+      options: ''
+    }, {
+      type: 'paragraph',
+      typeStructure: 'text',
+      class: 'paragraph',
+      header: 'Paragraph',
+      value: ''
+    }, {
+      type: 'dateField',
+      typeStructure: 'dateField',
+      class: 'form_model',
+      header: 'Date Field',
+      value: ''
     }
   ];
   modelForm = [];
@@ -99,11 +141,13 @@ export class CompositionComponent {
     let $mdDialog = this.$mdDialog;
 
     $scope.showModelForm = function() {
-      console.log('LLEGAAAA');
       $mdDialog.show({
         contentElement: '#modelForm',
         parent: angular.element(document.body)
       });
+    }
+    $scope.hideModelForm = function() {
+      $mdDialog.hide();
     }
     $scope.showSimpleToast = function() {
       var pinTo = $scope.getToastPosition();
@@ -133,7 +177,7 @@ export class CompositionComponent {
       if( current.right && last.left ) current.left = false;
       if( current.left && last.right ) current.right = false;
 
-      last = angular.extend({},current);
+      last = angular.extend({}, current);
     }
   }
 
@@ -148,6 +192,21 @@ export class CompositionComponent {
   }
   addSelect() {
     this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[3])));
+  }
+  addTextArea() {
+    this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[4])));
+  }
+  addRadioGroup() {
+    this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[5])));
+  }
+  addHeader() {
+    this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[6])));
+  }
+  addParagraph() {
+    this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[7])));
+  }
+  addDateField() {
+    this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[8])));
   }
   deleteObject(index) {
     this.modelForm.splice(index, 1);
@@ -164,9 +223,6 @@ export class CompositionComponent {
   selected() {
     this.showCombination = true;
     this.searchText = '';
-  }
-  test() {
-    console.log('HOLAAA');
   }
 }
 
