@@ -98,7 +98,9 @@ export class CompositionComponent {
       value: ''
     }
   ];
+  modelFormCustom = [];
   modelForm = [];
+  nameForm = '';
   example = [];
     // [
     //   {
@@ -134,10 +136,11 @@ export class CompositionComponent {
     // ]
   // ];
   /*@ngInject*/
-  constructor($scope, $mdToast, $mdDialog) {
+  constructor($scope, $mdToast, $mdDialog, $http) {
     this.$scope = $scope;
     this.$mdToast = $mdToast;
     this.$mdDialog = $mdDialog;
+    this.$http = $http;
 
 
     // this.searchText = '';
@@ -172,6 +175,15 @@ export class CompositionComponent {
     let $scope = this.$scope;
     let $mdToast = this.$mdToast;
     let $mdDialog = this.$mdDialog;
+    let $http = this.$http;
+
+    $http.get('api/forms')
+      .then(res => {
+        this.modelFormCustom = res.data;
+        console.log(res);
+        console.log('---------------------------');
+        console.log(this.modelFormCustom);
+      })
 
     $scope.showModelForm = function() {
       $mdDialog.show({
@@ -273,10 +285,22 @@ export class CompositionComponent {
       this.modelForm.push(JSON.parse(JSON.stringify(value)));
     });
   }
+
+  addFormCustom(form) {
+    form.forEach(f => {
+      this.modelForm.push(f);
+    });
+  }
+
   saveForm() {
-    this.example = [];
-    this.example.push(angular.copy(this.modelForm));
-    console.log(this.example);
+    let object = {
+      name: this.nameForm,
+      form: this.modelForm
+    }
+    // this.example = [];
+    // this.example(angular.copy(this.modelForm));
+    console.log(object);
+    this.$http.post('api/forms', object);
   }
 }
 
