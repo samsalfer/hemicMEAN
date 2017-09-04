@@ -287,7 +287,6 @@ export class CompositionComponent {
   }
 
   addFormCustom(form) {
-
     form.forEach(f => {
       this.modelForm.push(f);
     });
