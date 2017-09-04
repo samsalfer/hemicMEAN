@@ -99,7 +99,40 @@ export class CompositionComponent {
     }
   ];
   modelForm = [];
-
+  example = [];
+    // [
+    //   {
+    //     type: 'text',
+    //     typeStructure: 'simple',
+    //     class: 'form_model',
+    //     header: 'Soy un máquina',
+    //     options: 'Rellena los datos'
+    //   },
+    //   {
+    //     type: 'text',
+    //     typeStructure: 'simple',
+    //     class: 'form_model',
+    //     header: 'Tipo Text',
+    //     options: 'Rellena los datos'
+    //   }
+    // ],
+    // [
+    //   {
+    //     type: 'text',
+    //     typeStructure: 'simple',
+    //     class: 'form_model',
+    //     header: 'Tipo Text',
+    //     options: 'Rellena los datos'
+    //   },
+    //   {
+    //     type: 'text',
+    //     typeStructure: 'simple',
+    //     class: 'form_model',
+    //     header: 'Tipo Text',
+    //     options: 'Rellena los datos'
+    //   }
+    // ]
+  // ];
   /*@ngInject*/
   constructor($scope, $mdToast, $mdDialog) {
     this.$scope = $scope;
@@ -220,9 +253,30 @@ export class CompositionComponent {
   deleteOptionInCheck(i, j) {
     this.modelForm[i].options.splice(j, 1);
   }
-  selected() {
-    this.showCombination = true;
-    this.searchText = '';
+  // selected() {
+  //   this.showCombination = true;
+  //   this.searchText = '';
+  // }
+  // // add a personalized form created
+  addPersonalizedForm() {
+    console.log(this.example);
+
+    angular.forEach(this.example, value => {
+      angular.forEach(value, object => {
+        this.modelForm.push(JSON.parse(JSON.stringify(object)));
+      });
+    });
+  }
+
+  addOnePersonalizedForm() {
+    angular.forEach(this.example[3], value => {
+      this.modelForm.push(JSON.parse(JSON.stringify(value)));
+    });
+  }
+  saveForm() {
+    this.example = [];
+    this.example.push(angular.copy(this.modelForm));
+    console.log(this.example);
   }
 }
 
