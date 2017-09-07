@@ -62,6 +62,7 @@ export class CompositionComponent {
       class: 'form_model',
       header: 'Text Area',
       value: '',
+      maxLength: 2,
       rows: 4
     }, {
       type: 'radioGroup',
@@ -288,7 +289,7 @@ export class CompositionComponent {
 
   addFormCustom(form) {
     form.forEach(f => {
-      this.modelForm.push(f);
+      this.modelForm.push(angular.copy(f));
     });
   }
 

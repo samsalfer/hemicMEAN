@@ -113,7 +113,8 @@
                           </div>
                          <!--TextArea-->
                           <div ng-if="m.type === 'textArea' ">
-                            <textarea class="form-control" rows="{{m.rows}}" cols="93" ng-model="m.value">
+                            {{m.maxLength}}
+                            <textarea class="form-control" rows="{{m.rows}}" cols="93" ng-model="m.value" maxlength="{{m.maxLength}}">
                             </textarea>
                           </div>
                           <!--Radio Group-->
@@ -157,25 +158,25 @@
                               <div class="form-group" ng-if="m.typeStructure!='complex' && m.type!='dateField' && m.type!='header'">
                                 <label class="control-label col-sm-2" for="value">Value:</label>
                                 <div class="col-sm-10">
-                                  <input type="{{m.type}}" class="form-control" id="value" ng-model="m.value" >
+                                  <input type="{{m.type}}" class="form-control" id="value" ng-model="m.value" maxlength="{{m.maxLength}}">
                                 </div>
                               </div>
                               <!--MAX LENGTH-->
-                              <div class="form-group" ng-if="m.typeStructure!='complex' && m.type!='number' && m.type!='dateField'">
+                              <div class="form-group" ng-if="m.typeStructure!='complex' && m.type!='number' && m.type!='dateField' && m.type!='header'">
                                 <label class="control-label col-sm-2" for="maxLength">Max Length:</label>
                                 <div class="col-sm-10">
-                                  <input type="number" class="form-control" id="maxLength" ng-model="m.maxlength" >
+                                  <input type="number" class="form-control" id="maxLength" ng-model="m.maxLength" >
                                 </div>
                               </div>
                               <!--number max & min-->
                               <div class="form-group" ng-if="m.type==='number'">
                                 <label class="control-label col-sm-2" for="maxValue">Max:</label>
                                 <div class="col-sm-4">
-                                  <input type="number" class="form-control" id="maxValue" ng-model="m.maxlValue" >
+                                  <input type="number" class="form-control" id="maxValue" ng-model="m.maxValue" >
                                 </div>
                                 <label class="control-label col-sm-2" for="maxValue">Min:</label>
                                 <div class="col-sm-4">
-                                  <input type="number" class="form-control" id="minValue" ng-model="m.minlValue" >
+                                  <input type="number" class="form-control" id="minValue" ng-model="m.minValue" >
                                 </div>
                               </div>
                               <!--OPTIONS CHECKBOX-->
@@ -256,7 +257,7 @@
                       </div>
                       <div class="col-sm-4"><button class="form-control" ng-click="showModelForm()">{}</button></div>
                       <div class="col-sm-4">
-                        <button class="form-control" ng-click="$ctrl.addPersonalizedForm()">meter</button></div>
+                        <!--<button class="form-control" ng-click="$ctrl.addPersonalizedForm()">meter</button></div>-->
                       <button class="form-control" ng-click="$ctrl.saveForm()">Save</button></div>
 
                   </div>
