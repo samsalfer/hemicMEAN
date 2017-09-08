@@ -186,9 +186,9 @@ export class CompositionComponent {
         console.log(this.modelFormCustom);
       })
 
-    $scope.showModelForm = function() {
+    $scope.showModelForm = function(modelElement) {
       $mdDialog.show({
-        contentElement: '#modelForm',
+        contentElement: modelElement,
         parent: angular.element(document.body)
       });
     }
@@ -300,8 +300,14 @@ export class CompositionComponent {
     }
     // this.example = [];
     // this.example(angular.copy(this.modelForm));
-    console.log(object);
     this.$http.post('api/forms', object);
+    this.$http.get('api/forms')
+      .then(res => {
+        this.modelFormCustom = res.data;
+        console.log(res);
+        console.log('---------------------------');
+        console.log(this.modelFormCustom);
+      });
   }
 }
 

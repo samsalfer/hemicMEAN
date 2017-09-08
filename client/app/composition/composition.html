@@ -3,9 +3,9 @@
     <div class="col-lg-12">
       <h1 class="page-header">Personalizar formulario:</h1>
 
-      <md-button ng-click="showSimpleToast()">
-        Show Simple
-      </md-button>
+      <!--<md-button ng-click="showSimpleToast()">-->
+        <!--Show Simple-->
+      <!--</md-button>-->
       <div class="container-fluid container-fixed-lg">
         <div class="row">
           <div class="col-sm-3">
@@ -17,21 +17,26 @@
               </div>
               <div class="panel-body">
                 <form class="search-form">
-                  <label>Search</label>
+                  <!--<label><i class="fa fa-search"></i>Search</label>-->
                   <p class="input-group">
-                    <input type="text" class="form-control" placeholder="" ng-model="$ctrl.searchText">
+                    <input autocomplete="off" type="text" id="myInput" placeholder="Search for structures.." ng-model="$ctrl.searchText" ng-minlength="2">
                     <span class="input-group-btn">
                  </span>
                   </p>
                 </form>
-                <div ng-show="$ctrl.searchText" ng-repeat="st in $ctrl.data | filter:$ctrl.searchText">
-                  <p>
-                    <a ng-click="$ctrl.selected()">
+                <ul ng-show="$ctrl.searchText!=null && $ctrl.searchText!=''" id="myUL">
+                  <li ng-repeat="form in $ctrl.modelFormCustom | filter:$ctrl.searchText" >
+                    <a ng-click="$ctrl.addFormCustom(form.form)">{{form.name}}</a>
+                  </li>
+                </ul>
+                <!--<div ng-show="$ctrl.searchText" ng-repeat="st in $ctrl.data | filter:$ctrl.searchText">-->
+                  <!--<p>-->
+                    <!--<a ng-click="$ctrl.selected()">-->
 
-                      <!--<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>-->
-                      {{st.name}}
-                    </a>
-                  </p>
+                      <!--&lt;!&ndash;<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&ndash;&gt;-->
+                      <!--{{st.name}}-->
+                    <!--</a>-->
+                  <!--</p>-->
                   <!--ng-if="$ctrl.idStructure != '' && $ctrl.idStructure == st.idStructure"-->
                   <!--<div ng-show="$ctrl.selected == st._id">-->
                   <!--<p  style="padding-left: 20px" ng-repeat="e in st.elements">-->
@@ -39,19 +44,12 @@
                   <!--</p>-->
                   <!--</div>-->
 
-                </div>
+                <!--</div>-->
 
-                <hr>
-                <div ng-repeat="select in $ctrl.selection">
-                  <!--{{select}}-->
-                  <div ng-repeat="element in select.elements">
-                    <div  ng-repeat="term in element.terms">
-                      <md-checkbox ng-show="term.name" type="checkbox" checklist-model="element.specificterms.names" checklist-value="term.name"> {{term.name}} </md-checkbox>
-                    </div>
-                  </div>
-                </div>
-                <md-button class="md-raised md-primary" ng-click="$ctrl.select2 ()">Seleccionar</md-button>
-                <hr>
+
+
+                <!--<md-button class="md-raised md-primary" ng-click="$ctrl.select2 ()">Seleccionar</md-button>-->
+                <!--<hr>-->
 
                 <!--<div ng-repeat="combi in $ctrl.combination">-->
                 <!--<md-input-container>-->
@@ -80,17 +78,12 @@
                 </md-input-container>
                 <div class="row">
                   <div class="col-sm-9">
-                    <div>
-                      <div class="formComponent">
-                        <input type="text" ng-model="$ctrl.nameForm" placeholder="Introduzca el nombre del formulario"/>
-                      </div>
-                    </div>
                     <div ng-repeat="(i,m) in $ctrl.modelForm">
                       <!--Añado una variable para controlar cuando el ratón entra en el div para mostrar los botones de editar y borrar-->
                       <div class="formComponent" ng-mouseenter="showHeaderButtons=true" ng-mouseleave="showHeaderButtons=false" >
                         <span class="{{m.class}} formLabel">{{m.header}}<span ng-if="m.required===true">*</span></span>
-                        <md-button class="delete" ng-show="showHeaderButtons" ng-click="$ctrl.deleteObject(i)"><i class="fa fa-times" style="color: #d9534f;" aria-hidden="true"></i></md-button>
-                        <md-button class="edit" ng-show="showHeaderButtons" ng-click=" m.edit=true "><i class="fa fa-pencil" style="color: #105cb6;" aria-hidden="true"></i></md-button>
+                        <md-button class="delete" ng-show="showHeaderButtons" ng-click="$ctrl.deleteObject(i)"><i class="fa fa-times" style="color: #d9534f;" aria-hidden="true" aria-label="delete"></i></md-button>
+                        <md-button class="edit" ng-show="showHeaderButtons" ng-click=" m.edit=true "><i class="fa fa-pencil" style="color: #105cb6;" aria-hidden="true" aria-label="edit"></i></md-button>
                         <div ng-if="!m.edit">
                           <!--number & text-->
                           <div ng-if="m.typeStructure === 'simple'">
@@ -113,7 +106,6 @@
                           </div>
                          <!--TextArea-->
                           <div ng-if="m.type === 'textArea' ">
-                            {{m.maxLength}}
                             <textarea class="form-control" rows="{{m.rows}}" cols="93" ng-model="m.value" maxlength="{{m.maxLength}}">
                             </textarea>
                           </div>
@@ -247,18 +239,15 @@
                         Text Area</button>
                       <button ng-click="$ctrl.addRadioGroup()"><i class="fa fa-list-ul" aria-hidden="true"></i>
                         Radio Group</button>
-                      <div ng-repeat="form in $ctrl.modelFormCustom">
-                        <button ng-click="$ctrl.addFormCustom(form.form)">{{form.name}}</button>
-                      </div>
                     </div>
                     <div class="">
                       <div class="col-sm-4">
                         <button class="form-control" ng-click="$ctrl.clear()">Clear</button>
                       </div>
-                      <div class="col-sm-4"><button class="form-control" ng-click="showModelForm()">{}</button></div>
+                      <div class="col-sm-4"><button class="form-control" ng-click="showModelForm('#modelForm')">{}</button></div>
                       <div class="col-sm-4">
                         <!--<button class="form-control" ng-click="$ctrl.addPersonalizedForm()">meter</button></div>-->
-                      <button class="form-control" ng-click="$ctrl.saveForm()">Save</button></div>
+                      <button class="form-control" ng-click="showModelForm('#nameForm')">Save</button></div>
 
                   </div>
                   </div>
@@ -303,6 +292,26 @@
           <span flex></span>
           <md-button class="md-raised md-primary" ng-click="hideModelForm()">Close</md-button>
         </md-dialog-actions>
+
+      </md-dialog>
+    </div>
+  </div>
+  <!--Modal Form Name-->
+  <div style="visibility: hidden">
+    <div class="md-dialog-container" layout="row" class="profile" layout-wrap id="nameForm">
+      <md-dialog flex="50">
+        <md-toolbar>
+          <div class="md-toolbar-tools">
+            <h3>Save as:</h3>
+            <span flex></span>
+            <input class="form-control" type="text" id="inputName" ng-model="$ctrl.nameForm"/>
+            <md-button ng-click="$ctrl.saveForm()" class="md-raised">Save</md-button>
+
+            <md-button class="md-icon-button" ng-click="hideModelForm()">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </md-button>
+          </div>
+        </md-toolbar>
 
       </md-dialog>
     </div>
