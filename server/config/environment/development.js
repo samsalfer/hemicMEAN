@@ -7,7 +7,7 @@ module.exports = {
 
   // MongoDB connection options
   mongo: {
-    uri: 'mongodb://localhost/hemic-dev'
+    uri: 'mongodb://hemicUser:telemedicina@ec2-54-144-199-211.compute-1.amazonaws.com:27017/dummyDB'
   },
 
   // Seed database on startup
