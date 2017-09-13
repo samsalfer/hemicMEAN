@@ -7,7 +7,7 @@ module.exports = {
 
   // MongoDB connection options
   mongo: {
-    uri: 'mongodb://localhost/dummyDB'
+    uri: 'mongodb://ec2-34-234-70-89.compute-1.amazonaws.com/dummyDB'
   },
 
   // Seed database on startup
