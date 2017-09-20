@@ -63,6 +63,17 @@ textarea {
   float: right;
 }
 
+.form-actions button{
+  border-radius: 0px;
+  display: block;
+  float: right;
+}
+
+.dialog-header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e5e5e5;
+  color: #717171;
+}
 /*searchbox*/
 #myInput {
   background-image: url('https://www.w3schools.com/css/searchicon.png'); /* Add a search icon to input */

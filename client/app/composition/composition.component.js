@@ -26,6 +26,8 @@ export class CompositionComponent {
       typeStructure: 'simple',
       class: 'form_model',
       header: 'Number',
+      maxValue: 1000,
+      minValue: 0,
       value: 0
     }, {
       type: 'checkbox',
@@ -86,7 +88,7 @@ export class CompositionComponent {
       header: 'Header',
       options: ''
     }, {
-      type: 'paragraph',
+      type: 'header',
       typeStructure: 'text',
       class: 'paragraph',
       header: 'Paragraph',
