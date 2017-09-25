@@ -12,6 +12,7 @@
 
 import jsonpatch from 'fast-json-patch';
 import Form from './form.model';
+import _ from 'lodash';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -66,9 +67,24 @@ function handleError(res, statusCode) {
 
 // Gets a list of Forms
 export function index(req, res) {
-  return Form.find().exec()
-    .then(respondWithResult(res))
-    .catch(handleError(res));
+  let user = req.user;
+  if(user) {
+    if(user.role === 'admin') {
+      return Form.find().exec()
+        .then(respondWithResult(res))
+        .catch(handleError(res));
+    } else {
+      return Form.find({statusForm: 'accepted'}).exec()
+        .then(forms =>
+          Form.find({user: user.id}).exec()
+            .then(forms2 => {
+              forms2 = _.uniqBy(forms2.concat(forms), 'id');
+              return res.json(forms2);
+            })
+        );
+    }
+  }
+  return res.status(403).end('Forbidden');
 }
 
 // Gets a single Form from the DB
@@ -81,6 +97,7 @@ export function show(req, res) {
 
 // Creates a new Form in the DB
 export function create(req, res) {
+  req.body.user = req.user._id;
   return Form.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));

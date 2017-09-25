@@ -1,11 +1,21 @@
 'use strict';
 
-import mongoose from 'mongoose';
+import mongoose, {Schema} from 'mongoose';
 import {registerEvents} from './form.events';
+import shared from '../../config/environment/shared';
 
 var FormSchema = new mongoose.Schema({
+  user: {
+    type: Schema.ObjectId,
+    ref: 'User'
+  },
   name: String,
-  form: []
+  form: [],
+  statusForm: {
+    type: String,
+    enum: shared.statusConfig,
+    default: 'pending'
+  },
 });
 
 registerEvents(FormSchema);
