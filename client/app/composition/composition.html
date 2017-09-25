@@ -109,7 +109,7 @@
                             </div>
                            <!--TextArea-->
                             <div ng-if="m.type === 'textArea' ">
-                              <textarea class="form-control" rows="{{m.rows}}" cols="93" ng-model="m.value" maxlength="{{m.maxLength}}" ng-required="{{m.required}}">
+                              <textarea class="form-control" rows="{{m.rows}}" ng-model="m.value" maxlength="{{m.maxLength}}" ng-required="{{m.required}}">
                               </textarea>
                             </div>
                             <!--Radio Group-->
@@ -308,7 +308,7 @@
           <input class="form-control" type="text" id="inputName" ng-model="$ctrl.nameForm"/>
         </md-dialog-content>
         <md-dialog-actions layout="row">
-          <button type="button" ng-click="$ctrl.saveForm()" class="btn btn-primary btn-block">Save</button>
+          <button type="button" ng-click="$ctrl.saveForm();hideModelForm()" class="btn btn-primary btn-block">Save</button>
         </md-dialog-actions>
 
       </md-dialog>
