@@ -48,6 +48,7 @@
 @import 'composition/composition.css';
 @import 'main/main.css';
 @import 'structure/structure.css';
+@import 'validation/validation.css';
 @import '../components/footer/footer.css';
 @import '../components/modal/modal.css';
 /* endinject */
