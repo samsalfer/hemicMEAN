@@ -1,73 +1,13 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-12">
-      <h1 class="page-header">Personalizar formulario:</h1>
-
+      <h4 class="page-header">Personalizar Formulario</h4>
       <!--<md-button ng-click="showSimpleToast()">-->
         <!--Show Simple-->
       <!--</md-button>-->
       <div class="container-fluid container-fixed-lg">
         <div class="row">
-          <div class="col-sm-3">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <div class="panel-title">Autoformulario
-                </div>
-
-              </div>
-              <div class="panel-body">
-                <form class="search-form">
-                  <!--<label><i class="fa fa-search"></i>Search</label>-->
-                  <p class="input-group">
-                    <input autocomplete="off" type="text" id="myInput" placeholder="Search for structures.." ng-model="$ctrl.searchText" ng-minlength="2">
-                    <span class="input-group-btn">
-                 </span>
-                  </p>
-                </form>
-                <ul ng-show="$ctrl.searchText!=null && $ctrl.searchText!=''" id="myUL">
-                  <li ng-repeat="form in $ctrl.modelFormCustom | filter:$ctrl.searchText" >
-                    <a ng-click="$ctrl.addFormCustom(form.form)">{{form.name}}</a>
-                  </li>
-                </ul>
-                <!--<div ng-show="$ctrl.searchText" ng-repeat="st in $ctrl.data | filter:$ctrl.searchText">-->
-                  <!--<p>-->
-                    <!--<a ng-click="$ctrl.selected()">-->
-
-                      <!--&lt;!&ndash;<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&ndash;&gt;-->
-                      <!--{{st.name}}-->
-                    <!--</a>-->
-                  <!--</p>-->
-                  <!--ng-if="$ctrl.idStructure != '' && $ctrl.idStructure == st.idStructure"-->
-                  <!--<div ng-show="$ctrl.selected == st._id">-->
-                  <!--<p  style="padding-left: 20px" ng-repeat="e in st.elements">-->
-                  <!--<a ng-click="$ctrl.elementSelected(e._id)">{{e.name}}</a>-->
-                  <!--</p>-->
-                  <!--</div>-->
-
-                <!--</div>-->
-
-
-
-                <!--<md-button class="md-raised md-primary" ng-click="$ctrl.select2 ()">Seleccionar</md-button>-->
-                <!--<hr>-->
-
-                <!--<div ng-repeat="combi in $ctrl.combination">-->
-                <!--<md-input-container>-->
-                <!--<label>{{combi.name}}</label>-->
-                <!--<md-select name="singleSelect" ng-model="$ctrl.test2">-->
-                <!--<md-option ng-repeat="d in combi.datas" value="{{d}}">{{d}}</md-option>-->
-                <!--</md-select>-->
-
-                <!--</md-input-container>-->
-
-                <!--&lt;!&ndash;<select name="singleSelect" ng-model="$ctrl.test2">&ndash;&gt;-->
-                <!--&lt;!&ndash;<option ng-repeat="d in combi.datas" value="{{d}}">{{d}}</option>&ndash;&gt;-->
-                <!--&lt;!&ndash;</select>&ndash;&gt;-->
-                <!--</div>-->
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-9">
+          <div class="col-sm-12">
             <div class="panel panel-default">
               <div class="panel-heading">
                 <div class="panel-title">Término Combinado
@@ -209,11 +149,8 @@
                               </form>
                               <!--close button-->
                               <div class="row">
-                                <div class="col-xs-10">
-                                </div>
-                                <div class="col-xs-2">
-                                  <button class="form-control closeEdit" ng-click="m.edit=false">Close</button>
-                                </div>
+
+                                  <button class="btn btn-default closeEdit" ng-click="m.edit=false">Close</button>
                               </div>
                             </div>
                           </div>
@@ -225,6 +162,19 @@
                   </div>
                   <div class="col-sm-3">
                     <!--RIGTH FORM MENU-->
+                    <form class="search-form">
+                      <!--<label><i class="fa fa-search"></i>Search</label>-->
+                      <p class="input-group">
+                        <input autocomplete="off" type="text" id="myInput" placeholder="Search for structures.." ng-model="$ctrl.searchText" ng-minlength="2">
+                        <span class="input-group-btn">
+                 </span>
+                      </p>
+                    </form>
+                    <ul ng-show="$ctrl.searchText!=null && $ctrl.searchText!=''" id="myUL">
+                      <li ng-repeat="form in $ctrl.modelFormCustom | filter:$ctrl.searchText" >
+                        <a ng-click="$ctrl.addFormCustom(form.form)">{{form.name}}</a>
+                      </li>
+                    </ul>
                     <div class="btn-group">
                       <button ng-click="$ctrl.addCheck()"><i class="fa fa-check-square-o" aria-hidden="true"></i>
                         Checkbox Group</button>

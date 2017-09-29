@@ -37,7 +37,8 @@ textarea {
 }
 
 .closeEdit{
-  text-align: right;
+  float: right;
+  margin-right: 15px;
 
 }
 .paragraph{
