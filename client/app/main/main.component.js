@@ -1,6 +1,7 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import routing from './main.routes';
+import 'angular-drag-and-drop-lists';
 
 export class MainController {
   $http;
@@ -49,6 +50,7 @@ export class MainController {
   }
 
   $onInit() {
+    let $scope = this.$scope;
     this.$http.get('/api/things')
       .then(response => {
         this.awesomeThings = response.data;
@@ -83,6 +85,21 @@ export class MainController {
         ]
       }
     ];
+    $scope.models = {
+      selected: null,
+      lists: {A: [], B: []}
+    };
+
+    // Generate initial model
+    for(let i = 1; i <= 3; ++i) {
+      $scope.models.lists.A.push({label: 'Item A' + i});
+      $scope.models.lists.B.push({label: 'Item B' + i});
+    }
+
+    // Model to JSON for demo purpose
+    $scope.$watch('models', function(model) {
+      $scope.modelAsJson = angular.toJson(model, true);
+    }, true);
   }
   addText() {
     this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[0])));
@@ -111,9 +128,10 @@ export class MainController {
   deleteThing(thing) {
     this.$http.delete(`/api/things/${thing._id}`);
   }
+
 }
 
-export default angular.module('hemicApp.main', [uiRouter])
+export default angular.module('hemicApp.main', [uiRouter, 'dndLists'])
   .config(routing)
   .component('main', {
     template: require('./main.html'),

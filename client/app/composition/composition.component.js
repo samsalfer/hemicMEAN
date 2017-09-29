@@ -313,7 +313,7 @@ export class CompositionComponent {
   }
 }
 
-export default angular.module('hemicApp.composition', [uiRouter])
+export default angular.module('hemicApp.composition', [uiRouter, 'dndLists'])
   .config(routes)
   .component('composition', {
     template: require('./composition.html'),
