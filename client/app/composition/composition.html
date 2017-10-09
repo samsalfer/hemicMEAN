@@ -9,12 +9,15 @@
         <div class="row">
           <div class="col-sm-12">
             <div class="panel panel-default">
-              <div class="panel-heading">
-                <div class="panel-title">Término Combinado
+              <div class="panel-heading" ng-style="{'background-color': 'rgba('+$ctrl.screenColor+')'}">
+                <div class="panel-title" >Término Combinado
                 </div>
               </div>
               <div class="panel-body">
-
+                <div class="btn-group">
+                  <label class="btn btn-default" ng-model="radioModel" uib-btn-radio="'Left'" ng-click="$ctrl.viewStructure(); $ctrl.screenColor='242, 238, 130, 0.75'">Structure</label>
+                  <label class="btn btn-default" ng-model="radioModel" uib-btn-radio="'Right'" uib-uncheckable="" ng-click="$ctrl.viewForm(); $ctrl.screenColor='65, 191, 180, 0.45'">Form</label>
+                </div>
                 </md-input-container>
                 <div class="row">
                   <div class="col-sm-9 simpleDemo">
@@ -44,7 +47,7 @@
                             </div>
                            <!--Select -->
                             <div ng-if="m.type === 'select' ">
-                             <select class="form-control" id="sel1" ng-model="m.value">
+                             <select class="form-control" id="sel1" ng-model="gu.value">
                                <option ng-repeat="(j, v) in m.options">
                                  {{v.name}}
                                </option>
@@ -176,23 +179,25 @@
                       </li>
                     </ul>
                     <div class="btn-group">
-                      <button ng-click="$ctrl.addCheck()"><i class="fa fa-check-square-o" aria-hidden="true"></i>
-                        Checkbox Group</button>
                       <button ng-click="$ctrl.addDateField()"><i class="fa fa-calendar" aria-hidden="true"></i>
                         Date Field</button>
-                      <button ng-click="$ctrl.addHeader()"><i class="fa fa-header" aria-hidden="true"></i>
+                      <button ng-show="$ctrl.flagForm" ng-click="$ctrl.addCheck()"><i class="fa fa-check-square-o" aria-hidden="true"></i>
+                        Checkbox Group</button>
+                      <button ng-show="$ctrl.flagForm" ng-click="$ctrl.addHeader()"><i class="fa fa-header" aria-hidden="true"></i>
                         Header</button>
-                      <button ng-click="$ctrl.addParagraph()"><i class="fa fa-paragraph" aria-hidden="true"></i>
+                      <button ng-show="$ctrl.flagForm" ng-click="$ctrl.addParagraph()"><i class="fa fa-paragraph" aria-hidden="true"></i>
                         Paragraph</button>
                       <button ng-click="$ctrl.addNumber()"><i class="fa fa-hashtag" aria-hidden="true"></i>
                         Number</button>
-                      <button ng-click="$ctrl.addSelect()"><i class="fa fa-indent" aria-hidden="true"></i>
+                      <button ng-show="!$ctrl.flagForm" ng-click="$ctrl.addSelect()"><i class="fa fa-indent" aria-hidden="true"></i>
+                        Cluster</button>
+                      <button ng-show="$ctrl.flagForm" ng-click="$ctrl.addSelect()"><i class="fa fa-indent" aria-hidden="true"></i>
                         Select</button>
                       <button ng-click="$ctrl.addText()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                         Text Field</button>
-                      <button ng-click="$ctrl.addTextArea()"><i class="fa fa-align-justify" aria-hidden="true"></i>
+                      <button ng-show="$ctrl.flagForm" ng-click="$ctrl.addTextArea()"><i class="fa fa-align-justify" aria-hidden="true"></i>
                         Text Area</button>
-                      <button ng-click="$ctrl.addRadioGroup()"><i class="fa fa-list-ul" aria-hidden="true"></i>
+                      <button ng-show="$ctrl.flagForm" ng-click="$ctrl.addRadioGroup()"><i class="fa fa-list-ul" aria-hidden="true"></i>
                         Radio Group</button>
                     </div>
                     <div class="form-actions">
@@ -258,7 +263,9 @@
           </div>
         </md-toolbar>
         <md-dialog-content>
-          <input class="form-control" type="text" id="inputName" ng-model="$ctrl.nameForm"/>
+          <div style="padding-top: 10px" class="container-fluid container-fixed-lg">
+            <input class="form-control" type="text" id="inputName" ng-model="$ctrl.nameForm"/>
+          </div>
         </md-dialog-content>
         <md-dialog-actions layout="row">
           <button type="button" ng-click="$ctrl.saveForm();hideModelForm()" class="btn btn-primary btn-block">Save</button>

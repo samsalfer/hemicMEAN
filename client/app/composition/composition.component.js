@@ -12,7 +12,8 @@ export class CompositionComponent {
     left: false,
     right: true
   };
-
+  flagForm = true;
+  screenColor = '65, 191, 180, 0.45';
   modelFormBasic = [
     {
       type: 'text',
@@ -310,6 +311,15 @@ export class CompositionComponent {
         console.log('---------------------------');
         console.log(this.modelFormCustom);
       });
+  }
+  // Change view form/structure
+  viewStructure() {
+    this.flagForm = false;
+    this.clear();
+  }
+  viewForm() {
+    this.flagForm = true;
+    this.clear();
   }
 }
 

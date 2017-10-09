@@ -1,0 +1,20 @@
+
+.icon {
+   color: #777;
+}
+.info:hover {
+  color: #2e6da4;
+}
+.accept:hover {
+  color: #5cb85c;
+}
+
+.deny:hover{
+  color:rgb(209, 91, 71);
+}
+.user-list li .icon {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  margin-left: 20px;
+}
