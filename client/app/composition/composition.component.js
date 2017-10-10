@@ -18,6 +18,7 @@ export class CompositionComponent {
     {
       type: 'text',
       typeStructure: 'simple',
+      typeShow: 'item',
       class: 'form_model',
       header: 'Text Field',
       value: '',
@@ -25,6 +26,7 @@ export class CompositionComponent {
     }, {
       type: 'number',
       typeStructure: 'simple',
+      typeShow: 'item',
       class: 'form_model',
       header: 'Number',
       maxValue: 1000,
@@ -33,6 +35,7 @@ export class CompositionComponent {
     }, {
       type: 'checkbox',
       typeStructure: 'complex',
+      typeShow: 'item',
       class: 'form_model',
       header: 'Checkbox Group',
       options: [
@@ -47,6 +50,7 @@ export class CompositionComponent {
     }, {
       type: 'select',
       typeStructure: 'complex',
+      typeShow: 'item',
       value: '',
       class: 'form_model',
       header: 'Select',
@@ -62,6 +66,7 @@ export class CompositionComponent {
     }, {
       type: 'textArea',
       typeStructure: 'textArea',
+      typeShow: 'item',
       class: 'form_model',
       header: 'Text Area',
       value: '',
@@ -70,6 +75,7 @@ export class CompositionComponent {
     }, {
       type: 'radioGroup',
       typeStructure: 'complex',
+      typeShow: 'item',
       class: 'form_model',
       header: 'Radio Group',
       value: '',
@@ -85,21 +91,50 @@ export class CompositionComponent {
     }, {
       type: 'header',
       typeStructure: 'text',
+      typeShow: 'item',
       class: 'header',
       header: 'Header',
       options: ''
     }, {
       type: 'header',
       typeStructure: 'text',
+      typeShow: 'item',
       class: 'paragraph',
       header: 'Paragraph',
       value: ''
     }, {
       type: 'dateField',
       typeStructure: 'dateField',
+      typeShow: 'item',
       class: 'form_model',
       header: 'Date Field',
       value: ''
+    }, {
+      type: 'section',
+      typeStructure: 'text',
+      typeShow: 'container',
+      class: 'header',
+      header: 'Sección',
+      value: '',
+      container: [
+        {
+          type: 'text',
+          typeStructure: 'simple',
+          typeShow: 'item',
+          class: 'form_model',
+          header: 'Text Field',
+          value: '',
+          maxLength: 2
+        },{
+          type: 'text',
+          typeStructure: 'simple',
+          typeShow: 'item',
+          class: 'form_model',
+          header: 'Text Field',
+          value: '',
+          maxLength: 2
+        }
+      ]
     }
   ];
   modelFormCustom = [];
@@ -256,6 +291,9 @@ export class CompositionComponent {
   }
   addDateField() {
     this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[8])));
+  }
+  addSection() {
+    this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[9])));
   }
   deleteObject(index) {
     this.modelForm.splice(index, 1);
