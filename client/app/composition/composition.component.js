@@ -114,26 +114,9 @@ export class CompositionComponent {
       typeStructure: 'text',
       typeShow: 'container',
       class: 'header',
-      header: 'Sección',
+      header: 'Section',
       value: '',
       container: [
-        {
-          type: 'text',
-          typeStructure: 'simple',
-          typeShow: 'item',
-          class: 'form_model',
-          header: 'Text Field',
-          value: '',
-          maxLength: 2
-        },{
-          type: 'text',
-          typeStructure: 'simple',
-          typeShow: 'item',
-          class: 'form_model',
-          header: 'Text Field',
-          value: '',
-          maxLength: 2
-        }
       ]
     }
   ];
@@ -332,6 +315,46 @@ export class CompositionComponent {
     form.forEach(f => {
       this.modelForm.push(angular.copy(f));
     });
+  }
+
+  changeType(index) {
+    var oldType = this.modelForm[index].type;
+    var oldOptions = this.modelForm[index].options;
+    var oldHeader = this.modelForm[index].header;
+    var model = JSON.parse(JSON.stringify(this.modelFormBasic[3]));
+    model.edit = 'true';
+    model.header = oldHeader;
+    model.typeInformationModel = oldType;
+    if(oldOptions !== undefined) {
+      model.options = oldOptions;
+    }
+    this.modelForm.splice(index, 1, JSON.parse(JSON.stringify(model)));
+  }
+  changeType2(index) {
+    var oldType = this.modelForm[index].type;
+    var oldOptions = this.modelForm[index].options;
+    var oldHeader = this.modelForm[index].header;
+    var model = JSON.parse(JSON.stringify(this.modelFormBasic[2]));
+    model.edit = 'true';
+    model.header = oldHeader;
+    model.typeInformationModel = oldType;
+    if(oldOptions !== undefined) {
+      model.options = oldOptions;
+    }
+    this.modelForm.splice(index, 1, JSON.parse(JSON.stringify(model)));
+  }
+  changeType3(index) {
+    var oldType = this.modelForm[index].type;
+    var oldOptions = this.modelForm[index].options;
+    var oldHeader = this.modelForm[index].header;
+    var model = JSON.parse(JSON.stringify(this.modelFormBasic[5]));
+    model.edit = 'true';
+    model.header = oldHeader;
+    model.typeInformationModel = oldType;
+    if(oldOptions !== undefined) {
+      model.options = oldOptions;
+    }
+    this.modelForm.splice(index, 1, JSON.parse(JSON.stringify(model)));
   }
 
   saveForm() {
