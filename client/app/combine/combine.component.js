@@ -22,7 +22,14 @@ export class CombineComponent {
     this.combination = [];
     this.showChecks = false
     this.showFirst = true;
-    this.showCombination = false;
+    this.data1 = false;
+    this.data2 = false;
+    this.operator = '';
+    this.formularios = [{
+      test: ['ExampleForm']
+    }];
+
+
     this.$http.get('api/structures')
       .then(res => {
         this.structures = res.data;

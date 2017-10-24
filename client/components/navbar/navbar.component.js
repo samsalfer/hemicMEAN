@@ -8,10 +8,10 @@ export class NavbarComponent {
     title: 'Structure',
     state: 'structure'
   }, {
-    title: 'Personalize',
+    title: 'Indicators',
     state: 'combine'
   }, {
-    title: 'Form',
+    title: 'Personalize',
     state: 'composition'
   }];
   isLoggedIn: Function;

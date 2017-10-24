@@ -53,9 +53,7 @@
         </div>
       </md-toolbar>
       <md-dialog-content>
-
-        {{$ctrl.formSelected}}
-
+        <pre>{{$ctrl.formSelected | json : spacing}}</pre>
       </md-dialog-content>
       <md-dialog-actions layout="row">
         <a ng-click="$ctrl.accept($ctrl.formSelected)" class="icon accept"><span class="fa fa-check-square fa-2x"></span></a>

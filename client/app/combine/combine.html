@@ -1,23 +1,23 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-12">
-      <h1 class="page-header">Personalizar formulario:</h1>
-      <div class="row">
-        <div class="col-lg-3">
-          <md-input-container layout-gt-sm="row" class="md-block" flex-gt-sm>
-            <label>Name</label>
-            <input ng-model="$ctrl.name" autofocus>
-          </md-input-container>
-        </div>
-      </div>
+      <h1 class="page-header">Indicators</h1>
+      <!--<div class="row">-->
+        <!--<div class="col-lg-3">-->
+          <!--<md-input-container layout-gt-sm="row" class="md-block" flex-gt-sm>-->
+            <!--<label>Name</label>-->
+            <!--<input ng-model="$ctrl.name" autofocus>-->
+          <!--</md-input-container>-->
+        <!--</div>-->
+      <!--</div>-->
 
 
       <div class="container-fluid container-fixed-lg">
         <div class="row">
-          <div class="col-sm-6">
+          <div class="col-sm-3">
             <div class="panel panel-default">
               <div class="panel-heading">
-                <div class="panel-title">Autoformulario
+                <div class="panel-title">Model
                 </div>
 
               </div>
@@ -30,14 +30,20 @@
                  </span>
                   </p>
                 </form>
-                <div ng-show="$ctrl.searchText" ng-repeat="st in $ctrl.structures | filter:$ctrl.searchText">
-                  <p>
-                    <a ng-click="$ctrl.selected(st)">
 
-                      <!--<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>-->
-                      {{st.idStructure}}
-                    </a>
-                  </p>
+                <div ng-show="$ctrl.searchText" ng-repeat="st in $ctrl.formularios | filter:$ctrl.searchText">
+                  <div>
+                    <p>ExampleForm</p>
+                    <p style="padding-left: 20px">
+                      <a ng-click="$ctrl.data1=true"> >Data1</a>
+                    </p>
+                  </div>
+                  <div>
+                    <p>ExampleForm2</p>
+                    <p style="padding-left: 20px">
+                      <a ng-click="$ctrl.data2=true"> >Data2</a>
+                    </p>
+                  </div>
                   <!--ng-if="$ctrl.idStructure != '' && $ctrl.idStructure == st.idStructure"-->
                   <!--<div ng-show="$ctrl.selected == st._id">-->
                   <!--<p  style="padding-left: 20px" ng-repeat="e in st.elements">-->
@@ -56,8 +62,7 @@
                     </div>
                   </div>
                 </div>
-                <md-button class="md-raised md-primary" ng-click="$ctrl.combineTerms()">Seleccionar</md-button>
-                <hr>
+                <!--<md-button class="md-raised md-primary" ng-click="$ctrl.combineTerms()">Seleccionar</md-button>-->
 
                 <!--<div ng-repeat="combi in $ctrl.combination">-->
                   <!--<md-input-container>-->
@@ -75,42 +80,29 @@
               </div>
             </div>
           </div>
-          <div class="col-sm-6">
+          <div class="col-sm-9">
             <div class="panel panel-default">
               <div class="panel-heading">
-                <div class="panel-title">Término Combinado
+                <div class="panel-title">Creator
                 </div>
               </div>
               <div class="panel-body">
 
                 </md-input-container>
-                <table class="table table-hover" ng-show="$ctrl.showCombination">
-                  <thead>
-                  <tr>
-                    <th ng-repeat ="name in $ctrl.selection[0].elements[1].specificterms.names">{{name}}</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr>
-                    <td>Blastina</td>
-                    <td class="test">Comprimido</td>
-                    <td><button type="button" ng-click="$ctrl.removeItemFromArr(term.datas, d)" class="btn btn-danger btn-xs center">Delete</button></td>
-                  </tr>
-                  <tr>
-                    <td>Blastina</td>
-                    <td class="test">Pulv Nasal</td>
-                    <td><button type="button" ng-click="$ctrl.removeItemFromArr(term.datas, d)" class="btn btn-danger btn-xs center">Delete</button></td>
-                  </tr>
-                  <tr>
-                    <td>Comprimido</td>
-                    <td class="test">Pulv Nasal</td>
-                    <td><button type="button" ng-click="$ctrl.removeItemFromArr(term.datas, d)" class="btn btn-danger btn-xs center">Delete</button></td>
-                  </tr>
-                  </tbody>
-                </table>
+                <button ng-click="$ctrl.operator=$ctrl.operator+'+'"class="btn btn-default " ng-click="">+</button>
+                <button ng-click="$ctrl.operator=$ctrl.operator+'-'"class="btn btn-default " ng-click="">-</button>
+                <button ng-click="$ctrl.operator=$ctrl.operator+'*'" class="btn btn-default " ng-click="">*</button>
+                <button ng-click="$ctrl.operator=$ctrl.operator+'/'" class="btn btn-default " ng-click="">/</button>
+                <button ng-click="$ctrl.operator=$ctrl.operator+'('" class="btn btn-default " ng-click="">(</button>
+                <button ng-click="$ctrl.operator=$ctrl.operator+')'" class="btn btn-default " ng-click="">)</button>
+                <button ng-show="$ctrl.data1" class="btn btn-default " ng-click="$ctrl.operator=$ctrl.operator+'Data1'">ExampleForm1|Data1</button>
+                <button ng-show="$ctrl.data2" class="btn btn-default " ng-click="$ctrl.operator=$ctrl.operator+'Data2'">ExampleForm2|Data2</button>
 
 
 
+
+                </br>
+                <input style="margin-top:23px" ng-model="$ctrl.operator" class="form-control"/>
 
                 <!--{{$ctrl.user.test}}-->
                 <!--<label ng-repeat=" t in $ctrl.test">-->
