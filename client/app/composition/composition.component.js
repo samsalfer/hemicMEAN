@@ -278,8 +278,19 @@ export class CompositionComponent {
   addSection() {
     this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[9])));
   }
-  deleteObject(index) {
-    this.modelForm.splice(index, 1);
+  deleteObject(modelsN, model) {
+    console.log(model);
+    let models = modelsN ? modelsN : this.modelForm;
+    let index = models.indexOf(model);
+    if(index < 0) {
+      models.forEach(m => {
+        if(m.type === 'section') {
+          this.deleteObject(m.container, model);
+        }
+      });
+    } else {
+      models.splice(index, 1);
+    }
   }
   clear() {
     this.modelForm.splice(0);
