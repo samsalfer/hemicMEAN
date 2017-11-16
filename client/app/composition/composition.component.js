@@ -3,6 +3,7 @@ const angular = require('angular');
 
 const uiRouter = require('angular-ui-router');
 
+import _ from 'lodash';
 import routes from './composition.routes';
 
 export class CompositionComponent {
@@ -116,6 +117,16 @@ export class CompositionComponent {
       class: 'header',
       header: 'Section',
       value: '',
+      container: [
+      ]
+    }, {
+      type: 'section',
+      typeStructure: 'text',
+      typeShow: 'container',
+      class: 'header',
+      header: 'Table',
+      value: '',
+      multiple: true,
       container: [
       ]
     }
@@ -278,6 +289,9 @@ export class CompositionComponent {
   addSection() {
     this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[9])));
   }
+  addTable() {
+    this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[10])));
+  }
   deleteObject(modelsN, model) {
     console.log(model);
     let models = modelsN ? modelsN : this.modelForm;
@@ -328,44 +342,41 @@ export class CompositionComponent {
     });
   }
 
-  changeType(index) {
-    var oldType = this.modelForm[index].type;
-    var oldOptions = this.modelForm[index].options;
-    var oldHeader = this.modelForm[index].header;
-    var model = JSON.parse(JSON.stringify(this.modelFormBasic[3]));
-    model.edit = 'true';
-    model.header = oldHeader;
-    model.typeInformationModel = oldType;
-    if(oldOptions !== undefined) {
-      model.options = oldOptions;
+  // changeType(index) {
+  //   var oldType = this.modelForm[index].type;
+  //   var oldOptions = this.modelForm[index].options;
+  //   var oldHeader = this.modelForm[index].header;
+  //   var model = JSON.parse(JSON.stringify(this.modelFormBasic[3]));
+  //   model.edit = 'true';
+  //   model.header = oldHeader;
+  //   model.typeInformationModel = oldType;
+  //   if(oldOptions !== undefined) {
+  //     model.options = oldOptions;
+  //   }
+  //   this.modelForm.splice(index, 1, JSON.parse(JSON.stringify(model)));
+  // }
+  changeType(modelsN, model, type) {
+    let models = modelsN ? modelsN : this.modelForm;
+    let index = models.indexOf(model);
+    if(index < 0) {
+      models.forEach(m => {
+        if(m.type === 'section') {
+          this.changeType(m.container, model, type);
+        }
+      });
+    } else {
+      var oldType = models.selected.type;
+      var oldOptions = models.selected.options;
+      var oldHeader = models.selected.header;
+      var modelAux = JSON.parse(JSON.stringify(this.modelFormBasic[type]));
+      modelAux.edit = 'true';
+      modelAux.header = oldHeader;
+      modelAux.typeInformationModel = oldType;
+      if(oldOptions !== undefined) {
+        modelAux.options = oldOptions;
+      }
+      models.splice(index, 1,JSON.parse(JSON.stringify(modelAux)));
     }
-    this.modelForm.splice(index, 1, JSON.parse(JSON.stringify(model)));
-  }
-  changeType2(index) {
-    var oldType = this.modelForm[index].type;
-    var oldOptions = this.modelForm[index].options;
-    var oldHeader = this.modelForm[index].header;
-    var model = JSON.parse(JSON.stringify(this.modelFormBasic[2]));
-    model.edit = 'true';
-    model.header = oldHeader;
-    model.typeInformationModel = oldType;
-    if(oldOptions !== undefined) {
-      model.options = oldOptions;
-    }
-    this.modelForm.splice(index, 1, JSON.parse(JSON.stringify(model)));
-  }
-  changeType3(index) {
-    var oldType = this.modelForm[index].type;
-    var oldOptions = this.modelForm[index].options;
-    var oldHeader = this.modelForm[index].header;
-    var model = JSON.parse(JSON.stringify(this.modelFormBasic[5]));
-    model.edit = 'true';
-    model.header = oldHeader;
-    model.typeInformationModel = oldType;
-    if(oldOptions !== undefined) {
-      model.options = oldOptions;
-    }
-    this.modelForm.splice(index, 1, JSON.parse(JSON.stringify(model)));
   }
 
   saveForm() {
@@ -375,13 +386,15 @@ export class CompositionComponent {
     }
     // this.example = [];
     // this.example(angular.copy(this.modelForm));
-    this.$http.post('api/forms', object);
-    this.$http.get('api/forms')
-      .then(res => {
-        this.modelFormCustom = res.data;
-        console.log(res);
-        console.log('---------------------------');
-        console.log(this.modelFormCustom);
+    this.$http.post('api/forms', object)
+      .then(() => {
+        this.$http.get('api/forms')
+          .then(res => {
+            this.modelFormCustom = res.data;
+            console.log(res);
+            console.log('---------------------------');
+            console.log(this.modelFormCustom);
+          });
       });
   }
   // Change view form/structure
