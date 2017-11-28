@@ -12,7 +12,9 @@
 
 import jsonpatch from 'fast-json-patch';
 import Form from './form.model';
+import Element from '../element/element.model';
 import _ from 'lodash';
+import Q from 'q';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -70,7 +72,7 @@ export function index(req, res) {
   let user = req.user;
   if(user) {
     if(user.role === 'admin') {
-      return Form.find().exec()
+      return Form.find().populate({path:'form', model:'Element'}).exec()
         .then(respondWithResult(res))
         .catch(handleError(res));
     } else {
@@ -98,11 +100,95 @@ export function show(req, res) {
 // Creates a new Form in the DB
 export function create(req, res) {
   req.body.user = req.user._id;
-  return Form.create(req.body)
+  let elements = req.body.form;
+  return Form.create({name: req.body.name})
+    .then(form => {
+      console.log('LLEGA:', form);
+      if(form) {
+        let promises = [];
+        console.log(elements);
+        elements.forEach(element => {
+          if(element._id) {
+            delete element._id;
+          }
+          element.form = form._id;
+          if(element.type !== 'section') {
+            promises.push(Element.create(element)
+              .then(ele => {
+                if(ele) {
+                  return ele._id;
+                } else {
+                  return null;
+                }
+              }));
+          } else {
+            //todo controlar los sections;
+            promises.push(new Q(createSection(element, form._id, true)));
+          }
+        });
+        return Q.all(promises)
+          .then(data => {
+            form.form = data;
+            console.log('IDS:', data);
+            return form.save();
+          });
+      } else {
+        return null;
+      }
+    })
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
 }
 
+function createSection(element, idForm, first) {
+  let promises = [];
+  if(element.container.length > 0) {
+    element.container.forEach(eleContainer => {
+      if(eleContainer.type === 'section') {
+        promises.push(new Q(createSection(eleContainer, idForm, false)));
+      } else {
+        if(eleContainer._id) {
+          delete eleContainer._id;
+        }
+        eleContainer.form = idForm;
+        promises.push(Element.create(eleContainer));
+      }
+    });
+    return Q.all(promises)
+      .then(data => {
+        element.container = data;
+        // console.log(data);
+        // return data;
+        if(element._id) {
+          delete element._id;
+        }
+        return Element.create(element).then(ele => {
+          if(ele) {
+            if(first)
+              return ele._id;
+            else
+              return ele;
+          } else {
+            return null;
+          }
+        });
+      });
+  } else {
+    if(element._id) {
+      delete element._id;
+    }
+    return Element.create(element).then(ele => {
+      if(ele) {
+        if(first)
+          return ele._id;
+        else
+          return ele;
+      } else {
+        return null;
+      }
+    });
+  }
+}
 // Upserts the given Form in the DB at the specified ID
 export function upsert(req, res) {
   if(req.body._id) {

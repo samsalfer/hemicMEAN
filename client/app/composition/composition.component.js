@@ -129,6 +129,13 @@ export class CompositionComponent {
       multiple: true,
       container: [
       ]
+    }, {
+      type: 'file',
+      typeStructure: 'file',
+      typeShow: 'item',
+      class: 'file',
+      header: 'File',
+      value: ''
     }
   ];
   modelFormCustom = [];
@@ -292,6 +299,9 @@ export class CompositionComponent {
   addTable() {
     this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[10])));
   }
+  addFile() {
+    this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[11])));
+  }
   deleteObject(modelsN, model) {
     console.log(model);
     let models = modelsN ? modelsN : this.modelForm;
@@ -380,12 +390,12 @@ export class CompositionComponent {
   }
 
   saveForm() {
+    // Esto funcionaba!
     let object = {
       name: this.nameForm,
       form: this.modelForm
     }
-    // this.example = [];
-    // this.example(angular.copy(this.modelForm));
+    // Esto funcionaba!
     this.$http.post('api/forms', object)
       .then(() => {
         this.$http.get('api/forms')
@@ -396,6 +406,35 @@ export class CompositionComponent {
             console.log(this.modelFormCustom);
           });
       });
+    //HASTA AQUI
+    // let object = {
+    //   name: this.nameForm,
+    //   form: [],
+    // };
+    // this.modelForm.forEach(element => {
+    //   if(element.type !== 'section') {
+    //     this.$http.post('api/elements', element)
+    //      .then(res => {
+    //        console.log(res);
+    //        console.log(res.data._id);
+    //        object.form.push(res.data._id);
+    //        console.log(object);
+    //      });
+    //   } else {
+    //     console.log('SECTIONNNNN NOOOOOOOOOOOOOOOOOOOOOO');
+    //   }
+    // });
+    // console.log('Antes de :', object);
+    // this.$http.post('api/forms', object).then(res1 => {
+    //   console.log(res1.data);
+    //   this.$http.get('api/forms')
+    //     .then(res => {
+    //       this.modelFormCustom = res.data;
+    //       console.log(res);
+    //       console.log('---------------------------');
+    //       console.log(this.modelFormCustom);
+    //     });
+    // });
   }
   // Change view form/structure
   viewStructure() {
