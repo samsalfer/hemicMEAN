@@ -26,9 +26,7 @@
     </script>
 
     <navbar></navbar>
-    <div class="main">
-      <div ui-view=""></div>
-    </div>
+    <div ui-view="" class="my-body"></div>
     <footer></footer>
 <script type="text/javascript" src="/vendor.bundle.js"></script><script type="text/javascript" src="/polyfills.bundle.js"></script><script type="text/javascript" src="/app.bundle.js"></script></body>
 </html>

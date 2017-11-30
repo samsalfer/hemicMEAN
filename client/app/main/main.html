@@ -1,283 +1,90 @@
-<header class="hero-unit" id="banner">
-  <div class="container">
-    <h1>'Allo, 'Allo!</h1>
-    <p class="lead">Kick-start your next web app with Angular Fullstack</p>
-    <img src="assets/images/yeoman.png" alt="I'm Yeoman">
-  </div>
-</header>
---------------------------------------------------------------------------------------------
-
-<div ng-repeat="(i,m) in $ctrl.modelForm">
-  <input style="border:0px; font-size: 16px; font-style: bold" type="text" ng-model="m.header" />:
-  <div ng-if="m.typeStructure === 'simple' ">
-    <input type="{{m.type}}" ng-model="m.options" />
-  </div>
-  <div ng-if="m.typeStructure === 'complex' ">
-    <div ng-repeat="(j, v) in m.options">
-      <input type="text" ng-model="v.name" />
-      <input type="{{m.type}}" ng-model="v.value" />
-      <button ng-if="m.type === 'checkbox'" ng-click="$ctrl.deleteOptionInCheck(i,j)">-</button>
-    </div>
-    <button ng-if="m.type === 'checkbox'" ng-click="$ctrl.addOptionInCheck(i)">Añadir mas opciones al checkbox</button>
-  </div>
-</div>
-<div>
-  <button ng-click="$ctrl.addText()">Añadir Texto</button>
-  <button ng-click="$ctrl.addNumber()">Añadir Number</button>
-  <button ng-click="$ctrl.addCheck()">Añadir Check</button>
-</div>
-
---------------------------------------------------------------------------------------------
 <div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Features:</h1>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in $ctrl.awesomeThings">
-        <li><a href="#" uib-tooltip="{{thing.info}}">{{thing.name}}<button type="button" class="close" ng-click="$ctrl.deleteThing(thing)">&times;</button></a></li>
-      </ul>
-    </div>
-  </div>
-  <div uib-alert style="background-color:#fa39c3;color:white" close="closeAlert(0)">A happy alert!</div>
-  <div layout="row" layout-sm="column" layout-align="space-around">
-    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-  </div>
-  <!-- Single button -->
-  <div class="btn-group" uib-dropdown is-open="status.isopen">
-    <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
-      Button dropdown <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-      <li role="menuitem"><a href="#">Action</a></li>
-      <li role="menuitem"><a href="#">Another action</a></li>
-      <li role="menuitem"><a href="#">Something else here</a></li>
-      <li class="divider"></li>
-      <li role="menuitem"><a href="#">Separated link</a></li>
-    </ul>
-  </div>
-  <form class="thing-form">
-    <label>Syncs in realtime across clients</label>
-    <p class="input-group">
-      <input type="text" class="form-control" placeholder="Add a new thing here." ng-model="$ctrl.newThing">
-      <span class="input-group-btn">
-        <button type="submit" class="btn btn-primary" ng-click="$ctrl.addThing()">Add New</button>
-      </span>
-    </p>
-  </form>
-  <md-content>
-
-    <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-      <md-button>{{title1}}</md-button>
-      <md-button md-no-ink class="md-primary">Primary (md-noink)</md-button>
-      <md-button ng-disabled="true" class="md-primary">Disabled</md-button>
-      <md-button class="md-warn">{{title4}}</md-button>
-      <div class="label">Flat</div>
-    </section>
-
-    <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-      <md-button class="md-raised">Button</md-button>
-      <md-button class="md-raised md-primary">Primary</md-button>
-      <md-button ng-disabled="true" class="md-raised md-primary">Disabled</md-button>
-      <md-button class="md-raised md-warn">Warn</md-button>
-      <div class="label">Raised</div>
-    </section>
-
-    <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-      <md-button class="md-fab" aria-label="Eat cake">
-        <md-icon md-svg-src="img/icons/cake.svg"></md-icon>
-      </md-button>
-
-      <md-button class="md-fab md-primary" aria-label="Use Android">
-        <md-icon md-svg-src="img/icons/android.svg"></md-icon>
-      </md-button>
-
-      <md-button class="md-fab" ng-disabled="true" aria-label="Comment">
-        <md-icon md-svg-src="img/icons/ic_comment_24px.svg"></md-icon>
-      </md-button>
-
-      <md-button class="md-fab md-primary md-hue-2" aria-label="Profile">
-        <md-icon md-svg-src="img/icons/ic_people_24px.svg"></md-icon>
-      </md-button>
-
-      <md-button class="md-fab md-mini" aria-label="Eat cake">
-        <md-icon md-svg-src="img/icons/cake.svg"></md-icon>
-      </md-button>
-
-      <md-button class="md-fab md-mini md-primary" aria-label="Use Android">
-        <md-icon md-svg-src="img/icons/android.svg" style="color: greenyellow;"></md-icon>
-      </md-button>
-      <div class="label">FAB</div>
-    </section>
-
-    <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-      <md-button ng-href="{{googleUrl}}" target="_blank">Default Link</md-button>
-      <md-button class="md-primary" ng-href="{{googleUrl}}" target="_blank">Primary Link</md-button>
-
-      <md-button>Default Button</md-button>
-      <div class="label">Link vs. Button</div>
-    </section>
-
-    <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-      <md-button class="md-primary md-hue-1">Primary Hue 1</md-button>
-      <md-button class="md-warn md-raised md-hue-2">Warn Hue 2</md-button>
-      <md-button class="md-accent">Accent</md-button>
-      <md-button class="md-accent md-raised md-hue-1">Accent Hue 1</md-button>
-      <div class="label">Themed</div>
-    </section>
-
-    <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-      <md-button class="md-icon-button md-primary" aria-label="Settings">
-        <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
-      </md-button>
-      <md-button class="md-icon-button md-accent" aria-label="Favorite">
-        <md-icon md-svg-icon="img/icons/favorite.svg"></md-icon>
-      </md-button>
-      <md-button class="md-icon-button" aria-label="More">
-        <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
-      </md-button>
-      <md-button href="http://google.com"
-                 title="Launch Google.com in new window"
-                 target="_blank"
-                 ng-disabled="true"
-                 aria-label="Google.com"
-                 class="md-icon-button launch" >
-        <md-icon md-svg-icon="img/icons/launch.svg"></md-icon>
-      </md-button>
-      <div class="label">Icon Button</div>
-    </section>
-  </md-content>
-</div>
-
-<md-content class="md-padding">
-  <form ng-submit="$event.preventDefault()">
-    <p>Use <code>md-autocomplete</code> to search for matches from local or remote data sources.</p>
-    <md-autocomplete
-      md-selected-item="ctrl.selectedItem"
-      md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
-      md-search-text="ctrl.searchText"
-      md-selected-item-change="ctrl.selectedItemChange(item)"
-      md-items="item in ctrl.querySearch(ctrl.searchText)"
-      md-item-text="item.display"
-      md-min-length="0"
-      placeholder="What is your favorite US state?">
-      <md-item-template>
-        <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
-      </md-item-template>
-      <md-not-found>
-        No states matching "{{ctrl.searchText}}" were found.
-        <a ng-click="ctrl.newState(ctrl.searchText)">Create a new one!</a>
-      </md-not-found>
-    </md-autocomplete>
-    <br/>
-    <md-checkbox ng-model="ctrl.simulateQuery">Simulate query for results?</md-checkbox>
-    <md-checkbox ng-model="ctrl.noCache">Disable caching of queries?</md-checkbox>
-    <md-checkbox ng-model="ctrl.isDisabled">Disable the input?</md-checkbox>
-
-    <p>By default, <code>md-autocomplete</code> will cache results when performing a query.  After the initial call is performed, it will use the cached results to eliminate unnecessary server requests or lookup logic. This can be disabled above.</p>
-  </form>
-  holaaaa  --{{models}}  +++ {{modelAsJson}}
-  <ul class="simpleDemo" dnd-list="models.lists.A" >
-    <!-- The dnd-draggable directive makes an element draggable and will
-         transfer the object that was assigned to it. If an element was
-         dragged away, you have to remove it from the original list
-         yourself using the dnd-moved attribute -->
-    <li ng-repeat="item in models.lists.A"
-        dnd-draggable="item"
-        dnd-moved="models.lists.A.splice($index, 1)"
-        dnd-effect-allowed="move"
-        dnd-selected="models.selected = item"
-        ng-class="{'selected': models.selected === item}"
-    >
-      {{item.label}} -- {{item}}
-    </li>
-  </ul>
-
-
-  <!-- Markup for lists inside the dropzone. It's inside a seperate template
-     because it will be used recursively. The dnd-list directive enables
-     to drop elements into the referenced array. The dnd-draggable directive
-     makes an element draggable and will transfer the object that was
-     assigned to it. If an element was dragged away, you have to remove
-     it from the original list yourself using the dnd-moved attribute -->
-  <div class="simpleDemo">
-  <script type="text/ng-template" id="list.html">
-    <ul dnd-list="list">
-      <li ng-repeat="item in list"
-          dnd-draggable="item"
-          dnd-effect-allowed="move"
-          dnd-moved="list.splice($index, 1)"
-          dnd-selected="models.selected = item"
-          ng-class="{selected: models.selected === item}"
-          ng-include="item.type + '.html'">
-      </li>
-    </ul>
-  </script>
-
-  <!-- This template is responsible for rendering a container element. It uses
-       the above list template to render each container column -->
-  <script type="text/ng-template" id="container.html">
-    <div class="container-element box box-blue">
-      <h3>Container {{item.id}}</h3>
-      <div class="column" ng-repeat="list in item.columns" ng-include="'list.html'"></div>
-      <div class="clearfix"></div>
-    </div>
-  </script>
-
-  <!-- Template for a normal list item -->
-  <script type="text/ng-template" id="item.html">
-    <div class="item">Item {{item.id}}</div>
-  </script>
-
-  <!-- Main area with dropzones and source code -->
-  <div class="col-md-10">
-    <div class="row">
-      <div ng-repeat="(zone, list) in models.dropzones" class="col-md-6">
-        <div class="dropzone box box-yellow">
-          <!-- The dropzone also uses the list template -->
-          <h3>Dropzone {{zone}}</h3>
-          <div ng-include="'list.html'"></div>
+  <!-- Indicators -->
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+        <img src="https://lh3.googleusercontent.com/-i_wSdtovOnc/Wh_ozjmPXUI/AAAAAAAAWEw/NFBeYqwepUMOBUZfB2fm9aSObhuc-9PmACL0BGAYYCw/h1234/2017-11-30.png" alt="EHRBuilder">
+        <div class="carousel-caption">
+          <h3>EHRBuilder</h3>
+          <p>Herramienta para la creación de formularios normalizados.</p>
         </div>
       </div>
     </div>
-
-    <div view-source="nested"></div>
-
-    <h2>Generated Model</h2>
-    <pre>{{modelAsJson}}</pre>
   </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h4 class="page-header">Inicio</h4>
+      <!--<md-button ng-click="showSimpleToast()">-->
+      <!--Show Simple-->
+      <!--</md-button>-->
 
-  <!-- Sidebar -->
-  <div class="col-md-2">
+      <div class="container-fluid container-fixed-lg">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <div class="panel-title">EHRBuilder</div>
+              </div>
+              <div class="panel-body">
 
-    <div class="toolbox box box-grey box-padding">
-      <h3>New Elements</h3>
-      <ul>
-        <!-- The toolbox only allows to copy objects, not move it. After a new
-             element was created, dnd-copied is invoked and we generate the next id -->
-        <li ng-repeat="item in models.templates"
-            dnd-draggable="item"
-            dnd-effect-allowed="copy"
-            dnd-copied="item.id = item.id + 1"
-        >
-          <button type="button" class="btn btn-default btn-lg" disabled="disabled">{{item.type}}</button>
-        </li>
-      </ul>
+                Es una herramienta para la normalización de la información clínica en base a una metodología en el desarrollo de nuevos módulos en sistemas de Historia Clínica Electrónica. Esta herramienta permite la definición de modelos de información y documentos clínicos asociados a la atención de los pacientes mediante funcionalidades que aseguran la coordinación entre los profesionales involucrados en el modelado de información clínica. Además, incluye técnicas de para asegurar la consistencia semántica entre los múltiples documentos clínicos definidos para documentar la atención de los pacientes consiguiendo favorecer la explotación de los datos a través de los múltiples procesos asistenciales.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid container-fixed-lg">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <div class="panel-title">Funcionalidades</div>
+              </div>
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                      <img src="https://10725-presscdn-0-57-pagely.netdna-ssl.com/wp-content/uploads/2016/02/zf-icon-translation.png" alt="...">
+                      <div class="caption">
+                        <h3>Gobernanza</h3>
+                        <p>Mecanismos de gobernanza por medio de roles que aseguren la colaboración de profesionales sanitarios y expertos en terminologías y modelado de información en la definición de los modelos de información clínica y documentos clínicos. </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                      <img src="https://10725-presscdn-0-57-pagely.netdna-ssl.com/wp-content/uploads/2016/02/zf-icon-translation.png" alt="...">
+                      <div class="caption">
+                        <h3>Gobernanza</h3>
+                        <p>Mecanismos de gobernanza por medio de roles que aseguren la colaboración de profesionales sanitarios y expertos en terminologías y modelado de información en la definición de los modelos de información clínica y documentos clínicos. </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                      <img src="https://10725-presscdn-0-57-pagely.netdna-ssl.com/wp-content/uploads/2016/02/zf-icon-translation.png" alt="...">
+                      <div class="caption">
+                        <h3>Gobernanza</h3>
+                        <p>Mecanismos de gobernanza por medio de roles que aseguren la colaboración de profesionales sanitarios y expertos en terminologías y modelado de información en la definición de los modelos de información clínica y documentos clínicos. </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <div ng-if="models.selected" class="box box-grey box-padding">
-      <h3>Selected</h3>
-      <strong>Type: </strong> {{models.selected.type}}<br>
-      <input type="text" ng-model="models.selected.id" class="form-control" style="margin-top: 5px" />
-    </div>
-
-    <div class="trashcan box box-grey box-padding">
-      <!-- If you use [] as referenced list, the dropped elements will be lost -->
-      <h3>Trashcan</h3>
-      <ul dnd-list="[]">
-        <li><img src="nested/trashcan.jpg"></li>
-      </ul>
-    </div>
 
   </div>
-  </div>
-</md-content>
+
+</div>
+
 
