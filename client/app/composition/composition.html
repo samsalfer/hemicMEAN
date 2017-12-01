@@ -1,7 +1,7 @@
 <div class="container" >
   <div class="row">
     <div class="col-lg-12">
-      <h4 class="page-header">Personalize</h4>
+      <h4 class="page-header">Form</h4>
       <!--<md-button ng-click="showSimpleToast()">-->
         <!--Show Simple-->
       <!--</md-button>-->
@@ -16,11 +16,10 @@
                 </div>
               </div>
               <div class="panel-body">
-                <div class="btn-group">
-                  <label class="btn btn-default" ng-model="radioModel" uib-btn-radio="'Left'" ng-click="$ctrl.viewStructure(); $ctrl.screenColor='242, 238, 130, 0.75'">Structure</label>
-                  <label class="btn btn-default" ng-model="radioModel" uib-btn-radio="'Right'" uib-uncheckable="" ng-click="$ctrl.viewForm(); $ctrl.screenColor='65, 191, 180, 0.45'">Form</label>
-                </div>
-                </md-input-container>
+                <!--<div class="btn-group">-->
+                  <!--<label class="btn btn-default" ng-model="radioModel" uib-btn-radio="'Left'" ng-click="$ctrl.viewStructure(); $ctrl.screenColor='242, 238, 130, 0.75'">Structure</label>-->
+                  <!--<label class="btn btn-default" ng-model="radioModel" uib-btn-radio="'Right'" uib-uncheckable="" ng-click="$ctrl.viewForm(); $ctrl.screenColor='65, 191, 180, 0.45'">Form</label>-->
+                <!--</div>-->
                 <div class="row">
                   <div class="col-sm-9 simpleDemo">
                     <!--<ul name="principalForm" dnd-list="$ctrl.modelForm">-->
@@ -457,8 +456,6 @@
       </div>
 
     </div>
-  <h2>Generated Model</h2>
-  <pre>{{$ctrl.modelForm | json : spacing}}</pre>
   <!--Modal Data-->
   <div style="visibility: hidden">
     <div class="md-dialog-container" layout="row" class="profile" layout-wrap id="modelForm">

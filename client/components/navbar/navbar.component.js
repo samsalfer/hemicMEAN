@@ -8,11 +8,14 @@ export class NavbarComponent {
     title: 'Home',
     state: 'main'
   }, {
+    title: 'Structure',
+    state: 'structure'
+  }, {
+    title: 'Form',
+    state: 'composition'
+  }, {
     title: 'Indicators',
     state: 'combine'
-  }, {
-    title: 'Personalize',
-    state: 'composition'
   }];
   isLoggedIn: Function;
   isAdmin: Function;

@@ -36,7 +36,7 @@ export default class LoginController {
       })
         .then(() => {
           // Logged in, redirect to home
-          this.$state.go('structure');
+          this.$state.go('composition');
         })
         .catch(err => {
           this.errors.login = err.message;

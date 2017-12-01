@@ -1,167 +1,508 @@
-<div class="container">
+<div class="container" >
   <div class="row">
     <div class="col-lg-12">
-      <h1 class="page-header">Estructuras:</h1>
-      <div class="row">
-        <div class="col-lg-3">
-          <md-input-container layout-gt-sm="row" class="md-block" flex-gt-sm>
-            <label>Name</label>
-            <input ng-model="$ctrl.name" autofocus>
-          </md-input-container>
+      <h4 class="page-header">Structure</h4>
+      <!--<md-button ng-click="showSimpleToast()">-->
+      <!--Show Simple-->
+      <!--</md-button>-->
+      <div class="container-fluid container-fixed-lg">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="panel panel-default">
+              <div class="panel-heading" >
+                <div ng-show="$ctrl.flagForm" class="panel-title" >Form View
+                </div>
+                <div ng-show="!$ctrl.flagForm" class="panel-title" >Model View
+                </div>
+              </div>
+              <div class="panel-body">
+                <!--<div class="btn-group">-->
+                  <!--<label class="btn btn-default" ng-model="radioModel" uib-btn-radio="'Left'" ng-click="$ctrl.viewStructure(); $ctrl.screenColor='242, 238, 130, 0.75'">Structure</label>-->
+                  <!--<label class="btn btn-default" ng-model="radioModel" uib-btn-radio="'Right'" uib-uncheckable="" ng-click="$ctrl.viewForm(); $ctrl.screenColor='65, 191, 180, 0.45'">Form</label>-->
+                <!--</div>-->
+                <div class="row">
+                  <div class="col-sm-9 simpleDemo">
+                    <!--<ul name="principalForm" dnd-list="$ctrl.modelForm">-->
+                    <!--<li ng-repeat="(i,m) in $ctrl.modelForm"-->
+                    <!--dnd-draggable="m"-->
+                    <!--dnd-moved="$ctrl.modelForm.splice(i, 1)"-->
+                    <!--dnd-effect-allowed="move"-->
+                    <!--dnd-selected="$ctrl.modelForm.selected = m"-->
+                    <!--ng-class="{'selected': $ctrl.modelForm.selected === m}">-->
+                    <!--&lt;!&ndash;Añado una variable para controlar cuando el ratón entra en el div para mostrar los botones de editar y borrar&ndash;&gt;-->
+                    <!--<div class="formComponent" ng-mouseenter="showHeaderButtons=true" ng-mouseleave="showHeaderButtons=false" >-->
+                    <!--<span class="{{m.class}} formLabel">{{m.header}}<span ng-if="m.required===true">*</span></span>-->
+                    <!--<md-button class="delete" ng-show="showHeaderButtons" ng-click="$ctrl.deleteObject(i)"><i class="fa fa-times" style="color: #d9534f;" aria-hidden="true" aria-label="delete"></i></md-button>-->
+                    <!--<md-button class="edit" ng-show="showHeaderButtons" ng-click=" m.edit=true "><i class="fa fa-pencil" style="color: #105cb6;" aria-hidden="true" aria-label="edit"></i></md-button>-->
+                    <!--<div ng-if="!m.edit">-->
+                    <!--&lt;!&ndash;number & text&ndash;&gt;-->
+                    <!--<div ng-if="m.typeStructure === 'simple'">-->
+                    <!--<input class="form-control" type="{{m.type}}" ng-model="m.value" min="{{m.minValue}}" max="{{m.maxValue}}" ng-required="{{m.required}}" />-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash;CheckBox&ndash;&gt;-->
+                    <!--<div ng-if="m.type === 'checkbox' ">-->
+                    <!--<div ng-repeat="(j, v) in m.options">-->
+                    <!--<md-checkbox ng-model="v.value" />-->
+                    <!--<input class="form-control" type="text" ng-model="v.name"/>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash;Select &ndash;&gt;-->
+                    <!--<div ng-if="m.type === 'select' ">-->
+                    <!--<select class="form-control" id="sel1" ng-model="gu.value">-->
+                    <!--<option ng-repeat="(j, v) in m.options">-->
+                    <!--{{v.name}}-->
+                    <!--</option>-->
+                    <!--</select>-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash;TextArea&ndash;&gt;-->
+                    <!--<div ng-if="m.type === 'textArea' ">-->
+                    <!--<textarea class="form-control" rows="{{m.rows}}" ng-model="m.value" maxlength="{{m.maxLength}}" ng-required="{{m.required}}">-->
+                    <!--</textarea>-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash;Radio Group&ndash;&gt;-->
+                    <!--<div ng-if="m.type === 'radioGroup' ">-->
+                    <!--<md-radio-group ng-model="m.value">-->
+                    <!--<div ng-repeat="(j, v) in m.options">-->
+                    <!--<md-radio-button value={{v.value}} class="md-primary">{{v.name}}</md-radio-button>-->
+                    <!--</div>-->
+                    <!--</md-radio-group>-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash;Date Field&ndash;&gt;-->
+                    <!--<div ng-if="m.type === 'dateField' ">-->
+                    <!--<md-datepicker ng-model="m.value" md-placeholder="Enter date" ng-required="{{m.required}}"></md-datepicker>-->
+                    <!--&lt;!&ndash;</textarea>&ndash;&gt;-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;Edition view-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;-->
+                    <!--<div ng-if="m.edit" style="padding:10px">-->
+                    <!--<div class="formEdit">-->
+                    <!--<form class="form-horizontal">-->
+                    <!--&lt;!&ndash;REQUIRED&ndash;&gt;-->
+                    <!--<div class="form-group">-->
+                    <!--<label class="control-label col-sm-2" for="required">-->
+                    <!--Required:-->
+                    <!--</label>-->
+
+                    <!--<div class="col-sm-10">-->
+                    <!--<div class="checkbox">-->
+                    <!--<label><input type="checkbox" id="required" ng-model="m.required"> </label>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash;LABEL&ndash;&gt;-->
+                    <!--<div class="form-group">-->
+                    <!--<label class="control-label col-sm-2" for="label">Label:</label>-->
+                    <!--<div class="col-sm-10">-->
+                    <!--<input type="text" class="form-control" id="label" ng-model="m.header" >-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash;VALUE&ndash;&gt;-->
+                    <!--<div class="form-group" ng-if="m.typeStructure!='complex' && m.type!='dateField' && m.type!='header'">-->
+                    <!--<label class="control-label col-sm-2" for="value">Value:</label>-->
+                    <!--<div class="col-sm-10">-->
+                    <!--<input type="{{m.type}}" class="form-control" id="value" ng-model="m.value" maxlength="{{m.maxLength}}">-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash;MAX LENGTH&ndash;&gt;-->
+                    <!--<div class="form-group" ng-if="m.typeStructure!='complex' && m.type!='number' && m.type!='dateField' && m.type!='header'">-->
+                    <!--<label class="control-label col-sm-2" for="maxLength">Max Length:</label>-->
+                    <!--<div class="col-sm-10">-->
+                    <!--<input type="number" class="form-control" id="maxLength" ng-model="m.maxLength" >-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash;number max & min&ndash;&gt;-->
+                    <!--<div class="form-group" ng-if="m.type==='number'">-->
+                    <!--<label class="control-label col-sm-2" for="maxValue">Min:</label>-->
+                    <!--<div class="col-sm-4">-->
+                    <!--<input type="number" class="form-control" id="minValue" ng-model="m.minValue" >-->
+                    <!--</div>-->
+                    <!--<label class="control-label col-sm-2" for="maxValue">Max:</label>-->
+                    <!--<div class="col-sm-4">-->
+                    <!--<input type="number" class="form-control" id="maxValue" ng-model="m.maxValue" >-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash;OPTIONS CHECKBOX&ndash;&gt;-->
+                    <!--<div class="form-group" ng-if="m.typeStructure === 'complex'">-->
+                    <!--<div >-->
+                    <!--<div ng-repeat="(j, v) in m.options" >-->
+                    <!--<label class="control-label col-sm-2" for="optionCheckbox">Options:</label>-->
+                    <!--<div class="col-sm-4">-->
+                    <!--<input type="text" id="optionCheckbox" class="form-control" ng-model="v.name" >-->
+                    <!--</div>-->
+                    <!--<div class="col-sm-4">-->
+                    <!--<input type="text" class="form-control" ng-model="v.name" >-->
+                    <!--</div>-->
+                    <!--<div class="col-sm-2">-->
+                    <!--<md-button class="delete" ng-click="$ctrl.deleteOptionInCheck(i,j)"><i class="fa fa-times" style="color: #d9534f;" aria-hidden="true"></i></md-button>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="col-sm-10">-->
+                    <!--</div>-->
+                    <!--<div class="col-sm-2">-->
+                    <!--<md-button class="delete" ng-click="$ctrl.addOptionInCheck(i)"><i class="fa fa-plus" style="color: #5cb85c;" aria-hidden="true"></i></md-button>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash;Rows&ndash;&gt;-->
+                    <!--<div class="form-group" ng-if="m.typeStructure === 'textArea' ">-->
+                    <!--<label class="control-label col-sm-2" for="rows">Rows:</label>-->
+                    <!--<div class="col-sm-10">-->
+                    <!--<input type="number" class="form-control" id="rows" ng-model="m.rows" >-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</form>-->
+                    <!--&lt;!&ndash;close button&ndash;&gt;-->
+                    <!--<div class="row">-->
+
+                    <!--<button class="btn btn-default closeEdit" ng-click="m.edit=false">Close</button>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+
+
+                    <!--</div>-->
+                    <!--</li>-->
+                    <!--</ul>-->
+                    <!--- CON SECCIONES COMIENZO -->
+                    <script type="text/ng-template" id="list.html">
+                      <ul name="principalForm" dnd-list="list">
+                        <li ng-repeat="(i,m) in list"
+                            dnd-draggable="m"
+                            dnd-moved="list.splice(i, 1)"
+                            dnd-effect-allowed="move"
+                            dnd-selected="list.selected = m"
+                            ng-class="{'selected': list.selected === m}"
+                            ng-include="m.typeShow + '.html'">
+
+                        </li>
+                      </ul>
+                    </script>
+                    <script type="text/ng-template" id="list2.html">
+                      <ul name="principalForm" dnd-list="m.container">
+                        <li ng-repeat="(i,m) in m.container"
+                            dnd-draggable="m"
+                            dnd-moved="m.container.splice(i, 1)"
+                            dnd-effect-allowed="move"
+                            dnd-selected="m.container.selected = m"
+                            ng-class="{'selected': m.container.selected === m}"
+                            ng-include="m.typeShow + '.html'">
+                        </li>
+                      </ul>
+                    </script>
+                    <script type="text/ng-template" id="container.html">
+                      <div class="container-element box item box-blue">
+                        <div class="formComponent" ng-mouseenter="showHeaderButtons=true" ng-mouseleave="showHeaderButtons=false" >
+                          <span class="{{m.class}} formLabel">{{m.header}}<span ng-if="m.required===true">*</span></span>
+                          <md-button class="delete" ng-show="showHeaderButtons" ng-click="$ctrl.deleteObject(null,m)"><i class="fa fa-times" style="color: #d9534f;" aria-hidden="true" aria-label="delete"></i></md-button>
+                          <md-button class="edit" ng-show="showHeaderButtons" ng-click=" m.edit=true "><i class="fa fa-pencil" style="color: #105cb6;" aria-hidden="true" aria-label="edit"></i></md-button>
+                        </div>
+                        <!--Editar para la sección-->
+                        <div ng-if="m.edit" style="padding:10px">
+                          <div class="formEdit">
+                            <form class="form-horizontal">
+                              <div class="form-group">
+                                <label class="control-label col-sm-2" for="label">Label:</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="label" ng-model="m.header" >
+                                </div>
+                              </div>
+                            </form>
+                            <!--close button-->
+                            <div class="row">
+
+                              <button class="btn btn-default closeEdit" ng-click="m.edit=false">Close</button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="column" ng-repeat="list in [m.container]" ng-include="'list.html'"></div>
+                        <div class="clearfix"></div>
+                      </div>
+
+                    </script>
+                    <!--Añado una variable para controlar cuando el ratón entra en el div para mostrar los botones de editar y borrar-->
+                    <script type="text/ng-template" id="item.html">
+                      <div class="item">
+                        <div class="formComponent" ng-mouseenter="showHeaderButtons=true" ng-mouseleave="showHeaderButtons=false" >
+                          <span class="{{m.class}} formLabel">{{m.header}}<span ng-if="m.required===true">*</span></span>
+
+                          <md-button class="delete" ng-show="showHeaderButtons" dnd-list="[]" ng-click="$ctrl.deleteObject(null,m)"><i class="fa fa-times" style="color: #d9534f;" aria-hidden="true" aria-label="delete"></i></md-button>
+                          <md-button class="edit" ng-show="showHeaderButtons" ng-click=" m.edit=true "><i class="fa fa-pencil" style="color: #105cb6;" aria-hidden="true" aria-label="edit"></i></md-button>
+                          <md-button uib-tooltip="{{m.helptext}}" class="delete" ng-show="showHeaderButtons" dnd-list="[]" ng-click=""><i class="fa fa-question" style="color: #3c763d;" aria-hidden="true" aria-label="help"></i></md-button>
+
+                          <div ng-if="!m.edit">
+                            <!--number & text-->
+                            <div ng-if="m.typeStructure === 'simple'">
+                              <input class="form-control" type="{{m.type}}" ng-model="m.value" min="{{m.minValue}}" max="{{m.maxValue}}" ng-required="{{m.required}}" />
+                            </div>
+                            <!--CheckBox-->
+                            <div ng-if="m.type === 'checkbox' ">
+                              <div ng-repeat="(j, v) in m.options">
+                                <md-checkbox ng-model="v.value" />
+                                <input class="form-control" type="text" ng-model="v.name"/>
+                              </div>
+                            </div>
+                            <!--Select -->
+                            <div ng-if="m.type === 'select' ">
+                              <select class="form-control" id="sel1" ng-model="gu.value">
+                                <option ng-repeat="(j, v) in m.options">
+                                  {{v.name}}
+                                </option>
+                              </select>
+                            </div>
+                            <!--TextArea-->
+                            <div ng-if="m.type === 'textArea' ">
+                              <textarea class="form-control" rows="{{m.rows}}" ng-model="m.value" maxlength="{{m.maxLength}}" ng-required="{{m.required}}">
+                              </textarea>
+                            </div>
+                            <!--Radio Group-->
+                            <div ng-if="m.type === 'radioGroup' ">
+                              <md-radio-group ng-model="m.value">
+                                <div ng-repeat="(j, v) in m.options">
+                                  <md-radio-button value={{v.value}} class="md-primary">{{v.name}}</md-radio-button>
+                                </div>
+                              </md-radio-group>
+                            </div>
+                            <!--Date Field-->
+                            <div ng-if="m.type === 'dateField' ">
+                              <md-datepicker ng-model="m.value" md-placeholder="Enter date" ng-required="{{m.required}}"></md-datepicker>
+                            </div>
+                            <!--File-->
+                            <div ng-if="m.type === 'file' ">
+                              <input type="file" class="form-control">
+                            </div>
+                          </div>
+                          <!--------------------Edition view----------------->
+                          <div ng-if="m.edit" style="padding:10px">
+                            <div class="formEdit">
+                              <form class="form-horizontal">
+                                <!--REQUIRED-->
+                                <div class="form-group">
+                                  <label class="control-label col-sm-2" for="required">
+                                    Required:
+                                  </label>
+
+                                  <div class="col-sm-10">
+                                    <div class="checkbox">
+                                      <label><input type="checkbox" id="required" ng-model="m.required"> </label>
+                                    </div>
+                                  </div>
+                                </div>
+                                <!--LABEL-->
+                                <div class="form-group">
+                                  <label class="control-label col-sm-2" for="label1">Label:</label>
+                                  <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="label1" ng-model="m.header" >
+                                  </div>
+                                </div>
+                                <!--VALUE-->
+                                <div class="form-group" ng-if="m.typeStructure!='complex' && m.type!='dateField' && m.type!='header' && m.type!='file'">
+                                  <label class="control-label col-sm-2" for="value">Value:</label>
+                                  <div class="col-sm-10">
+                                    <input type="{{m.type}}" class="form-control" id="value" ng-model="m.value" maxlength="{{m.maxLength}}">
+                                  </div>
+                                </div>
+                                <!--Default VALUE-->
+                                <div class="form-group" ng-if="m.typeStructure!='complex' && m.type!='dateField' && m.type!='header' && m.type!='file'">
+                                  <label class="control-label col-sm-2" for="value">Default Value:</label>
+                                  <div class="col-sm-10">
+                                    <input type="{{m.type}}" class="form-control" id="dvalue" ng-model="m.defaultValue" maxlength="{{m.maxLength}}">
+                                  </div>
+                                </div>
+                                <!--Help Text-->
+                                <div class="form-group" ng-if="m.type!='header'">
+                                  <label class="control-label col-sm-2" for="value">Help Text:</label>
+                                  <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="htext" ng-model="m.helptext" maxlength="150">
+                                  </div>
+                                </div>
+                                <!--MAX LENGTH-->
+                                <div class="form-group" ng-if="m.typeStructure!='complex' && m.type!='number' && m.type!='dateField' && m.type!='header' && m.type!='file'">
+                                  <label class="control-label col-sm-2" for="maxLength">Max Length:</label>
+                                  <div class="col-sm-10">
+                                    <input type="number" class="form-control" id="maxLength" ng-model="m.maxLength" >
+                                  </div>
+                                </div>
+                                <!--number max & min-->
+                                <div class="form-group" ng-if="m.type==='number'">
+                                  <label class="control-label col-sm-2" for="maxValue">Min:</label>
+                                  <div class="col-sm-4">
+                                    <input type="number" class="form-control" id="minValue" ng-model="m.minValue" >
+                                  </div>
+                                  <label class="control-label col-sm-2" for="maxValue">Max:</label>
+                                  <div class="col-sm-4">
+                                    <input type="number" class="form-control" id="maxValue" ng-model="m.maxValue" >
+                                  </div>
+                                </div>
+                                <!--OPTIONS CHECKBOX-->
+                                <div class="form-group" ng-if="m.typeStructure === 'complex'">
+                                  <div >
+                                    <div ng-repeat="(j, v) in m.options" >
+                                      <label class="control-label col-sm-2" for="optionCheckbox">Options:</label>
+                                      <div class="col-sm-4">
+                                        <input type="text" id="optionCheckbox" class="form-control" ng-model="v.name" >
+                                      </div>
+                                      <div class="col-sm-4">
+                                        <input type="text" class="form-control" ng-model="v.name" >
+                                      </div>
+                                      <div class="col-sm-2">
+                                        <md-button class="delete" ng-click="$ctrl.deleteOptionInCheck(i,j)"><i class="fa fa-times" style="color: #d9534f;" aria-hidden="true"></i></md-button>
+                                      </div>
+                                    </div>
+                                    <div class="col-sm-10">
+                                    </div>
+                                    <div class="col-sm-2">
+                                      <md-button class="delete" ng-click="$ctrl.addOptionInCheck(i)"><i class="fa fa-plus" style="color: #5cb85c;" aria-hidden="true"></i></md-button>
+                                    </div>
+                                  </div>
+                                </div>
+                                <!--Rows-->
+                                <div class="form-group" ng-if="m.typeStructure === 'textArea' ">
+                                  <label class="control-label col-sm-2" for="rows">Rows:</label>
+                                  <div class="col-sm-10">
+                                    <input type="number" class="form-control" id="rows" ng-model="m.rows" >
+                                  </div>
+                                </div>
+                                <!--Type form view-->
+                                <div class="form-group" ng-if="$ctrl.flagForm && m.type!='file'">
+                                  <label class="control-label col-sm-2" for="value">Type form view:</label>
+                                  <div class="col-sm-10">
+                                    <button class="btn btn-default" ng-click="$ctrl.changeType(null, m, 3)">Select</button>
+                                    <button class="btn btn-default" ng-click="$ctrl.changeType(null, m, 2)">CheckBox</button>
+                                    <button class="btn btn-default" ng-click="$ctrl.changeType(null, m, 5)">Radio Group</button>
+                                  </div>
+                                </div>
+                              </form>
+                              <!--close button-->
+                              <div class="row">
+                                <button class="btn btn-default closeEdit" ng-click="m.edit=false">Close</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </script>
+                    <div ng-repeat="list in [$ctrl.modelForm]">
+                      <div class="dropzone box box-yellow">
+                        <div ng-include="'list.html'"></div>
+                      </div>
+                    </div>
+                    <!--- CON SECCCIONES FIN ---->
+                  </div>
+                  <div class="col-sm-3">
+                    <!--RIGTH FORM MENU-->
+                    <form class="search-form">
+                      <!--<label><i class="fa fa-search"></i>Search</label>-->
+                      <p class="input-group">
+                        <input autocomplete="off" type="text" id="myInput" placeholder="Search for structures.." ng-model="$ctrl.searchText" ng-minlength="2">
+                        <span class="input-group-btn">
+                 </span>
+                      </p>
+                    </form>
+                    <ul ng-show="$ctrl.searchText!=null && $ctrl.searchText!=''" id="myUL">
+                      <li ng-repeat="form in $ctrl.modelFormCustom | filter:$ctrl.searchText" >
+                        <a ng-click="$ctrl.addFormCustom(form.form)">{{form.name}}</a>
+                      </li>
+                    </ul>
+                    <div class="btn-group">
+                      <button ng-click="$ctrl.addDateField()"><i class="fa fa-calendar" aria-hidden="true"></i>
+                        Date Field</button>
+                      <button ng-show="$ctrl.flagForm" ng-click="$ctrl.addCheck()"><i class="fa fa-check-square-o" aria-hidden="true"></i>
+                        Checkbox Group</button>
+                      <button ng-show="$ctrl.flagForm" ng-click="$ctrl.addHeader()"><i class="fa fa-header" aria-hidden="true"></i>
+                        Header</button>
+                      <button ng-show="$ctrl.flagForm" ng-click="$ctrl.addParagraph()"><i class="fa fa-paragraph" aria-hidden="true"></i>
+                        Paragraph</button>
+                      <button ng-click="$ctrl.addNumber()"><i class="fa fa-hashtag" aria-hidden="true"></i>
+                        Number</button>
+                      <button ng-show="!$ctrl.flagForm" ng-click="$ctrl.addSelect()"><i class="fa fa-indent" aria-hidden="true"></i>
+                        Cluster</button>
+                      <button ng-show="$ctrl.flagForm" ng-click="$ctrl.addSelect()"><i class="fa fa-indent" aria-hidden="true"></i>
+                        Select</button>
+                      <button ng-click="$ctrl.addText()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        Text Field</button>
+                      <button ng-show="$ctrl.flagForm" ng-click="$ctrl.addTextArea()"><i class="fa fa-align-justify" aria-hidden="true"></i>
+                        Text Area</button>
+                      <button ng-show="$ctrl.flagForm" ng-click="$ctrl.addRadioGroup()"><i class="fa fa-list-ul" aria-hidden="true"></i>
+                        Radio Group</button>
+                      <button ng-click="$ctrl.addSection()"><i class="fa fa-object-group" aria-hidden="true"></i>
+                        Section</button>
+                      <button ng-click="$ctrl.addTable()"><i class="fa fa-table" aria-hidden="true"></i>
+                        Table</button>
+                      <button ng-click="$ctrl.addFile()"><i class="fa fa-upload" aria-hidden="true"></i>
+                        File</button>
+                    </div>
+                    <div class="form-actions">
+                      <button type="button" ng-click="$ctrl.clear()" id="clear-action" class="btn btn-danger">Clear</button>
+                      <button type="button" ng-click="showModelForm('#modelForm')" id="data-action" class="btn btn-default">{ }</button>
+                      <button type="button" ng-click="showModelForm('#nameForm')" id="save-action" class="btn btn-primary">Save</button>
+                    </div>
+                  </div>
+
+                </div>
+
+                </md-input-container>
+
+                <!--Dialog Data Structure-->
+              </div>
+
+
+            </div>
+
+          </div>
         </div>
       </div>
 
 
+    </div>
 
-      <div class="container-fluid container-fixed-lg">
-        <div class="row animate-show-hide" ng-show="$ctrl.showFirst">
-          <div class="col-sm-6">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <div class="panel-title">Estructura de información
-                </div>
-
-              </div>
-              <div class="panel-body">
-                <form class="search-form">
-                  <label>Search</label>
-                  <p class="input-group">
-                    <input type="text" class="form-control" placeholder="Add a new thing here." ng-model="$ctrl.searchText">
-                    <span class="input-group-btn">
-                 </span>
-                  </p>
-                </form>
-                <div ng-show="$ctrl.searchText" ng-repeat="st in $ctrl.structures | filter:$ctrl.searchText">
-                  <p>
-                    <a ng-click="$ctrl.selected(st)">
-
-                      <!--<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>-->
-                      {{st.idStructure}}
-                    </a>
-                  </p>
-                  <!--ng-if="$ctrl.idStructure != '' && $ctrl.idStructure == st.idStructure"-->
-                  <!--<div ng-show="$ctrl.selected == st._id">-->
-                  <!--<p  style="padding-left: 20px" ng-repeat="e in st.elements">-->
-                  <!--<a ng-click="$ctrl.elementSelected(e._id)">{{e.name}}</a>-->
-                  <!--</p>-->
-                  <!--</div>-->
-
-                </div>
-
-                <hr>
-                <div ng-repeat="select in $ctrl.selection">
-                  <p>{{select.idStructure}}</p>
-                  <p style="padding-left: 20px" ng-repeat="e in select.elements">
-                    <a ng-click="$ctrl.elementOfStructureSelected(select._id,e._id)"> >{{e.name}}</a>
-                  </p>
-                </div>
-              </div>
-            </div>
+  </div>
+  <!--Modal Data-->
+  <div style="visibility: hidden">
+    <div class="md-dialog-container" layout="row" class="profile" layout-wrap id="modelForm">
+      <md-dialog flex="50">
+        <md-toolbar>
+          <div class="md-toolbar-tools dialog-header">
+            Data
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="hideModelForm()">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </md-button>
           </div>
-          <div class="col-sm-6">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <div class="panel-title">Conjunto de valores
-                </div>
-              </div>
-              <div class="panel-body">
-                <table ng-repeat="term in $ctrl.elementSelected.terms" class="table table-hover">
-                  <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>{{term.name}}</th>
-                    <th><input type="text" class="form-control" placeholder="Add term" ng-model="especific"></th>
-                    <th><a ng-if="especific" ng-click="$ctrl.addItemFromArr(term.datas, especific)"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr ng-repeat="d in term.datas">
-                    <td></td>
-                    <td class="test">{{d}}</td>
-                    <td><button type="button" ng-click="$ctrl.removeItemFromArr(term.datas, d)" class="btn btn-danger btn-xs center">Delete</button></td>
-                  </tr>
-                  </tbody>
-                </table>
+        </md-toolbar>
+        <md-dialog-content>
+          <pre>{{$ctrl.modelForm | json : spacing}}</pre>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+          <button type="button" class="btn btn-primary btn-block">Copy Data</button>
+        </md-dialog-actions>
 
+      </md-dialog>
+    </div>
+  </div>
+  <!--Modal Form Name-->
+  <div style="visibility: hidden">
+    <div class="md-dialog-container" layout="row" class="profile" layout-wrap id="nameForm">
+      <md-dialog flex="50">
+        <md-toolbar>
+          <div class="md-toolbar-tools dialog-header">
+            Save as:
+            <span flex></span>
 
+            <md-button class="md-icon-button" ng-click="hideModelForm()">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </md-button>
+          </div>
+        </md-toolbar>
+        <md-dialog-content>
+          <div style="padding-top: 10px" class="container-fluid container-fixed-lg">
+            <input class="form-control" type="text" id="inputName" ng-model="$ctrl.nameForm"/>
+          </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+          <button type="button" ng-click="$ctrl.saveForm();hideModelForm()" class="btn btn-primary btn-block">Save</button>
+        </md-dialog-actions>
 
-
-                <!--{{$ctrl.user.test}}-->
-                <!--<label ng-repeat=" t in $ctrl.test">-->
-                  <!--<input type="checkbox" checklist-model="$ctrl.user.test" checklist-value="t">{{t}}</br>-->
-                <!--</label>-->
-
-
-
-
-
-
-                <!--<div ng-if="$ctrl.elementSelected.typeData == 'pq'">-->
-                  <!--<div ng-repeat="term in $ctrl.elementSelected.terms">-->
-                    <!--<p class="test"> {{term.name}}: </p>-->
-                    <!--<input type="text" class="form-control" placeholder="term.name especific" ng-model="especific">-->
-                    <!--<a ng-if="especific" ng-click="$ctrl.addItemFromArr(term.datas, especific)"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>-->
-                    <!--<div ng-repeat="d in term.datas">-->
-                      <!--<span>{{d}}</span><a ng-click="$ctrl.removeItemFromArr(term.datas, d)"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></a>-->
-                    <!--</div>-->
-                  <!--</div>-->
-                  <!--<form class="search-form">-->
-                  <!--<span class="input-group">-->
-                  <!--<input type="text" class="form-control" placeholder="Add a new thing here." ng-model="searchText">-->
-                  <!--<span class="input-group-btn">-->
-                  <!--</span>-->
-                  <!--</span>-->
-                  <!--<select type="text" class="form-control" ng-model="searchText"> -->
-                  <!--</select>-->
-                  <!---->
-                  <!--</form>-->
-                  <!--<p>-->
-                  <!--{{el.name}}-->
-
-                  <!--</p>-->
-                </div>
-
-              </div>
-            </div>
-        </div>
-
-        <div class="row animate-show-hide" ng-show="!$ctrl.showFirst">
-            <div class="col-sm-6">
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <div class="panel-title">Combinar</div>
-                </div>
-                <div class="panel-body">
-                  <div ng-repeat="select in $ctrl.selection">
-                    <!--{{select}}-->
-                    <div ng-repeat="element in select.elements">
-                      <div  ng-repeat="term in element.terms">
-                        <md-checkbox ng-show="term.name" type="checkbox" checklist-model="element.specificterms.names" checklist-value="term.name"> {{term.name}} </md-checkbox>
-                      </div>
-                    </div>
-                  </div>
-                  <md-button class="md-raised md-primary" ng-click="$ctrl.combineTerms()">Selectionar</md-button>
-                  <div ng-repeat="combi in $ctrl.combination">
-                    <md-input-container>
-                      <label>{{combi.name}}</label>
-                      <md-select name="singleSelect" ng-model="$ctrl.test2">
-                        <md-option ng-repeat="d in combi.datas" value="{{d}}">{{d}}</md-option>
-                      </md-select>
-
-                    </md-input-container>
-
-                    <!--<select name="singleSelect" ng-model="$ctrl.test2">-->
-                      <!--<option ng-repeat="d in combi.datas" value="{{d}}">{{d}}</option>-->
-                    <!--</select>-->
-                  </div>
-                </div>
-              </div>
-
-            </div>
-        </div>
-
-        </div>
-
+      </md-dialog>
     </div>
   </div>
 </div>
