@@ -14,7 +14,7 @@ export class CompositionComponent {
     right: true
   };
   flagForm = true;
-  screenColor = '65, 191, 180, 0.45';
+  combineElements = [];
   modelFormBasic = [
     {
       type: 'text',
@@ -436,14 +436,39 @@ export class CompositionComponent {
     //     });
     // });
   }
-  // Change view form/structure
-  viewStructure() {
-    this.flagForm = false;
-    this.clear();
+  // AddCombine Elements
+  addCombineElement(model) {
+    if(model.selectCombineElement === true) {
+      this.combineElements.push(model);
+    }
+    else {
+      this.combineElements.splice(this.combineElements.indexOf(model));
+    }
+    console.log(this.combineElements);
   }
-  viewForm() {
-    this.flagForm = true;
-    this.clear();
+  combineFunction() {
+    var oldHeaderCombine = '';
+    var oldOptions = [];
+    var newOptions = [];
+    var modelAux = JSON.parse(JSON.stringify(this.modelFormBasic[3]));
+
+    this.combineElements.forEach(m => {
+      oldHeaderCombine += m.header + '-';
+      oldOptions.push(m.options);
+    });
+    oldHeaderCombine = oldHeaderCombine.slice(0, -1);
+
+    oldOptions[0].forEach(combineA => {
+      oldOptions[1].forEach(combineB => {
+        newOptions.push({
+          name: combineA.name + ' - ' + combineB.name,
+          value: combineA.value + ' - ' + combineB.value
+        });
+      });
+    });
+    modelAux.header = oldHeaderCombine;
+    modelAux.options = newOptions;
+    this.modelForm.push(JSON.parse(JSON.stringify(modelAux)));
   }
 }
 

@@ -14,6 +14,8 @@
                 </div>
                 <div ng-show="!$ctrl.flagForm" class="panel-title" >Model View
                 </div>
+                <button type="button" ng-click="$ctrl.combineFunction()" id="clear-action" class="btn btn-danger">Combine</button>
+
               </div>
               <div class="panel-body">
                 <!--<div class="btn-group">-->
@@ -223,7 +225,8 @@
                     <script type="text/ng-template" id="item.html">
                       <div class="item">
                         <div class="formComponent" ng-mouseenter="showHeaderButtons=true" ng-mouseleave="showHeaderButtons=false" >
-                          <span class="{{m.class}} formLabel">{{m.header}}<span ng-if="m.required===true">*</span></span>
+
+                          <span class="{{m.class}} formLabel"><md-checkbox  ng-model="m.selectCombineElement" ng-change="$ctrl.addCombineElement(m)"/>{{m.header}}<span ng-if="m.required===true">*</span></span>
 
                           <md-button class="delete" ng-show="showHeaderButtons" dnd-list="[]" ng-click="$ctrl.deleteObject(null,m)"><i class="fa fa-times" style="color: #d9534f;" aria-hidden="true" aria-label="delete"></i></md-button>
                           <md-button class="edit" ng-show="showHeaderButtons" ng-click=" m.edit=true "><i class="fa fa-pencil" style="color: #105cb6;" aria-hidden="true" aria-label="edit"></i></md-button>
