@@ -2,6 +2,8 @@ import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import routing from './main.routes';
 import 'angular-drag-and-drop-lists';
+import '../../../node_modules/angular-tree-view/dist/eaTreeView-tpls.min.js';
+
 
 export class MainController {
   $http;
@@ -40,10 +42,11 @@ export class MainController {
   newThing = '';
 
   /*@ngInject*/
-  constructor($http, $scope, socket) {
+  constructor($http, $scope, socket, eaTreeViewFactory) {
     this.$http = $http;
     this.socket = socket;
     this.$scope = $scope;
+    this.eaTreeViewFactory = eaTreeViewFactory;
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('thing');
     });
@@ -51,6 +54,7 @@ export class MainController {
 
   $onInit() {
     let $scope = this.$scope;
+    let eaTreeViewFactory = this.eaTreeViewFactory;
     this.$http.get('/api/things')
       .then(response => {
         this.awesomeThings = response.data;
@@ -215,7 +219,47 @@ export class MainController {
     $scope.$watch('models.dropzones', function(model) {
       $scope.modelAsJson = angular.toJson(model, true);
     }, true);
+    //TREE VIEW
+    $scope.model = {
+      simpsons: [
+        {
+          display: 'Abe',
+          items: [
+            {
+              display: 'Homer', items: [
+              {display: 'Bart', stateName: 'Homer-Bart'},
+              {display: 'Lisa', stateName: 'Homer-Lisa'},
+              {display: 'Maggie', stateName: 'Homer-Maggie'}
+            ]
+            },
+            {display: 'Herb', stateName: 'Herb'},
+            {display: 'Abbie', stateName: 'Abbie'}
+          ]
+        },
+        {
+          display: 'Jacqueline',
+          items: [
+            {display: 'Patty', stateName: 'Patty'},
+            {display: 'Selma', stateName: 'Selma'},
+            {
+              display: 'Marge', items: [
+              {display: 'Bart', stateName: 'Marge-Bart'},
+              {display: 'Lisa', stateName: 'Marge-Lisa'},
+              {display: 'Maggie', stateName: 'Marge-Maggie'}
+            ]
+            },
+          ]
+        }
+      ]
+    };
 
+    eaTreeViewFactory.setItems($scope.model.simpsons, $scope.$id);
+
+    $scope.show = function(item) {
+      $scope.model.imageSource = '../../../node_modules/angular-tree-view/demo/images/' + item.stateName + '.jpg';
+      $scope.model.imageAlt = item.display;
+    };
+    //END TREE VIEW
   }
   addText() {
     this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[0])));
@@ -247,7 +291,7 @@ export class MainController {
 
 }
 
-export default angular.module('hemicApp.main', [uiRouter, 'dndLists'])
+export default angular.module('hemicApp.main', [uiRouter, 'dndLists', 'ea.treeview'])
   .config(routing)
   .component('main', {
     template: require('./main.html'),

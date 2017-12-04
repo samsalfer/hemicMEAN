@@ -1,3 +1,128 @@
+
+<style>
+  body {
+    border-radius: 1em;
+  }
+
+  .float-left {
+    float: left;
+  }
+
+  .left, .middle, .right {
+    margin: .5em 0 0 .5em;
+    float: left;
+    border-radius: 1em;
+  }
+
+  .left {
+    clear: left;
+    width: 30%;
+  }
+
+  .middle, .right {
+    padding-left: 3%;
+    width: 30%;
+  }
+
+  .markup {
+    padding-top: 2em;
+    float: left;
+  }
+
+  .code {
+    float: left;
+    clear: left;
+  }
+
+  .example {
+    padding-top: .5em;
+    float: left;
+    clear: left;
+    width: 100%;
+  }
+
+  .active {
+    background-color: grey;
+  }
+
+  .tree-trunk {
+    padding: .5em 0 0 .5em;
+  }
+
+  .white {
+    color: white;
+  }
+
+  .type {
+    border-radius: .25em;
+    color: white;
+    padding: .5em;
+    margin-left: .5em;
+  }
+
+  .string {
+    background-color: red;
+  }
+
+  .optional {
+    background-color: green;
+  }
+
+  .function {
+    background-color: black;
+  }
+
+  .object {
+    background-color: purple;
+  }
+
+  .number {
+    background-color: blue;
+  }
+
+  .boolean {
+    background-color: grey;
+  }
+
+  .array {
+    background-color: orange;
+  }
+
+  .required {
+    background-color: yellow;
+    color: red;
+  }
+
+  .property {
+    font-weight: 700;
+    display: inline;
+  }
+
+  .padding-top-half-em {
+    padding-top: .5em;
+  }
+
+  .italicized {
+    font-style: italic;
+  }
+  .clickable {
+    cursor: pointer;
+  }
+
+  .active {
+    background-color: lightgrey;
+  }
+
+  .tree-parent {
+    margin-bottom: .25em;
+    padding-left: 0;
+  }
+
+  .tree-child {
+    margin-bottom: .25em;
+    padding-left: 1em;
+  }
+</style>
 <div class="container">
   <!-- Indicators -->
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -93,7 +218,15 @@
 
 
   </div>
-
+  <!-- QUITAR ARBOL -->
+  <!-- https://github.com/engineer-andrew/Angular-Tree-View -->
+  <p>TREE VIEW</p>
+  <div>
+    <div class="left">
+      <ea-tree-view items="model.simpsons" dataset-id="$id" callback="show"></ea-tree-view>
+    </div>
+  </div>
+  <!-------------------------->
 </div>
 
 
