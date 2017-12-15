@@ -8,6 +8,9 @@ export class NavbarComponent {
     title: 'Home',
     state: 'main'
   }, {
+    title: 'Terminology',
+    state: 'terminology'
+  }, {
     title: 'Structure',
     state: 'structure'
   }, {
