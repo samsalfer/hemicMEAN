@@ -273,6 +273,7 @@
                             <div ng-if="m.type === 'file' ">
                               <input type="file" class="form-control">
                             </div>
+                            <!--Autocalculated-->
                           </div>
                           <!--------------------Edition view----------------->
                           <div ng-if="m.edit" style="padding:10px">
@@ -304,6 +305,25 @@
                                     <input type="{{m.type}}" class="form-control" id="value" ng-model="m.value" maxlength="{{m.maxLength}}">
                                   </div>
                                 </div>
+                                <!--Magnitude-->
+                                <div class="form-group" ng-if="m.type==='magnitude'">
+                                  <label class="control-label col-sm-2" for="value">Unit:</label>
+                                  <div class="col-sm-10">
+                                    <select class="form-control" ng-model="m.unit">
+                                      <optgroup label="Picnic">
+                                        <option>Mustard</option>
+                                        <option>Ketchup</option>
+                                        <option>Relish</option>
+                                      </optgroup>
+                                      <optgroup label="Camping">
+                                        <option>Tent</option>
+                                        <option>Flashlight</option>
+                                        <option>Toilet Paper</option>
+                                      </optgroup>
+                                    </select>
+                                  </div>
+                                </div>
+
                                 <!--Default VALUE-->
                                 <div class="form-group" ng-if="m.typeStructure!='complex' && m.type!='dateField' && m.type!='header' && m.type!='file'">
                                   <label class="control-label col-sm-2" for="value">Default Value:</label>
@@ -336,6 +356,14 @@
                                     <input type="number" class="form-control" id="maxValue" ng-model="m.maxValue" >
                                   </div>
                                 </div>
+
+                                <!--decimal number-->
+                                <div class="form-group" ng-if="m.type==='number'">
+                                  <label class="control-label col-sm-2" for="maxLength">Decimals:</label>
+                                  <div class="col-sm-10">
+                                    <input type="number" class="form-control" id="decimalNumber" ng-model="m.decimalNumber" >
+                                  </div>
+                                </div>
                                 <!--OPTIONS CHECKBOX-->
                                 <div class="form-group" ng-if="m.typeStructure === 'complex'">
                                   <div >
@@ -366,7 +394,7 @@
                                   </div>
                                 </div>
                                 <!--Type form view-->
-                                <div class="form-group" ng-if="$ctrl.flagForm && m.type!='file'">
+                                <div class="form-group" ng-if="$ctrl.flagForm && m.type!='file' && m.type!='header'">
                                   <label class="control-label col-sm-2" for="value">Type form view:</label>
                                   <div class="col-sm-10">
                                     <button class="btn btn-default" ng-click="$ctrl.changeType(null, m, 3)">Select</button>
@@ -433,6 +461,10 @@
                         Table</button>
                       <button ng-click="$ctrl.addFile()"><i class="fa fa-upload" aria-hidden="true"></i>
                         File</button>
+                      <button ng-click="$ctrl.addMagnitude()"><i class="fa fa-upload" aria-hidden="true"></i>
+                        Magnitude</button>
+                      <button ng-click="$ctrl.addAutocalculated()"><i class="fa fa-upload" aria-hidden="true"></i>
+                        Autocalculated</button>
                     </div>
                     <div class="form-actions">
                       <button type="button" ng-click="$ctrl.clear()" id="clear-action" class="btn btn-danger">Clear</button>
@@ -499,6 +531,10 @@
         <md-dialog-content>
           <div style="padding-top: 10px" class="container-fluid container-fixed-lg">
             <input class="form-control" type="text" id="inputName" ng-model="$ctrl.nameForm"/>
+            <input class="form-control" type="text" id="inputName1" ng-model="$ctrl.languageForm"/>
+            <input class="form-control" type="text" id="inputName2" ng-model="$ctrl.projectForm"/>
+            <input class="form-control" type="text" id="inputName3" ng-model="$ctrl.versionForm"/>
+
           </div>
         </md-dialog-content>
         <md-dialog-actions layout="row">

@@ -135,6 +135,26 @@ export class StructureComponent {
       class: 'file',
       header: 'File',
       value: ''
+    }, {
+      type: 'magnitude',
+      typeStructure: 'simple',
+      typeShow: 'item',
+      class: 'form_model',
+      header: 'Magnitude',
+      unit: 'kg',
+      maxValue: 1000,
+      minValue: 0,
+      value: 0
+    }, {
+      type: 'auto',
+      typeStructure: 'simple',
+      typeShow: 'item',
+      class: 'form_model',
+      header: 'Autocalculated',
+      unit: '',
+      maxValue: 1000,
+      minValue: 0,
+      value: 0
     }
   ];
   modelFormCustom = [];
@@ -300,6 +320,12 @@ export class StructureComponent {
   }
   addFile() {
     this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[11])));
+  }
+  addMagnitude() {
+    this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[12])));
+  }
+  addAutocalculated() {
+    this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[13])));
   }
   deleteObject(modelsN, model) {
     console.log(model);

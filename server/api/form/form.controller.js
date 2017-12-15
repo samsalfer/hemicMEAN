@@ -101,7 +101,7 @@ export function show(req, res) {
 export function create(req, res) {
   req.body.user = req.user._id;
   let elements = req.body.form;
-  return Form.create({name: req.body.name})
+  return Form.create({name: req.body.name, version: req.body.version, project: req.body.project, language: req.body.language })
     .then(form => {
       console.log('LLEGA:', form);
       if(form) {

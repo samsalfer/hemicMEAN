@@ -21,7 +21,9 @@ let ElementSchema = new mongoose.Schema({
   options: [],
   container: [],
   multiple: Boolean,
-  rows: Number
+  helptext: String,
+  rows: Number,
+  defaultValue: String
 });
 // var ElementSchema = new mongoose.Schema({
 //   name: String,

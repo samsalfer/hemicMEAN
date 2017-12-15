@@ -136,11 +136,35 @@ export class CompositionComponent {
       class: 'file',
       header: 'File',
       value: ''
+    }, {
+      type: 'magnitude',
+      typeStructure: 'simple',
+      typeShow: 'item',
+      class: 'form_model',
+      header: 'Magnitude',
+      unit: '',
+      maxValue: 1000,
+      minValue: 0,
+      value: 0
+    }, {
+      type: 'auto',
+      typeStructure: 'simple',
+      typeShow: 'item',
+      class: 'form_model',
+      header: 'Autocalculated',
+      unit: '',
+      maxValue: 1000,
+      minValue: 0,
+      value: 0
     }
   ];
   modelFormCustom = [];
   modelForm = [];
   nameForm = '';
+  languageForm = '';
+  projectForm = '';
+  versionForm = '';
+
   example = [];
     // [
     //   {
@@ -302,6 +326,12 @@ export class CompositionComponent {
   addFile() {
     this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[11])));
   }
+  addMagnitude() {
+    this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[12])));
+  }
+  addAutocalculated() {
+    this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[13])));
+  }
   deleteObject(modelsN, model) {
     console.log(model);
     let models = modelsN ? modelsN : this.modelForm;
@@ -393,17 +423,18 @@ export class CompositionComponent {
     // Esto funcionaba!
     let object = {
       name: this.nameForm,
+      version: this.versionForm,
+      language: this.languageForm,
+      project: this.projectForm,
       form: this.modelForm
     }
+    console.log(object);
     // Esto funcionaba!
     this.$http.post('api/forms', object)
       .then(() => {
         this.$http.get('api/forms')
           .then(res => {
             this.modelFormCustom = res.data;
-            console.log(res);
-            console.log('---------------------------');
-            console.log(this.modelFormCustom);
           });
       });
     //HASTA AQUI

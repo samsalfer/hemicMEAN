@@ -9,7 +9,10 @@ var FormSchema = new mongoose.Schema({
     type: Schema.ObjectId,
     ref: 'User'
   },
+  language: String,
   name: String,
+  version: String,
+  project: String,
   form: [],
   statusForm: {
     type: String,
