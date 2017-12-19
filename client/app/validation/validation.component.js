@@ -7,12 +7,14 @@ import routes from './validation.routes';
 
 export class ValidationComponent {
   formSelected = {};
+  message='';
   /*@ngInject*/
-  constructor($http, $mdDialog, $scope) {
+  constructor($http, $mdDialog, $scope, Auth) {
     this.$http = $http;
     this.forms = [];
     this.$mdDialog = $mdDialog;
     this.$scope = $scope;
+    this.getCurrentUser = Auth.getCurrentUserSync;
   }
   $onInit() {
     let $http = this.$http;
@@ -50,6 +52,12 @@ export class ValidationComponent {
   selectForm(form) {
     this.formSelected = form;
     console.log(this.formSelected);
+  }
+  sendMessage(form) {
+    let aux = {user: this.getCurrentUser().name, message: this.message};
+    form.messages.push(aux);
+    this.message = '';
+    this.updateForm(form);
   }
 }
 

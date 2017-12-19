@@ -20,9 +20,10 @@
                         <strong>{{validation.name}}</strong><br>
                         <span class="text-muted">{{validation.statusForm}}</span>
                       </div>
-                      <a ng-click="showModelForm('#modelInfo'); $ctrl.selectForm(validation)" class="icon info"><span class="fa fa-info fa-2x"></span></a>
-                      <a ng-click="$ctrl.accept(validation)" class="icon accept"><span class="fa fa-check-square fa-2x"></span></a>
-                      <a ng-click="$ctrl.deny(validation)" class="icon deny"><span class="fa fa-minus-circle fa-2x"></span></a>
+                      <a ng-click="showModelForm('#modelMessages'); $ctrl.selectForm(validation)" class="icon info"><span class="fa fa-envelope"></span></a>
+                      <a ng-click="showModelForm('#modelInfo'); $ctrl.selectForm(validation)" class="icon info"><span class="fa fa-info"></span></a>
+                      <a ng-click="$ctrl.accept(validation)" class="icon accept"><span class="fa fa-check-square"></span></a>
+                      <a ng-click="$ctrl.deny(validation)" class="icon deny"><span class="fa fa-minus-circle"></span></a>
                     </li>
                   </ul>
                 </div>
@@ -58,6 +59,43 @@
       <md-dialog-actions layout="row">
         <a ng-click="$ctrl.accept($ctrl.formSelected)" class="icon accept"><span class="fa fa-check-square fa-2x"></span></a>
         <a ng-click="$ctrl.deny($ctrl.formSelected)" class="icon deny"><span class="fa fa-minus-circle fa-2x"></span></a>
+      </md-dialog-actions>
+
+    </md-dialog>
+  </div>
+</div>
+
+<!--Modal messages-->
+<div style="visibility: hidden">
+  <div class="md-dialog-container" layout="row" class="profile" layout-wrap id="modelMessages">
+    <md-dialog flex="50">
+      <md-toolbar>
+        <div class="md-toolbar-tools dialog-header">
+          Messages
+          <span flex></span>
+          <md-button class="md-icon-button" aria-label="buttonHide" ng-click="hideModelForm()">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </md-button>
+        </div>
+      </md-toolbar>
+      <md-dialog-content>
+        <ul class="list-group user-list">
+          <li class="list-group-item" ng-repeat="n in $ctrl.formSelected.messages track by $index">
+            <div class="user-info">
+              <strong>{{n.user}}</strong><br>
+              <span class="text-muted">{{n.message}}</span>
+            </div>
+
+          </li>
+        </ul>
+        <div class="form-group">
+          <label for="message">New message:</label>
+          <textarea ng-keydown="$event.keyCode === 13 && $ctrl.sendMessage($ctrl.formSelected)" ng-model="$ctrl.message" class="form-control" rows="5" id="message"></textarea>
+        </div>
+      </md-dialog-content>
+
+      <md-dialog-actions layout="row">
+        <a ng-click="$ctrl.sendMessage($ctrl.formSelected)" class="icon accept"><span class="fa fa-paper-plane-o fa-2x"></span></a>
       </md-dialog-actions>
 
     </md-dialog>

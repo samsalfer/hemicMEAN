@@ -14,6 +14,7 @@ var FormSchema = new mongoose.Schema({
   version: String,
   project: String,
   form: [],
+  messages: [],
   mode: {
     type: String,
     enum: ['structure', 'form', 'terminology'],

@@ -106,7 +106,7 @@ export function show(req, res) {
 export function create(req, res) {
   req.body.user = req.user._id;
   let elements = req.body.form;
-  return Form.findOne({name: req.body.name, mode: req.body.mode, version: req.body.version, project: req.body.project, language: req.body.language }).exec()
+  return Form.findOne({name: req.body.name, mode: req.body.mode, version: req.body.version, project: req.body.project, language: req.body.language, messages: req.body.messages }).exec()
     .then(form0 => {
       if(form0){
         return form0.remove();
@@ -120,7 +120,8 @@ export function create(req, res) {
         version: req.body.version,
         project: req.body.project,
         language: req.body.language,
-        mode: req.body.mode
+        mode: req.body.mode,
+        messages: req.body.messages
       })
         .then(form => {
           console.log('LLEGA:', form);
