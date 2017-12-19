@@ -8,6 +8,7 @@ import Thing from '../api/thing/thing.model';
 import User from '../api/user/user.model';
 import Structure from '../api/structure/structure.model';
 import Element from '../api/element/element.model';
+import Terminology from '../api/terminology/terminology.model';
 import Form from '../api/form/form.model';
 import Q from 'q';
 import config from './environment/';
@@ -134,6 +135,11 @@ export default function seedDatabaseIfNeeded() {
         return Element.find({}).remove()
           .then(() => console.log('remove elements'))
           .catch(err => console.log('error remove elements: ', err));
+      })
+      .then(() => {
+        return Terminology.find({}).remove()
+          .then(() => console.log('remove terminologies'))
+          .catch(err => console.log('error remove terminologies: ', err));
       })
       .then(() => {
         return Form.find({}).remove()

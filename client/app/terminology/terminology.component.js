@@ -53,6 +53,14 @@ export class TerminologyComponent {
     this.selectList = this.selectList.concat(this.selections);
     this.source = _.differenceWith(this.source, this.selections);
   }
+  removeAll() {
+    this.source = this.source.concat(this.selectList);
+    this.selectList = [];
+  }
+  removeSelect() {
+    this.source = this.source.concat(this.selections2);
+    this.selectList = _.differenceWith(this.selectList, this.selections2);
+  }
   //funcion para convertir una terminología a un select
   createForm() {
     let aux = {

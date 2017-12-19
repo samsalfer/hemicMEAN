@@ -243,7 +243,7 @@
                             </div>
                             <!--Select -->
                             <div ng-if="m.type === 'select' ">
-                              <select class="form-control" id="sel1" ng-model="gu.value">
+                              <select class="form-control" id="sel1" ng-model="v.value">
                                 <option ng-repeat="(j, v) in m.options">
                                   {{v.display}}
                                 </option>
@@ -302,7 +302,7 @@
                                   </div>
                                 </div>
                                 <!--Magnitude-->
-                                <div class="form-group" ng-if="m.type='magnitude'">
+                                <div class="form-group" ng-if="m.type==='magnitude'">
                                   <label class="control-label col-sm-2" for="value">Unit:</label>
                                   <div class="col-sm-10">
                                     <select class="form-control" ng-model="m.unit">
@@ -367,7 +367,7 @@
                                         <input type="text" id="optionCheckbox" class="form-control" ng-model="v.display" >
                                       </div>
                                       <div class="col-sm-4">
-                                        <input type="text" class="form-control" ng-model="v.display" >
+                                        <input type="text" class="form-control" ng-model="v.code" >
                                       </div>
                                       <div class="col-sm-2">
                                         <md-button class="delete" ng-click="$ctrl.deleteOptionInCheck(i,j)"><i class="fa fa-times" style="color: #d9534f;" aria-hidden="true"></i></md-button>
@@ -453,9 +453,9 @@
                         Section</button>
                       <button ng-click="$ctrl.addTable()"><i class="fa fa-table" aria-hidden="true"></i>
                         Table</button>
-                      <button ng-click="$ctrl.addMagnitude()"><i class="fa fa-upload" aria-hidden="true"></i>
+                      <button ng-click="$ctrl.addMagnitude()"><i class="fa fa-quora" aria-hidden="true"></i>
                         Magnitude</button>
-                      <button ng-click="$ctrl.addAutocalculated()"><i class="fa fa-upload" aria-hidden="true"></i>
+                      <button ng-click="$ctrl.addAutocalculated()"><i class="fa fa-calculator" aria-hidden="true"></i>
                         Autocalculated</button>
                     </div>
                     <div class="form-actions">

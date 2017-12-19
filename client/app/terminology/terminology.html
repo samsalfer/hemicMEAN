@@ -38,11 +38,11 @@
                 </div>
               </div>
               <div class="panel-body">
-                <button type="button" class="btn remove btn-default" title="Remove selected">       <i class="glyphicon glyphicon-arrow-left"></i>     </button>
-                <button type="button" class="btn removeall btn-default" title="Remove all">       <i class="glyphicon glyphicon-arrow-left"></i>       <i class="glyphicon glyphicon-arrow-left"></i>     </button>
+                <button ng-click="$ctrl.removeSelect()" type="button" class="btn remove btn-default" title="Remove selected">       <i class="glyphicon glyphicon-arrow-left"></i>     </button>
+                <button ng-click="$ctrl.removeAll()" type="button" class="btn removeall btn-default" title="Remove all">       <i class="glyphicon glyphicon-arrow-left"></i>       <i class="glyphicon glyphicon-arrow-left"></i>     </button>
                 <div class="form-group">
-                  <select multiple class="form-control" id="sel2">
-                    <option ng-repeat="option in $ctrl.selectList">{{option.display}}</option>
+                  <select ng-model="$ctrl.selections2" multiple class="form-control" id="sel2">
+                    <option ng-repeat="option in $ctrl.selectList" ng-value="option">{{option.display}}</option>
                   </select>
                 </div>
               </div>
