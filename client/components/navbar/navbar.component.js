@@ -6,19 +6,24 @@ import angular from 'angular';
 export class NavbarComponent {
   menu = [{
     title: 'Home',
-    state: 'main'
+    state: 'main',
+    icon: 'home'
   }, {
     title: 'Terminology',
-    state: 'terminology'
+    state: 'terminology',
+    icon: 'book'
   }, {
     title: 'Structure',
-    state: 'structure'
+    state: 'structure',
+    icon: 'share-alt'
   }, {
     title: 'Form',
-    state: 'composition'
+    state: 'composition',
+    icon: 'file-text-o'
   }, {
     title: 'Indicators',
-    state: 'combine'
+    state: 'combine',
+    icon: 'bar-chart'
   }];
   isLoggedIn: Function;
   isAdmin: Function;

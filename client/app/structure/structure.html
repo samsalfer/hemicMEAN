@@ -238,14 +238,14 @@
                             <div ng-if="m.type === 'checkbox' ">
                               <div ng-repeat="(j, v) in m.options">
                                 <md-checkbox ng-model="v.value" />
-                                <input class="form-control" type="text" ng-model="v.name"/>
+                                <input class="form-control" type="text" ng-model="v.display"/>
                               </div>
                             </div>
                             <!--Select -->
                             <div ng-if="m.type === 'select' ">
                               <select class="form-control" id="sel1" ng-model="gu.value">
                                 <option ng-repeat="(j, v) in m.options">
-                                  {{v.name}}
+                                  {{v.display}}
                                 </option>
                               </select>
                             </div>
@@ -258,7 +258,7 @@
                             <div ng-if="m.type === 'radioGroup' ">
                               <md-radio-group ng-model="m.value">
                                 <div ng-repeat="(j, v) in m.options">
-                                  <md-radio-button value={{v.value}} class="md-primary">{{v.name}}</md-radio-button>
+                                  <md-radio-button value={{v.value}} class="md-primary">{{v.display}}</md-radio-button>
                                 </div>
                               </md-radio-group>
                             </div>
@@ -364,10 +364,10 @@
                                     <div ng-repeat="(j, v) in m.options" >
                                       <label class="control-label col-sm-2" for="optionCheckbox">Options:</label>
                                       <div class="col-sm-4">
-                                        <input type="text" id="optionCheckbox" class="form-control" ng-model="v.name" >
+                                        <input type="text" id="optionCheckbox" class="form-control" ng-model="v.display" >
                                       </div>
                                       <div class="col-sm-4">
-                                        <input type="text" class="form-control" ng-model="v.name" >
+                                        <input type="text" class="form-control" ng-model="v.display" >
                                       </div>
                                       <div class="col-sm-2">
                                         <md-button class="delete" ng-click="$ctrl.deleteOptionInCheck(i,j)"><i class="fa fa-times" style="color: #d9534f;" aria-hidden="true"></i></md-button>

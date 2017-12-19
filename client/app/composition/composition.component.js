@@ -41,10 +41,10 @@ export class CompositionComponent {
       header: 'Checkbox Group',
       options: [
         {
-          name: 'Option 1',
+          display: 'Option 1',
           value: false
         }, {
-          name: 'Option 2',
+          display: 'Option 2',
           value: false
         }
       ]
@@ -57,10 +57,10 @@ export class CompositionComponent {
       header: 'Select',
       options: [
         {
-          name: 'Option 1',
+          display: 'Option 1',
           value: 'Option 1'
         }, {
-          name: 'Option 2',
+          display: 'Option 2',
           value: 'Option 2'
         }
       ]
@@ -82,10 +82,10 @@ export class CompositionComponent {
       value: '',
       options: [
         {
-          name: 'Option 1',
+          display: 'Option 1',
           value: 'Option 1'
         }, {
-          name: 'Option 2',
+          display: 'Option 2',
           value: 'Option 2'
         }
       ]
@@ -235,6 +235,7 @@ export class CompositionComponent {
     // ];
   }
   $onInit() {
+    console.log('Composition.componenet.js')
     let last = this.last;
     let $scope = this.$scope;
     let $mdToast = this.$mdToast;
@@ -350,7 +351,7 @@ export class CompositionComponent {
     this.modelForm.splice(0);
   }
   addOptionInCheck(index) {
-    this.modelForm[index].options.push({name: 'new option', value: false});
+    this.modelForm[index].options.push({display: 'new option', value: false});
   }
   deleteOptionInCheck(i, j) {
     this.modelForm[i].options.splice(j, 1);
@@ -426,7 +427,8 @@ export class CompositionComponent {
       version: this.versionForm,
       language: this.languageForm,
       project: this.projectForm,
-      form: this.modelForm
+      form: this.modelForm,
+      mode: 'form',
     }
     console.log(object);
     // Esto funcionaba!
@@ -492,7 +494,7 @@ export class CompositionComponent {
     oldOptions[0].forEach(combineA => {
       oldOptions[1].forEach(combineB => {
         newOptions.push({
-          name: combineA.name + ' - ' + combineB.name,
+          display: combineA.display + ' - ' + combineB.display,
           value: combineA.value + ' - ' + combineB.value
         });
       });

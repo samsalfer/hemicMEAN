@@ -241,14 +241,14 @@
                             <div ng-if="m.type === 'checkbox' ">
                               <div ng-repeat="(j, v) in m.options">
                                 <md-checkbox ng-model="v.value" />
-                                <input class="form-control" type="text" ng-model="v.name"/>
+                                <input class="form-control" type="text" ng-model="v.display"/>
                               </div>
                             </div>
                            <!--Select -->
                             <div ng-if="m.type === 'select' ">
                              <select class="form-control" id="sel1" ng-model="gu.value">
                                <option ng-repeat="(j, v) in m.options">
-                                 {{v.name}}
+                                 {{v.display}}
                                </option>
                              </select>
                             </div>
@@ -261,7 +261,7 @@
                             <div ng-if="m.type === 'radioGroup' ">
                               <md-radio-group ng-model="m.value">
                                 <div ng-repeat="(j, v) in m.options">
-                                  <md-radio-button value={{v.value}} class="md-primary">{{v.name}}</md-radio-button>
+                                  <md-radio-button value={{v.value}} class="md-primary">{{v.display}}</md-radio-button>
                                 </div>
                               </md-radio-group>
                             </div>
@@ -370,10 +370,10 @@
                                     <div ng-repeat="(j, v) in m.options" >
                                       <label class="control-label col-sm-2" for="optionCheckbox">Options:</label>
                                       <div class="col-sm-4">
-                                        <input type="text" id="optionCheckbox" class="form-control" ng-model="v.name" >
+                                        <input type="text" id="optionCheckbox" class="form-control" ng-model="v.display" >
                                       </div>
                                       <div class="col-sm-4">
-                                        <input type="text" class="form-control" ng-model="v.name" >
+                                        <input type="text" class="form-control" ng-model="v.display" >
                                       </div>
                                       <div class="col-sm-2">
                                         <md-button class="delete" ng-click="$ctrl.deleteOptionInCheck(i,j)"><i class="fa fa-times" style="color: #d9534f;" aria-hidden="true"></i></md-button>
@@ -431,7 +431,11 @@
                     </form>
                     <ul ng-show="$ctrl.searchText!=null && $ctrl.searchText!=''" id="myUL">
                       <li ng-repeat="form in $ctrl.modelFormCustom | filter:$ctrl.searchText" >
-                        <a ng-click="$ctrl.addFormCustom(form.form)">{{form.name}}</a>
+                        <a ng-click="$ctrl.addFormCustom(form.form)">
+                          <span ng-if="form.mode === 'form' "><i class="fa fa-file-text-o" aria-hidden="true"></i></span>
+                          <span ng-if="form.mode === 'structure' "><i class="fa fa-share-alt" aria-hidden="true"></i></span>
+                          {{form.name}}(v.{{form.version}})
+                        </a>
                       </li>
                     </ul>
                     <div class="btn-group">
@@ -461,9 +465,9 @@
                         Table</button>
                       <button ng-click="$ctrl.addFile()"><i class="fa fa-upload" aria-hidden="true"></i>
                         File</button>
-                      <button ng-click="$ctrl.addMagnitude()"><i class="fa fa-upload" aria-hidden="true"></i>
+                      <button ng-click="$ctrl.addMagnitude()"><i class="fa fa-quora" aria-hidden="true"></i>
                         Magnitude</button>
-                      <button ng-click="$ctrl.addAutocalculated()"><i class="fa fa-upload" aria-hidden="true"></i>
+                      <button ng-click="$ctrl.addAutocalculated()"><i class="fa fa-calculator" aria-hidden="true"></i>
                         Autocalculated</button>
                     </div>
                     <div class="form-actions">

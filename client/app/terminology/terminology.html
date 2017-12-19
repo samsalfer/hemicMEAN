@@ -13,13 +13,19 @@
 
               </div>
               <div class="panel-body">
+                <button ng-click="$ctrl.addAll()" type="button" class="btn moveall btn-default" title="Move all">
+                  <i class="glyphicon glyphicon-arrow-right"></i><i class="glyphicon glyphicon-arrow-right"></i>
+                </button>
+                <button ng-click="$ctrl.addSelect()" type="button" class="btn move btn-default" title="Move selected">
+                  <i class="glyphicon glyphicon-arrow-right"></i>
+                </button>
                 <div class="form-group">
-                  <select multiple class="form-control" id="sel1">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
+                  <select ng-model="$ctrl.selections" multiple class="form-control" id="sel1">
+                    <option ng-repeat="term in $ctrl.source " ng-value="term">{{term.display}}</option>
+                    <!--<option>2</option>-->
+                    <!--<option>3</option>-->
+                    <!--<option>4</option>-->
+                    <!--<option>5</option>-->
                   </select>
                 </div>
               </div>
@@ -32,20 +38,50 @@
                 </div>
               </div>
               <div class="panel-body">
+                <button type="button" class="btn remove btn-default" title="Remove selected">       <i class="glyphicon glyphicon-arrow-left"></i>     </button>
+                <button type="button" class="btn removeall btn-default" title="Remove all">       <i class="glyphicon glyphicon-arrow-left"></i>       <i class="glyphicon glyphicon-arrow-left"></i>     </button>
                 <div class="form-group">
                   <select multiple class="form-control" id="sel2">
-                    <option ng-repeat="option in $ctrl.selectList">{{option.name}}</option>
+                    <option ng-repeat="option in $ctrl.selectList">{{option.display}}</option>
                   </select>
                 </div>
               </div>
 
             </div>
+            <button type="button" ng-click="showModelForm('#nameForm')" id="save-action" class="btn btn-primary">Save</button>
+
           </div>
         </div>
 
 
       </div>
 
+    </div>
+  </div>
+  <!--Modal Form Name-->
+  <div style="visibility: hidden">
+    <div class="md-dialog-container" layout="row" class="profile" layout-wrap id="nameForm">
+      <md-dialog flex="50">
+        <md-toolbar>
+          <div class="md-toolbar-tools dialog-header">
+            Save as:
+            <span flex></span>
+
+            <md-button class="md-icon-button" ng-click="hideModelForm()">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </md-button>
+          </div>
+        </md-toolbar>
+        <md-dialog-content>
+          <div style="padding-top: 10px" class="container-fluid container-fixed-lg">
+            <input class="form-control" type="text" id="inputName" ng-model="$ctrl.nameForm"/>
+          </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+          <button type="button" ng-click="$ctrl.createForm();hideModelForm()" class="btn btn-primary btn-block">Save</button>
+        </md-dialog-actions>
+
+      </md-dialog>
     </div>
   </div>
 </div>

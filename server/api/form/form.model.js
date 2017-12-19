@@ -14,6 +14,11 @@ var FormSchema = new mongoose.Schema({
   version: String,
   project: String,
   form: [],
+  mode: {
+    type: String,
+    enum: ['structure', 'form', 'terminology'],
+    required: true
+  },
   statusForm: {
     type: String,
     enum: shared.statusConfig,

@@ -70,9 +70,14 @@ function handleError(res, statusCode) {
 // Gets a list of Forms
 export function index(req, res) {
   let user = req.user;
+  console.log(req.query.filter);
+  var filter = {}
+  if(req.query.filter === 'structure'){
+    filter['mode'] = [req.query.filter, 'terminology'];
+  }
   if(user) {
     if(user.role === 'admin') {
-      return Form.find().populate({path:'form', model:'Element'}).exec()
+      return Form.find().where(filter).populate({path:'form', model:'Element'}).exec()
         .then(respondWithResult(res))
         .catch(handleError(res));
     } else {
@@ -101,43 +106,59 @@ export function show(req, res) {
 export function create(req, res) {
   req.body.user = req.user._id;
   let elements = req.body.form;
-  return Form.create({name: req.body.name, version: req.body.version, project: req.body.project, language: req.body.language })
-    .then(form => {
-      console.log('LLEGA:', form);
-      if(form) {
-        let promises = [];
-        console.log(elements);
-        elements.forEach(element => {
-          if(element._id) {
-            delete element._id;
-          }
-          element.form = form._id;
-          if(element.type !== 'section') {
-            promises.push(Element.create(element)
-              .then(ele => {
-                if(ele) {
-                  return ele._id;
-                } else {
-                  return null;
-                }
-              }));
-          } else {
-            //todo controlar los sections;
-            promises.push(new Q(createSection(element, form._id, true)));
-          }
-        });
-        return Q.all(promises)
-          .then(data => {
-            form.form = data;
-            console.log('IDS:', data);
-            return form.save();
-          });
+  return Form.findOne({name: req.body.name, mode: req.body.mode, version: req.body.version, project: req.body.project, language: req.body.language }).exec()
+    .then(form0 => {
+      if(form0){
+        return form0.remove();
       } else {
-        return null;
+        return true;
       }
     })
-    .then(respondWithResult(res, 201))
-    .catch(handleError(res));
+    .then(() => {
+      return Form.create({
+        name: req.body.name,
+        version: req.body.version,
+        project: req.body.project,
+        language: req.body.language,
+        mode: req.body.mode
+      })
+        .then(form => {
+          console.log('LLEGA:', form);
+          if (form) {
+            let promises = [];
+            console.log(elements);
+            elements.forEach(element => {
+              if (element._id) {
+                delete element._id;
+              }
+              element.form = form._id;
+              if (element.type !== 'section') {
+                promises.push(Element.create(element)
+                  .then(ele => {
+                    if (ele) {
+                      return ele._id;
+                    } else {
+                      return null;
+                    }
+                  }));
+              } else {
+                //todo controlar los sections;
+                promises.push(new Q(createSection(element, form._id, true)));
+              }
+            });
+            return Q.all(promises)
+              .then(data => {
+                form.form = data;
+                console.log('IDS:', data);
+                return form.save();
+              });
+          } else {
+            return null;
+          }
+        })
+        .then(respondWithResult(res, 201))
+        .catch(handleError(res));
+    });
 }
 
 function createSection(element, idForm, first) {

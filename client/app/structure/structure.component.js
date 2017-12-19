@@ -40,10 +40,10 @@ export class StructureComponent {
       header: 'Checkbox Group',
       options: [
         {
-          name: 'Option 1',
+          display: 'Option 1',
           value: false
         }, {
-          name: 'Option 2',
+          display: 'Option 2',
           value: false
         }
       ]
@@ -56,10 +56,10 @@ export class StructureComponent {
       header: 'Select',
       options: [
         {
-          name: 'Option 1',
+          display: 'Option 1',
           value: 'Option 1'
         }, {
-          name: 'Option 2',
+          display: 'Option 2',
           value: 'Option 2'
         }
       ]
@@ -81,10 +81,10 @@ export class StructureComponent {
       value: '',
       options: [
         {
-          name: 'Option 1',
+          display: 'Option 1',
           value: 'Option 1'
         }, {
-          name: 'Option 2',
+          display: 'Option 2',
           value: 'Option 2'
         }
       ]
@@ -236,7 +236,7 @@ export class StructureComponent {
     let $mdDialog = this.$mdDialog;
     let $http = this.$http;
 
-    $http.get('api/forms')
+    $http.get('api/forms?filter=structure')
       .then(res => {
         this.modelFormCustom = res.data;
         console.log(res);
@@ -345,7 +345,7 @@ export class StructureComponent {
     this.modelForm.splice(0);
   }
   addOptionInCheck(index) {
-    this.modelForm[index].options.push({name: 'new option', value: false});
+    this.modelForm[index].options.push({display: 'new option', value: false});
   }
   deleteOptionInCheck(i, j) {
     this.modelForm[i].options.splice(j, 1);
@@ -418,7 +418,8 @@ export class StructureComponent {
     // Esto funcionaba!
     let object = {
       name: this.nameForm,
-      form: this.modelForm
+      form: this.modelForm,
+      mode: 'structure'
     }
     // Esto funcionaba!
     this.$http.post('api/forms', object)
