@@ -418,18 +418,19 @@ export class StructureComponent {
     // Esto funcionaba!
     let object = {
       name: this.nameForm,
+      version: this.versionForm,
+      language: this.languageForm,
+      project: this.projectForm,
       form: this.modelForm,
-      mode: 'structure'
+      mode: 'structure',
     }
+    console.log(object);
     // Esto funcionaba!
     this.$http.post('api/forms', object)
       .then(() => {
         this.$http.get('api/forms')
           .then(res => {
             this.modelFormCustom = res.data;
-            console.log(res);
-            console.log('---------------------------');
-            console.log(this.modelFormCustom);
           });
       });
     //HASTA AQUI

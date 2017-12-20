@@ -246,7 +246,7 @@
                             </div>
                            <!--Select -->
                             <div ng-if="m.type === 'select' ">
-                             <select class="form-control" id="sel1" ng-model="gu.value">
+                             <select class="form-control" id="sel1" ng-model="v.value">
                                <option ng-repeat="(j, v) in m.options">
                                  {{v.display}}
                                </option>
@@ -534,10 +534,34 @@
         </md-toolbar>
         <md-dialog-content>
           <div style="padding-top: 10px" class="container-fluid container-fixed-lg">
-            <input class="form-control" type="text" id="inputName" ng-model="$ctrl.nameForm"/>
-            <input class="form-control" type="text" id="inputName1" ng-model="$ctrl.languageForm"/>
-            <input class="form-control" type="text" id="inputName2" ng-model="$ctrl.projectForm"/>
-            <input class="form-control" type="text" id="inputName3" ng-model="$ctrl.versionForm"/>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="nameform1">Name:</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="nameform1" ng-model="$ctrl.nameForm">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="inpuName2">Language:</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="inpuName2" ng-model="$ctrl.languageForm">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="inpuName3">Project:</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="inpuName3" ng-model="$ctrl.projectForm">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="inpuName4">Version:</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="inpuName4" ng-model="$ctrl.versionForm">
+              </div>
+            </div>
+            <!--<input class="form-control" type="text" id="inputName" ng-model="$ctrl.nameForm"/>-->
+            <!--<input class="form-control" type="text" id="inputName1" ng-model="$ctrl.languageForm"/>-->
+            <!--<input class="form-control" type="text" id="inputName2" ng-model="$ctrl.projectForm"/>-->
+            <!--<input class="form-control" type="text" id="inputName3" ng-model="$ctrl.versionForm"/>-->
 
           </div>
         </md-dialog-content>

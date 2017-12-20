@@ -18195,7 +18195,7 @@ md-toolbar ~ md-content > md-list md-list-item:last-child md-divider {
   color: #F5F5F5;
   text-align: left;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-  background: #4393B9;
+  background: #ffffff;
 }
 .my-body {
   background-color: #edf1f5;
@@ -18203,12 +18203,19 @@ md-toolbar ~ md-content > md-list md-list-item:last-child md-divider {
 
 
 .navbar-default{
-  background-color: white;
+  background-color: #1657a5;
   margin-bottom: 0px;
 }
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
   background-color: #edf1f5;
+}
+/*Color de texto para navbar blanco*/
+.navbar-default .navbar-nav > li > a{
+  color: white;
+}
+.navbar-default .navbar-text{
+  color: white;
 }
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
@@ -18234,4 +18241,8 @@ md-toolbar ~ md-content > md-list md-list-item:last-child md-divider {
   padding: 1rem;
   background-color: #efefef;
   text-align: center;
+}
+
+.md-dialog-container{
+  z-index: 1000;
 }

@@ -10,6 +10,7 @@ export class TerminologyComponent {
   selectList = [];
   modelForm = [];
   nameForm='';
+  searchText='';
   /*@ngInject*/
   constructor($scope, $mdDialog, $http) {
     this.message = 'Hello';

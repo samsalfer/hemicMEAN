@@ -8,11 +8,20 @@
           <div class="col-sm-6">
             <div class="panel panel-default">
               <div class="panel-heading">
-                <div class="panel-title">DATA1
+                <div class="panel-title">
                 </div>
 
               </div>
+
               <div class="panel-body">
+                <select class="form-control" ng-model="$ctrl.searchText">
+                  <option>Laboratorio</option>
+                  <option value="HOJA_CONSTANTES">Hoja Constantes</option>
+                  <option value="ANTIBIOTICOS">Antibioticos</option>
+                  <option value="ATHOS PRINCIPIOS ACTIVOS">Principios Activos</option>
+
+                </select>
+                <hr>
                 <button ng-click="$ctrl.addAll()" type="button" class="btn moveall btn-default" title="Move all">
                   <i class="glyphicon glyphicon-arrow-right"></i><i class="glyphicon glyphicon-arrow-right"></i>
                 </button>
@@ -21,20 +30,21 @@
                 </button>
                 <div class="form-group">
                   <select ng-model="$ctrl.selections" multiple class="form-control" id="sel1">
-                    <option ng-repeat="term in $ctrl.source " ng-value="term">{{term.display}}</option>
+                    <option ng-repeat="term in $ctrl.source | filter:{terminology:$ctrl.searchText}" ng-value="term">{{term.display}}</option>
                     <!--<option>2</option>-->
                     <!--<option>3</option>-->
                     <!--<option>4</option>-->
                     <!--<option>5</option>-->
                   </select>
                 </div>
+
               </div>
             </div>
           </div>
           <div class="col-sm-6">
             <div class="panel panel-default">
               <div class="panel-heading">
-                <div class="panel-title">Creator
+                <div class="panel-title">
                 </div>
               </div>
               <div class="panel-body">
