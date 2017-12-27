@@ -70,8 +70,8 @@
  * Show selected elements in green
  */
 .simpleDemo ul[dnd-list] li.selected {
-  background-color: #dff0d8;
-  color: #3c763d;
+  background-color: #edf1f5;
+  color: #000000;
 }
 /***************************** Dropzone Styling *****************************/
 

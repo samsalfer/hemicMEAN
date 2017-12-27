@@ -23,7 +23,10 @@ let ElementSchema = new mongoose.Schema({
   multiple: Boolean,
   helptext: String,
   rows: Number,
-  defaultValue: String
+  defaultValue: String,
+  code: String,
+  terminology: String,
+  version: String
 });
 // var ElementSchema = new mongoose.Schema({
 //   name: String,

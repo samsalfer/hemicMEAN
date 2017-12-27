@@ -6,10 +6,84 @@ const uiRouter = require('angular-ui-router');
 import routes from './terminology.routes';
 
 export class TerminologyComponent {
+  modelFormBasic = [
+    {
+      type: 'text',
+      typeStructure: 'simple',
+      typeShow: 'item',
+      class: 'form_model',
+      header: 'Text Field',
+      value: '',
+      maxLength: 2
+    }, {
+      type: 'number',
+      typeStructure: 'simple',
+      typeShow: 'item',
+      class: 'form_model',
+      header: 'Number',
+      maxValue: 1000,
+      minValue: 0,
+      value: 0
+    }, {
+      type: 'select',
+      typeStructure: 'complex',
+      typeShow: 'item',
+      value: '',
+      class: 'form_model',
+      header: 'Select',
+      options: [
+        {
+          display: 'Option 1',
+          value: 'Option 1'
+        }, {
+          display: 'Option 2',
+          value: 'Option 2'
+        }
+      ]
+    }, {
+      type: 'dateField',
+      typeStructure: 'dateField',
+      typeShow: 'item',
+      class: 'form_model',
+      header: 'Date Field',
+      value: ''
+    }, {
+      type: 'section',
+      typeStructure: 'text',
+      typeShow: 'container',
+      class: 'header',
+      header: 'Section',
+      value: '',
+      container: [
+      ]
+    }, {
+      type: 'magnitude',
+      typeStructure: 'simple',
+      typeShow: 'item',
+      class: 'form_model',
+      header: 'Magnitude',
+      unit: '',
+      maxValue: 1000,
+      minValue: 0,
+      value: 0
+    }, {
+      type: 'auto',
+      typeStructure: 'simple',
+      typeShow: 'item',
+      class: 'form_model',
+      header: 'Autocalculated',
+      unit: '',
+      maxValue: 1000,
+      minValue: 0,
+      value: 0
+    }
+  ];
   source = [];
   selectList = [];
   modelForm = [];
   nameForm='';
+  termForImport = [];
+  typeForCreate = -1;
   searchText='';
   /*@ngInject*/
   constructor($scope, $mdDialog, $http) {
@@ -40,9 +114,8 @@ export class TerminologyComponent {
   }
 
   getTerminologies(filter) {
-    this.$http.get('api/terminologys?filter='+filter)
+    this.$http.get('api/terminologys?filter=' + filter)
       .then(res => {
-        console.log(res.data);
         this.source = res.data;
       });
   }
@@ -54,6 +127,15 @@ export class TerminologyComponent {
     this.selectList = this.selectList.concat(this.selections);
     this.source = _.differenceWith(this.source, this.selections);
   }
+  // Utilizo un termino para crear un elemento del form
+  addSelectLinkeName() {
+    if(this.termForImport.length > 0) {
+      this.source = this.source.concat(this.termForImport[0]);
+    }
+    this.termForImport = (this.selections);
+    this.source = _.differenceWith(this.source, this.selections);
+    this.nameForm = this.termForImport[0].display;
+  }
   removeAll() {
     this.source = this.source.concat(this.selectList);
     this.selectList = [];
@@ -64,16 +146,12 @@ export class TerminologyComponent {
   }
   //funcion para convertir una terminología a un select
   createForm() {
-    let aux = {
-      type: 'select',
-      typeStructure: 'complex',
-      typeShow: 'item',
-      value: '',
-      class: 'form_model',
-      header: 'Select',
-      options: []
-    };
+    let aux = (JSON.parse(JSON.stringify(this.modelFormBasic[this.typeForCreate])));
+
     aux.header = this.nameForm;
+    aux.code = this.termForImport[0].code;
+    aux.terminology = this.termForImport[0].terminology;
+    aux.version = this.termForImport[0].version;
     aux.options = this.selectList;
     this.modelForm.push(aux);
     this.saveForm();
