@@ -14,7 +14,6 @@
                 </div>
                 <div ng-show="!$ctrl.flagForm" class="panel-title" >Model View
                 </div>
-                <button type="button" ng-click="$ctrl.combineFunction()" id="clear-action" class="btn btn-danger">Combine</button>
 
               </div>
               <div class="panel-body">
@@ -325,7 +324,7 @@
                                 </div>
 
                                 <!--Default VALUE-->
-                                <div class="form-group" ng-if="m.typeStructure!='complex' && m.type!='dateField' && m.type!='header' && m.type!='file'">
+                                <div class="form-group" ng-if="m.typeStructure!='complex' && m.type!='dateField' && m.type!='header' && m.type!='file' && m.type!='auto'">
                                   <label class="control-label col-sm-2" for="value">Default Value:</label>
                                   <div class="col-sm-10">
                                     <input type="{{m.type}}" class="form-control" id="dvalue" ng-model="m.defaultValue" maxlength="{{m.maxLength}}">
@@ -339,7 +338,7 @@
                                   </div>
                                 </div>
                                 <!--MAX LENGTH-->
-                                <div class="form-group" ng-if="m.typeStructure!='complex' && m.type!='number' && m.type!='dateField' && m.type!='header' && m.type!='file'">
+                                <div class="form-group" ng-if="m.typeStructure!='complex' && m.type!='number' && m.type!='dateField' && m.type!='header' && m.type!='file' && m.type!='auto'">
                                   <label class="control-label col-sm-2" for="maxLength">Max Length:</label>
                                   <div class="col-sm-10">
                                     <input type="number" class="form-control" id="maxLength" ng-model="m.maxLength" >
@@ -394,7 +393,7 @@
                                   </div>
                                 </div>
                                 <!--Type form view-->
-                                <div class="form-group" ng-if="$ctrl.flagForm && m.type!='file' && m.type!='header'">
+                                <div class="form-group" ng-if="$ctrl.flagForm && m.type!='file' && m.type!='header' && m.type!='auto'">
                                   <label class="control-label col-sm-2" for="value">Type form view:</label>
                                   <div class="col-sm-10">
                                     <button class="btn btn-default" ng-click="$ctrl.changeType(null, m, 3)">Select</button>
@@ -420,6 +419,8 @@
                     <!--- CON SECCCIONES FIN ---->
                   </div>
                   <div class="col-sm-3">
+                    <button type="button" ng-click="$ctrl.combineFunction()" id="clear-action" class="btn btn-danger">Combine</button>
+
                     <!--RIGTH FORM MENU-->
                     <form class="search-form">
                       <!--<label><i class="fa fa-search"></i>Search</label>-->
