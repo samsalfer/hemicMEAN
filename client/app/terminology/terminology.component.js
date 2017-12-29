@@ -85,6 +85,7 @@ export class TerminologyComponent {
   termForImport = [];
   typeForCreate = -1;
   searchText='';
+  searchText2='';
   /*@ngInject*/
   constructor($scope, $mdDialog, $http) {
     this.message = 'Hello';

@@ -14,14 +14,20 @@
               </div>
 
               <div class="panel-body">
-                <p>Filter by...</p>
-                <select class="form-control" ng-model="$ctrl.searchText">
-                  <option>Laboratorio</option>
-                  <option value="HOJA_CONSTANTES">Hoja Constantes</option>
-                  <option value="ANTIBIOTICOS">Antibioticos</option>
-                  <option value="ATHOS PRINCIPIOS ACTIVOS">Principios Activos</option>
+                <div class="form-group">
+                  <select class="form-control" ng-model="$ctrl.searchText">
+                    <option value="" disabled selected>Select Terminology...</option>
+                    <option>Laboratorio</option>
+                    <option value="HOJA_CONSTANTES">Hoja Constantes</option>
+                    <option value="ANTIBIOTICOS">Antibioticos</option>
+                    <option value="ATHOS PRINCIPIOS ACTIVOS">Principios Activos</option>
 
-                </select>
+                  </select>
+                </div>
+                <div class="inner-addon left-addon">
+                  <i class="glyphicon glyphicon-search"></i>
+                  <input type="text" class="form-control" ng-model="$ctrl.searchText2" placeholder="Type for search"/>
+                </div>
                 <hr>
                 <button ng-click="$ctrl.addSelectLinkeName()" type="button" class="btn moveall btn-default" title="Import term">
                   Name <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
@@ -34,7 +40,7 @@
                 </button>
                 <div class="form-group">
                   <select ng-model="$ctrl.selections" multiple class="form-control" id="sel1" style="height: 20vh;">
-                    <option ng-repeat="term in $ctrl.source | filter:{terminology:$ctrl.searchText}" ng-value="term">{{term.display}}</option>
+                    <option ng-repeat="term in $ctrl.source | filter:{terminology:$ctrl.searchText} | filter:$ctrl.searchText2" ng-value="term">{{term.display}}</option>
                   </select>
                 </div>
 
@@ -63,8 +69,7 @@
                 <hr>
                 <div class="form-group">
                   <!--<label for="inputNameForm">Name</label>-->
-                  <input type="text" id="inputNameForm" class="form-control" ng-model="$ctrl.nameForm" placeholder="Enter Name">
-                  <small id="emailHelp" class="form-text text-muted">You can export a complete term.</small>
+                  <input type="text" id="inputNameForm" class="form-control" ng-model="$ctrl.nameForm" placeholder="Name for term" disabled>
                 </div>
                 <div ng-show="$ctrl.typeForCreate==='2'">
                   <hr>
