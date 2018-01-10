@@ -241,3 +241,10 @@ export function destroy(req, res) {
     .then(removeEntity(res))
     .catch(handleError(res));
 }
+// Deletes a Form from the DB
+export function getProjects(req, res) {
+  return Form.find().distinct('project', function(error, projects){
+    console.log(projects);
+    return res.json(projects);
+  });
+}

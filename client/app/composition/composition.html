@@ -165,6 +165,8 @@
                       <!--</li>-->
                     <!--</ul>-->
                     <!--- CON SECCIONES COMIENZO -->
+                    <small ng-show="showCombineButton" id="combineHelp" class="form-text text-muted">For correct combinetion you should check 2 inputs with options and pulse Confirm Combine</small>
+
                     <script type="text/ng-template" id="list.html">
                       <ul name="principalForm" dnd-list="list">
                         <li ng-repeat="(i,m) in list"
@@ -190,6 +192,7 @@
                         </li>
                       </ul>
                     </script>
+
                     <script type="text/ng-template" id="container.html">
                       <div class="container-element box item box-blue">
                         <div class="formComponent" ng-mouseenter="showHeaderButtons=true" ng-mouseleave="showHeaderButtons=false" >
@@ -225,11 +228,22 @@
                       <div class="item">
                         <div class="formComponent" ng-mouseenter="showHeaderButtons=true" ng-mouseleave="showHeaderButtons=false" >
 
-                          <span class="{{m.class}} formLabel"><md-checkbox  ng-model="m.selectCombineElement" ng-change="$ctrl.addCombineElement(m)"/>{{m.header}}<span ng-if="m.required===true">*</span></span>
+                          <!--Muestra si el combinar está activo-->
+                          <span class="formLabel" ng-show="showCombineButton">
+                            <md-checkbox  ng-model="m.selectCombineElement" ng-change="$ctrl.addCombineElement(m)"/>
+                            {{m.header}}
+                            <span ng-if="m.required===true">*</span>
+                          </span>
 
+                          <!--Muestra si el combinar está desactivado-->
+                          <span class="formLabel" ng-show="!showCombineButton">
+                            {{m.header}}
+                            <span ng-if="m.required===true">*</span>
+                          </span>
                           <md-button class="delete" ng-show="showHeaderButtons" dnd-list="[]" ng-click="$ctrl.deleteObject(null,m)"><i class="fa fa-times" style="color: #d9534f;" aria-hidden="true" aria-label="delete"></i></md-button>
                           <md-button class="edit" ng-show="showHeaderButtons" ng-click=" m.edit=true "><i class="fa fa-pencil" style="color: #105cb6;" aria-hidden="true" aria-label="edit"></i></md-button>
                           <md-button uib-tooltip="{{m.helptext}}" class="delete" ng-show="showHeaderButtons" dnd-list="[]" ng-click=""><i class="fa fa-question" style="color: #3c763d;" aria-hidden="true" aria-label="help"></i></md-button>
+
 
                           <div ng-if="!m.edit">
                             <!--number & text-->
@@ -419,7 +433,8 @@
                     <!--- CON SECCCIONES FIN ---->
                   </div>
                   <div class="col-sm-3">
-                    <button type="button" ng-click="$ctrl.combineFunction()" id="clear-action" class="btn btn-danger">Combine</button>
+                    <button ng-show="showCombineButton" type="button" ng-click="$ctrl.combineFunction(); showCombineButton=false" id="combineButton" class="btn btn-danger">Confirm Combine</button>
+                    <button ng-show="!showCombineButton" type="button" ng-click="showCombineButton=true" id="showCombineButtom" class="btn btn-danger">Combine</button>
 
                     <!--RIGTH FORM MENU-->
                     <form class="search-form">

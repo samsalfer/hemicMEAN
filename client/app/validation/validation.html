@@ -13,49 +13,121 @@
                 <div class="panel-title">Término Combinado</div>
               </div>
                 <div class="panel-body">
-                  <table class="table table-striped">
-                    <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>State</th>
-                      <th>Project</th>
-                      <th>Version</th>
-                      <th>Language</th>
-                      <th>Actions</th>
-                      <th>Export</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="validation in $ctrl.forms">
-                      <td>{{validation.name}}</td>
-                      <td>{{validation.statusForm}}</td>
-                      <td>{{validation.project}}</td>
-                      <td>{{validation.version}}</td>
-                      <td>{{validation.language}}</td>
-                      <td>
-                        <!--<a ng-click="showModelForm('#modelMessages'); $ctrl.selectForm(validation)" class="icon info"><span class="fa fa-envelope"></span></a>-->
-                        <a ng-click="showModelForm('#modelInfo'); $ctrl.selectForm(validation)" class="icon info"><span class="fa fa-comments"></span></a>
-                        <a ng-click="$ctrl.accept(validation)" class="icon accept"><span class="fa fa-check-square-o"></span></a>
-                        <a ng-click="$ctrl.deny(validation)" class="icon deny"><span class="fa fa-times"></span></a>
-                      </td>
-                      <td>
-                        <div class="icon accept" uib-dropdown is-open="status.isopen">
-                          <a id="single-button" class="icon info" uib-dropdown-toggle>
-                            <span class="fa fa-share-square-o"></span>
-                          </a>
-                          <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-                            <li role="menuitem"><a target="_blank" href="https://www.juntadeandalucia.es/servicioandaluzdesalud/hhuuvr/esaludpre/MirthOperaciones/HEMIC_G/{{validation._id}}">OpenClinica</a></li>
-                            <li role="menuitem"><a href="#">Another action</a></li>
-                            <li role="menuitem"><a href="#">Something else here</a></li>
-                            <li class="divider"></li>
-                            <li role="menuitem"><a href="#">Separated link</a></li>
-                          </ul>
-                        </div>
-                      </td>
-                    </tr>
+                  <div class="col-sm-3 pre-scrollable">
+                    <p ng-repeat="validation in $ctrl.forms">
 
-                    </tbody>
-                  </table>
+                      <a ng-click="$ctrl.selectForm(validation)">{{validation.name}}</a>
+
+                    </p>
+                  </div>
+                  <div class="col-sm-9">
+                    <uib-tabset active="activeJustified" justified="true">
+                      <uib-tab index="0" heading="Form">
+                        <div class="panel panel-default">
+                          <div class="panel-body">
+                            {{$ctrl.formSelected.name}}
+                          </div>
+                        </div>
+                      </uib-tab>
+                      <uib-tab index="1" heading="Messages">
+                        <div class="panel panel-default">
+                          <div class="panel-body">
+                            <div class="progress">
+                              <div class="progress-bar progress-bar-success" role="progressbar" style="width:40%">
+                                Accepted
+                              </div>
+                              <div class="progress-bar progress-bar-danger" role="progressbar" style="width:20%">
+                                Rejected
+                              </div>
+                            </div>
+                            {{$ctrl.formSelected.statusForm}}
+                            <a ng-click="$ctrl.accept($ctrl.formSelected)" class="icon accept"><span class="fa  fa-thumbs-o-up fa-2x"></span></a>
+                            <a ng-click="$ctrl.deny($ctrl.formSelected)" class="icon deny"><span class="fa fa-times fa-2x"></span></a>
+                            <ul class="list-group user-list">
+                              <li class="list-group-item" ng-repeat="n in $ctrl.formSelected.messages track by $index">
+                                <div class="user-info">
+                                  <strong>{{n.user}}</strong><br>
+                                  <span class="text-muted">{{n.message}}</span>
+                                </div>
+                              </li>
+                            </ul>
+                            <div class="col-sm-10">
+
+                              <div class="form-group">
+                                <input class="form-control" ng-keydown="$event.keyCode === 13 && $ctrl.sendMessage($ctrl.formSelected)" ng-model="$ctrl.message" class="form-control" rows="5" id="message"></input>
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <a ng-click="$ctrl.sendMessage($ctrl.formSelected)" class="icon accept"><span class="fa fa-paper-plane-o fa-2x"></span></a>
+                            </div>
+                          </div>
+                        </div>
+                      </uib-tab>
+                      <uib-tab index="2" heading="Export">
+                        <div class="panel panel-default">
+                          <div class="panel-body">
+
+                            <div class="icon accept" uib-dropdown is-open="status.isopen">
+                              <a id="multi-button" class="icon info" uib-dropdown-toggle>
+                                <span class="fa fa-share-square-o"></span>
+                              </a>
+                              <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                                <li role="menuitem"><a target="_blank" href="https://www.juntadeandalucia.es/servicioandaluzdesalud/hhuuvr/esaludpre/MirthOperaciones/HEMIC_G/{{validation._id}}">OpenClinica</a></li>
+                                <li role="menuitem"><a href="#">Another action</a></li>
+                                <li role="menuitem"><a href="#">Something else here</a></li>
+                                <li class="divider"></li>
+                                <li role="menuitem"><a href="#">Separated link</a></li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </uib-tab>
+                    </uib-tabset>
+                  </div>
+
+                  <!--<table class="table table-striped">-->
+                    <!--<thead>-->
+                    <!--<tr>-->
+                      <!--<th>Name</th>-->
+                      <!--<th>State</th>-->
+                      <!--<th>Project</th>-->
+                      <!--<th>Version</th>-->
+                      <!--<th>Language</th>-->
+                      <!--<th>Actions</th>-->
+                      <!--<th>Export</th>-->
+                    <!--</tr>-->
+                    <!--</thead>-->
+                    <!--<tbody>-->
+                    <!--<tr ng-repeat="validation in $ctrl.forms">-->
+                      <!--<td>{{validation.name}}</td>-->
+                      <!--<td>{{validation.statusForm}}</td>-->
+                      <!--<td>{{validation.project}}</td>-->
+                      <!--<td>{{validation.version}}</td>-->
+                      <!--<td>{{validation.language}}</td>-->
+                      <!--<td>-->
+                        <!--&lt;!&ndash;<a ng-click="showModelForm('#modelMessages'); $ctrl.selectForm(validation)" class="icon info"><span class="fa fa-envelope"></span></a>&ndash;&gt;-->
+                        <!--<a ng-click="showModelForm('#modelInfo'); $ctrl.selectForm(validation)" class="icon info"><span class="fa fa-comments"></span></a>-->
+                        <!--<a ng-click="$ctrl.accept(validation)" class="icon accept"><span class="fa fa-check-square-o"></span></a>-->
+                        <!--<a ng-click="$ctrl.deny(validation)" class="icon deny"><span class="fa fa-times"></span></a>-->
+                      <!--</td>-->
+                      <!--<td>-->
+                        <!--<div class="icon accept" uib-dropdown is-open="status.isopen">-->
+                          <!--<a id="single-button" class="icon info" uib-dropdown-toggle>-->
+                            <!--<span class="fa fa-share-square-o"></span>-->
+                          <!--</a>-->
+                          <!--<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">-->
+                            <!--<li role="menuitem"><a target="_blank" href="https://www.juntadeandalucia.es/servicioandaluzdesalud/hhuuvr/esaludpre/MirthOperaciones/HEMIC_G/{{validation._id}}">OpenClinica</a></li>-->
+                            <!--<li role="menuitem"><a href="#">Another action</a></li>-->
+                            <!--<li role="menuitem"><a href="#">Something else here</a></li>-->
+                            <!--<li class="divider"></li>-->
+                            <!--<li role="menuitem"><a href="#">Separated link</a></li>-->
+                          <!--</ul>-->
+                        <!--</div>-->
+                      <!--</td>-->
+                    <!--</tr>-->
+
+                    <!--</tbody>-->
+                  <!--</table>-->
                   <!--<ul class="list-group user-list">-->
                     <!--<li class="list-group-item" ng-repeat="validation in $ctrl.forms">-->
                       <!--<div class="user-info">-->
@@ -164,3 +236,4 @@
     </md-dialog>
   </div>
 </div>
+

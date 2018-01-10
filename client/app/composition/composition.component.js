@@ -475,9 +475,9 @@ export class CompositionComponent {
       this.combineElements.push(model);
     }
     else {
-      this.combineElements.splice(this.combineElements.indexOf(model));
+      this.combineElements.splice(this.combineElements.indexOf(model), 1);
     }
-    console.log(this.combineElements);
+    console.log('Combine' + this.combineElements);
   }
   combineFunction() {
     var oldHeaderCombine = '';
@@ -486,6 +486,7 @@ export class CompositionComponent {
     var modelAux = JSON.parse(JSON.stringify(this.modelFormBasic[3]));
 
     this.combineElements.forEach(m => {
+      m.selectCombineElement = false; //pongo el select a falso en la interfaz
       oldHeaderCombine += m.header + '-';
       oldOptions.push(m.options);
     });
@@ -502,6 +503,7 @@ export class CompositionComponent {
     modelAux.header = oldHeaderCombine;
     modelAux.options = newOptions;
     this.modelForm.push(JSON.parse(JSON.stringify(modelAux)));
+    this.combineElements = [];
   }
 }
 

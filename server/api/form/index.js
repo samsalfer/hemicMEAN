@@ -12,5 +12,6 @@ router.post('/', auth.isAuthenticated(), controller.create);
 router.put('/:id', auth.isAuthenticated(), controller.upsert);
 router.patch('/:id', auth.isAuthenticated(), controller.patch);
 router.delete('/:id', auth.isAuthenticated(), controller.destroy);
+router.get('/projects/all', auth.isAuthenticated(), controller.getProjects);
 
 module.exports = router;
