@@ -18,4 +18,8 @@
   text-decoration: none;
   margin-left: 20px;
 }
-
+img {
+  max-width: 60%;
+  max-height: 100%;
+  padding: 5%;
+}
