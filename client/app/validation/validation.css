@@ -18,7 +18,7 @@
   text-decoration: none;
   margin-left: 20px;
 }
-img {
+.resize {
   max-width: 60%;
   max-height: 100%;
   padding: 5%;
