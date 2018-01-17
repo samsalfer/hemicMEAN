@@ -9,32 +9,17 @@ export class ValidationComponent {
   formSelected = {};
   message='';
   /*@ngInject*/
-  constructor($http, $mdDialog, $scope, Auth) {
+  constructor($http, Auth) {
     this.$http = $http;
     this.forms = [];
-    this.$mdDialog = $mdDialog;
-    this.$scope = $scope;
     this.getCurrentUser = Auth.getCurrentUserSync;
   }
   $onInit() {
     let $http = this.$http;
-    let $mdDialog = this.$mdDialog;
-    let $scope = this.$scope;
-
     $http.get('api/forms')
       .then(res => {
         this.forms = res.data;
       });
-
-    $scope.showModelForm = function(modelElement) {
-      $mdDialog.show({
-        contentElement: modelElement,
-        parent: angular.element(document.body)
-      });
-    }
-    $scope.hideModelForm = function() {
-      $mdDialog.hide();
-    };
   }
   //Se puede cambiar solo un atributo??? cómo es la sentencia?
   //Change the status of forms

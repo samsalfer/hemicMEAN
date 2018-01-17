@@ -31,12 +31,13 @@ import combine from './combine/combine.component';
 import composition from './composition/composition.component';
 import validation from './validation/validation.component';
 import terminology from './terminology/terminology.component';
+import project from './project/project.component';
 
 
 import './app.css';
 
 angular.module('hemicApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
-  uiBootstrap, _Auth, account, admin, 'validation.match', navbar, footer, main, structure, combine, composition, validation, terminology, constants,
+  uiBootstrap, _Auth, account, admin, 'validation.match', navbar, footer, main, structure, combine, composition, validation, terminology, project, constants,
   ngMaterial, checklist, socket, util
 ])
   .config(routeConfig)

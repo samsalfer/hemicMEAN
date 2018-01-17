@@ -47,6 +47,7 @@
 @import 'combine/combine.css';
 @import 'composition/composition.css';
 @import 'main/main.css';
+@import 'project/project.css';
 @import 'structure/structure.css';
 @import 'terminology/terminology.css';
 @import 'validation/validation.css';
@@ -18249,4 +18250,8 @@ md-toolbar ~ md-content > md-list md-list-item:last-child md-divider {
 
 body {
   word-break: break-all;
+}
+
+.body-color{
+  background-color: #fafafa;
 }

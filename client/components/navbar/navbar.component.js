@@ -9,6 +9,10 @@ export class NavbarComponent {
     state: 'main',
     icon: 'home'
   }, {
+    title: 'Project',
+    state: 'project',
+    icon: 'truck'
+  }, {
     title: 'Terminology',
     state: 'terminology',
     icon: 'book'
