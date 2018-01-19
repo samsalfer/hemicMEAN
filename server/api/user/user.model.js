@@ -20,6 +20,10 @@ var UserSchema = new Schema({
     type: String,
     required: true
   },
+  projects: [{
+    type: Schema.ObjectId,
+    ref: 'Project'
+  }],
   config: [{
     type: Schema.ObjectId,
     ref: 'Config'

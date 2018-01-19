@@ -12,6 +12,9 @@
 
 import jsonpatch from 'fast-json-patch';
 import Project from './project.model';
+import Q from 'q';
+import User from '../user/user.model';
+
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -76,19 +79,46 @@ export function index(req, res) {
 
 // Gets a single Project from the DB
 export function show(req, res) {
-  return Project.findById(req.params.id).exec()
-    .then(handleEntityNotFound(res))
-    .then(respondWithResult(res))
-    .catch(handleError(res));
+  console.log(req.user.projects);
+  if(req.user.projects.indexOf(req.params.id >= 0) || req.user.role === 'admin') {
+    return Project.findById(req.params.id).exec()
+      .then(handleEntityNotFound(res))
+      .then(respondWithResult(res))
+      .catch(handleError(res));
+  } else {
+    return res.status(403).end('Forbidden');
+  }
 }
 
 // Creates a new Project in the DB
 export function create(req, res) {
+  let users = [req.user.id];
+  req.body.users = users;
   return Project.create(req.body)
+    .then(insertProjectUsers())
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
 }
 
+function insertProjectUsers(res) {
+  return function(entity) {
+    if(entity) {
+      if(entity.users.length > 0) {
+        let promises = [];
+        entity.users.forEach(user => {
+          promises.push(User.findByIdAndUpdate({_id: user}, {$push: {projects: entity._id}}).exec()
+            .then(user2 => user2._id)
+            .catch(handleError(res)));
+        });
+        return Q.all(promises)
+          .then(() => entity);
+      } else {
+        return entity;
+      }
+    }
+    return null;
+  };
+}
 // Upserts the given Project in the DB at the specified ID
 export function upsert(req, res) {
   if(req.body._id) {

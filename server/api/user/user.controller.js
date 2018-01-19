@@ -23,7 +23,9 @@ function handleError(res, statusCode) {
  * restriction: 'admin'
  */
 export function index(req, res) {
-  return User.find({}, '-salt -password').exec()
+  return User.find({}, '-salt -password')
+    .populate({path: 'projects', model: 'Project', select: 'name' })
+    .exec()
     .then(users => {
       res.status(200).json(users);
     })
@@ -97,14 +99,28 @@ export function changePassword(req, res) {
       }
     });
 }
+/**
+ * Get all my projects
+ */
+export function getProjects(req, res, next) {
+  var userId = req.user._id;
 
+  return User.findById(userId).exec()
+    .then(user => {
+      if(!user) {
+        return res.status(404).end('Usuario no encontrado');
+      }
+      res.json(user.projects);
+    })
+    .catch(err => next(err));
+}
 /**
  * Get my info
  */
 export function me(req, res, next) {
   var userId = req.user._id;
 
-  return User.findOne({ _id: userId }, '-salt -password').exec()
+  return User.findOne({ _id: userId }, '-salt -password').populate({path: 'projects', model: 'Project', select: 'name' }).exec()
     .then(user => { // don't ever give out the password or salt
       if(!user) {
         return res.status(401).end();

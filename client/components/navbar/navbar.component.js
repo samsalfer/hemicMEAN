@@ -41,7 +41,6 @@ export class NavbarComponent {
     this.isAdmin = Auth.isAdminSync;
     this.getCurrentUser = Auth.getCurrentUserSync;
   }
-
 }
 
 export default angular.module('directives.navbar', [])
