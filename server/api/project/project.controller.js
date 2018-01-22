@@ -81,7 +81,10 @@ export function index(req, res) {
 export function show(req, res) {
   console.log(req.user.projects);
   if(req.user.projects.indexOf(req.params.id >= 0) || req.user.role === 'admin') {
-    return Project.findById(req.params.id).exec()
+    return Project.findById(req.params.id)
+      .populate({path: 'users', model: 'User'})
+      .populate({path: 'forms', model: 'Form'})
+      .exec()
       .then(handleEntityNotFound(res))
       .then(respondWithResult(res))
       .catch(handleError(res));

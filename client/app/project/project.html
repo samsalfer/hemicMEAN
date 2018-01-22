@@ -9,16 +9,40 @@
             <div class="panel panel-default">
               <div class="panel-heading">
                 <div class="panel-title">Project
+                  <button type="button" ng-click="showModelForm('#modelForm')" id="data-action" class="btn btn-default">+</button>
+
                 </div>
               </div>
               <div class="panel-body">
-                <p ng-repeat="project in $ctrl.getCurrentUser().projects">
-                  {{project.name}}
-                  <span ng-repeat="user in project.users">
-                    {{user.name}}
-                  </span>
-                </p>
-                <button type="button" ng-click="showModelForm('#modelForm')" id="data-action" class="btn btn-default">+</button>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p ng-repeat="project in $ctrl.getCurrentUser().projects">
+                      <a  ng-click="$ctrl.selectProject(project._id)">{{project.name}}</a>
+                    </p>
+                  </div>
+                  <div class="col-sm-9">
+                    <h3>{{$ctrl.projectSelected.name}}</h3>
+                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+
+                    <table class="table table-striped">
+                      <thead>
+                      <tr>
+                        <th>User</th>
+                        <th>Email</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr ng-repeat="user in $ctrl.projectSelected.users">
+                        <td>{{user.name}}</td>
+                        <td>{{user.email}}</td>
+                      </tr>
+                      </tbody>
+                    </table>
+
+                    <a ng-click="$ctrl.addUserProject()">add</a>
+                  </div>
+                </div>
+
               </div>
 
             </div>
@@ -31,7 +55,7 @@
     </div>
   </div>
 
-  <!--Modal Data-->
+  <!--Create new Project-->
 
   <div style="visibility: hidden">
     <div class="md-dialog-container" id="modelForm" layout-wrap id="modelForm">

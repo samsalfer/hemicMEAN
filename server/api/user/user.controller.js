@@ -66,6 +66,22 @@ export function show(req, res, next) {
 }
 
 /**
+ * Get a single user by name
+ */
+export function showByName(req, res, next) {
+  var userName = req.params.name;
+
+  return User.findOne({ name: userName}).exec()
+    .then(user => {
+      if(!user) {
+        return res.status(404).end('Usuario no encontrado');
+      }
+      res.json(user);
+    })
+    .catch(err => next(err));
+}
+
+/**
  * Deletes a user
  * restriction: 'admin'
  */

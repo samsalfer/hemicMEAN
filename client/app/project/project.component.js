@@ -8,6 +8,9 @@ import routes from './project.routes';
 export class ProjectComponent {
   projectsList = [];
   newProject = {};
+  projectSelected = {};
+  newUser = 'silvia';
+
   /*@ngInject*/
   constructor($http, Auth, $mdDialog, $scope) {
     this.$http = $http;
@@ -37,6 +40,26 @@ export class ProjectComponent {
         this.getCurrentUser = Auth.getCurrentUserSync;
       });
   }
+  selectProject(projectId) {
+    this.$http.get('api/projects/' + projectId)
+      .then(res => {
+        this.projectSelected = res.data;
+      });
+  }
+  addUserProject() {
+    this.$http.get('api/users/byName/' + this.newUser)
+      .then(res => {
+        this.projectSelected.users.push(res.data._id);
+      })
+      .then(() => {
+        var data = 	{
+          users: this.projectSelected.users,
+        };
+        this.$http.put('api/projects/' + this.projectSelected._id, data)
+          .then(this.selectProject(this.projectSelected._id));
+      });
+  }
+
 }
 
 export default angular.module('hemicApp.project', [uiRouter])
