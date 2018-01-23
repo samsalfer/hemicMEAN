@@ -15,10 +15,21 @@
                 <div class="panel-body">
                   <div class="col-sm-3 pre-scrollable">
                     <p ng-repeat="validation in $ctrl.forms">
-
                       <a ng-click="$ctrl.selectForm(validation)">{{validation.name}}</a>
-
                     </p>
+
+                    <div class="treeGlobal">
+                      <ol class="tree">
+                        <li ng-repeat="project in $ctrl.getCurrentUser().projects">
+                          <label>{{project.name}}</label>
+                          <input type="checkbox" />
+                          <ol>
+                            <li ng-repeat="form in project.forms" class="file"><a ng-click="$ctrl.selectFormById(form._id)">{{form._id}}{{form.name}}</a></li>
+                          </ol>
+                        </li>
+                      </ol>
+
+                    </div>
                   </div>
                   <div class="col-sm-9">
                     <uib-tabset active="activeJustified" justified="true">

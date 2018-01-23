@@ -36,10 +36,19 @@
                         <td>{{user.name}}</td>
                         <td>{{user.email}}</td>
                       </tr>
+                      <tr>
+                        <td>
+                          <input type="text" class="form-control" ng-model="$ctrl.newUser">
+                        </td>
+                        <td>
+                          <button type="button" ng-click="$ctrl.addUserProject()" id="save-action" class="btn btn-primary">
+                            Add User
+                          </button>
+                        </td>
+                      </tr>
                       </tbody>
                     </table>
 
-                    <a ng-click="$ctrl.addUserProject()">add</a>
                   </div>
                 </div>
 

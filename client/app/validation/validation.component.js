@@ -36,7 +36,15 @@ export class ValidationComponent {
   }
   selectForm(form) {
     this.formSelected = form;
-    console.log(this.formSelected);
+  }
+  selectFormById(formId) {
+    let $http = this.$http;
+    $http.get('api/forms/' + formId)
+      .then(res => {
+        console.log(res.data);
+
+        this.formSelected = res.data;
+      });
   }
   sendMessage(form) {
     let aux = {user: this.getCurrentUser().name, message: this.message};

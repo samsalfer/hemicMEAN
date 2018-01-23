@@ -9,7 +9,7 @@ export class ProjectComponent {
   projectsList = [];
   newProject = {};
   projectSelected = {};
-  newUser = 'silvia';
+  newUser = '';
 
   /*@ngInject*/
   constructor($http, Auth, $mdDialog, $scope) {
@@ -52,6 +52,7 @@ export class ProjectComponent {
         this.projectSelected.users.push(res.data._id);
       })
       .then(() => {
+        this.newUser = '';
         var data = 	{
           users: this.projectSelected.users,
         };

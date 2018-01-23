@@ -96,7 +96,9 @@ export function index(req, res) {
 
 // Gets a single Form from the DB
 export function show(req, res) {
-  return Form.findById(req.params.id).exec()
+  return Form.findById(req.params.id)
+    .populate({path: 'form', model: 'Element'})
+    .exec()
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));
