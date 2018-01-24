@@ -70,7 +70,7 @@ function handleError(res, statusCode) {
 // Gets a list of Projects
 export function index(req, res) {
   return Project.find()
-    .populate({path: 'users', model: 'User'})
+    .populate({path: 'users', model: 'User', select: 'name email'})
     .populate({path: 'forms', model: 'Form'})
     .exec()
     .then(respondWithResult(res))
@@ -102,7 +102,7 @@ export function create(req, res) {
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
 }
-
+// Añade al último usuario añadido a un proyecto la ID del proyecto
 function insertProjectUsers(res) {
   return function(entity) {
     if(entity) {

@@ -12,7 +12,10 @@ var FormSchema = new mongoose.Schema({
   language: String,
   name: String,
   version: String,
-  project: String,
+  project: {
+    type: Schema.ObjectId,
+    ref: 'User'
+  },
   form: [],
   messages: [],
   mode: {

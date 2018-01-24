@@ -15,6 +15,8 @@ import Form from './form.model';
 import Element from '../element/element.model';
 import _ from 'lodash';
 import Q from 'q';
+import Project from '../project/project.model';
+
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -159,6 +161,7 @@ export function create(req, res) {
             return null;
           }
         })
+        .then(insertFormsProject())
         .then(respondWithResult(res, 201))
         .catch(handleError(res));
     });
@@ -212,6 +215,23 @@ function createSection(element, idForm, first) {
       }
     });
   }
+}
+// Añade al proyecto la ID del Formulario
+function insertFormsProject(res) {
+  return function(entity) {
+    if(entity) {
+      if(entity.project != '') {
+        let promises = [];
+        promises.push(Project.findByIdAndUpdate({_id: entity.project}, {$push: {forms: entity._id}}).exec()
+          .catch(handleError(res)));
+        return Q.all(promises)
+          .then(() => entity);
+      } else {
+        return entity;
+      }
+    }
+    return null;
+  };
 }
 // Upserts the given Form in the DB at the specified ID
 export function upsert(req, res) {

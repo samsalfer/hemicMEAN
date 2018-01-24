@@ -200,11 +200,12 @@ export class CompositionComponent {
     // ]
   // ];
   /*@ngInject*/
-  constructor($scope, $mdToast, $mdDialog, $http) {
+  constructor($scope, $mdToast, $mdDialog, $http, Auth) {
     this.$scope = $scope;
     this.$mdToast = $mdToast;
     this.$mdDialog = $mdDialog;
     this.$http = $http;
+    this.getCurrentUser = Auth.getCurrentUserSync;
 
 
     // this.searchText = '';
