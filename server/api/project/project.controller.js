@@ -108,11 +108,11 @@ function insertProjectUsers(res) {
     if(entity) {
       if(entity.users.length > 0) {
         let promises = [];
-        entity.users.forEach(user => {
-          promises.push(User.findByIdAndUpdate({_id: user}, {$push: {projects: entity._id}}).exec()
-            .then(user2 => user2._id)
-            .catch(handleError(res)));
-        });
+        // entity.users.forEach(user => {
+        promises.push(User.findByIdAndUpdate({_id: entity.users[entity.users.length - 1]}, {$push: {projects: entity._id}}).exec()
+          .then(user2 => user2._id)
+          .catch(handleError(res)));
+        // });
         return Q.all(promises)
           .then(() => entity);
       } else {
@@ -129,6 +129,7 @@ export function upsert(req, res) {
   }
   return Project.findOneAndUpdate({_id: req.params.id}, req.body, {new: true, upsert: true, setDefaultsOnInsert: true, runValidators: true}).exec()
 
+    .then(insertProjectUsers())
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
