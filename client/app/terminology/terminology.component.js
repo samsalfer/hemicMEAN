@@ -79,6 +79,7 @@ export class TerminologyComponent {
     }
   ];
   source = [];
+  projectForm = '';
   selectList = [];
   modelForm = [];
   nameForm='';
@@ -87,11 +88,12 @@ export class TerminologyComponent {
   searchText='';
   searchText2='';
   /*@ngInject*/
-  constructor($scope, $mdDialog, $http) {
+  constructor($scope, $mdDialog, $http, Auth) {
     this.message = 'Hello';
     this.$http = $http;
     this.$scope = $scope;
     this.$mdDialog = $mdDialog;
+    this.getCurrentUser = Auth.getCurrentUserSync;
   }
   $onInit() {
     let $scope = this.$scope;
@@ -162,6 +164,7 @@ export class TerminologyComponent {
     let object = {
       name: this.nameForm,
       form: this.modelForm,
+      project: this.projectForm,
       mode: 'terminology',
     }
     this.$http.post('api/forms', object)

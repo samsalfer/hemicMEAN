@@ -112,6 +112,14 @@
         <md-dialog-content>
           <div style="padding-top: 10px" class="container-fluid container-fixed-lg">
             <input class="form-control" type="text" id="inputName" ng-model="$ctrl.nameForm"/>
+            <div class="form-group">
+              <label class="control-label col-sm-3">Project:</label>
+              <div class="col-sm-9">
+                <select class="form-control" ng-model="$ctrl.projectForm">
+                  <option value={{project._id}}  ng-repeat="project in $ctrl.getCurrentUser().projects">{{project.name}}</option>
+                </select>
+              </div>
+            </div>
           </div>
         </md-dialog-content>
         <md-dialog-actions layout="row">
