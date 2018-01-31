@@ -305,16 +305,18 @@
                         <div class="panel panel-default">
                           <div class="panel-body">
                             <div class="progress">
-                              <div class="progress-bar progress-bar-success" role="progressbar" style="width:40%">
+                              <div class="progress-bar progress-bar-success" role="progressbar" style="width:{{$ctrl.widthAccepted}}%">
                                 Accepted
                               </div>
-                              <div class="progress-bar progress-bar-danger" role="progressbar" style="width:20%">
+                              <div class="progress-bar progress-bar-danger" role="progressbar" style="width:{{$ctrl.widthRejected}}%">
                                 Rejected
                               </div>
                             </div>
                             {{$ctrl.formSelected.statusForm}}
                             <a ng-click="$ctrl.accept($ctrl.formSelected)" class="icon accept"><span class="fa  fa-thumbs-o-up fa-2x"></span></a>
                             <a ng-click="$ctrl.deny($ctrl.formSelected)" class="icon deny"><span class="fa fa-times fa-2x"></span></a>
+                            <a ng-click="$ctrl.changeStateForm(true)" class="icon accept"><span class="fa  fa-thumbs-o-up fa-2x"></span></a>
+                            <a ng-click="$ctrl.changeStateForm(false)" class="icon deny"><span class="fa fa-times fa-2x"></span></a>
                             <ul class="list-group user-list">
                               <li class="list-group-item" ng-repeat="n in $ctrl.formSelected.messages track by $index">
                                 <div class="user-info">

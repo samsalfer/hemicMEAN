@@ -100,6 +100,7 @@ export function index(req, res) {
 export function show(req, res) {
   return Form.findById(req.params.id)
     .populate({path: 'form', model: 'Element'})
+    .populate({path: 'project', model: 'Project', select: 'users'})
     .exec()
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))

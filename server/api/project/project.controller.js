@@ -82,8 +82,8 @@ export function show(req, res) {
   console.log(req.user.projects);
   if(req.user.projects.indexOf(req.params.id >= 0) || req.user.role === 'admin') {
     return Project.findById(req.params.id)
-      .populate({path: 'users', model: 'User'})
-      .populate({path: 'forms', model: 'Form'})
+      .populate({path: 'users', model: 'User', select: '-projects'})
+      .populate({path: 'forms', model: 'Form', select: 'name'})
       .exec()
       .then(handleEntityNotFound(res))
       .then(respondWithResult(res))

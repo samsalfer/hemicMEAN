@@ -11,7 +11,7 @@ export class NavbarComponent {
   }, {
     title: 'Project',
     state: 'project',
-    icon: 'truck'
+    icon: 'briefcase'
   }, {
     title: 'Terminology',
     state: 'terminology',
@@ -24,11 +24,17 @@ export class NavbarComponent {
     title: 'Form',
     state: 'composition',
     icon: 'file-text-o'
-  }, {
-    title: 'Indicators',
-    state: 'combine',
-    icon: 'bar-chart'
+  },
+  {
+    title: 'Repository',
+    state: 'validation',
+    icon: 'check-square-o'
   }];
+  // , {
+  //   title: 'Indicators',
+  //   state: 'combine',
+  //   icon: 'bar-chart'
+  // }]
   isLoggedIn: Function;
   isAdmin: Function;
   getCurrentUser: Function;

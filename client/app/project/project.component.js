@@ -39,6 +39,7 @@ export class ProjectComponent {
       .then(() => {
         this.getCurrentUser = Auth.getCurrentUserSync;
       });
+    //no rula el then
   }
   selectProject(projectId) {
     this.$http.get('api/projects/' + projectId)
