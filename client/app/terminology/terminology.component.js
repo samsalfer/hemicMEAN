@@ -4,6 +4,7 @@ const angular = require('angular');
 const uiRouter = require('angular-ui-router');
 
 import routes from './terminology.routes';
+import _ from 'lodash';
 
 export class TerminologyComponent {
   modelFormBasic = [
@@ -79,6 +80,7 @@ export class TerminologyComponent {
     }
   ];
   source = [];
+  sourceNames = [];
   projectForm = '';
   selectList = [];
   modelForm = [];
@@ -100,8 +102,8 @@ export class TerminologyComponent {
     let $mdDialog = this.$mdDialog;
     this.$http.get('api/terminologys')
       .then(res => {
-        console.log(res.data);
         this.source = res.data;
+        this.sourceNames = _.uniqBy(this.source, 'terminology');
       });
     this.getTerminologies('');
 

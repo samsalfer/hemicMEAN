@@ -32,6 +32,7 @@
                     </div>
                   </div>
                   <div class="col-sm-9">
+                    <h3>{{$ctrl.formSelected.name}}</h3>
                     <uib-tabset active="activeJustified" justified="true">
                       <uib-tab index="0" heading="Form">
                         <div class="panel panel-default">
@@ -304,6 +305,11 @@
                         <!--Mensajes de usuarios-->
                         <div class="panel panel-default">
                           <div class="panel-body">
+                            <h4>{{$ctrl.formSelected.statusForm}}</h4>
+
+                            <a ng-click="$ctrl.accept($ctrl.formSelected)" class="icon accept"><span class="fa  fa-check-square fa-2x"></span></a>
+                              <a ng-click="$ctrl.deny($ctrl.formSelected)" class="icon deny"><span class="fa fa-times fa-2x"></span></a>
+
                             <div class="progress">
                               <div class="progress-bar progress-bar-success" role="progressbar" style="width:{{$ctrl.widthAccepted}}%">
                                 Accepted
@@ -312,9 +318,6 @@
                                 Rejected
                               </div>
                             </div>
-                            {{$ctrl.formSelected.statusForm}}
-                            <a ng-click="$ctrl.accept($ctrl.formSelected)" class="icon accept"><span class="fa  fa-thumbs-o-up fa-2x"></span></a>
-                            <a ng-click="$ctrl.deny($ctrl.formSelected)" class="icon deny"><span class="fa fa-times fa-2x"></span></a>
                             <a ng-click="$ctrl.changeStateForm(true)" class="icon accept"><span class="fa  fa-thumbs-o-up fa-2x"></span></a>
                             <a ng-click="$ctrl.changeStateForm(false)" class="icon deny"><span class="fa fa-times fa-2x"></span></a>
                             <ul class="list-group user-list">

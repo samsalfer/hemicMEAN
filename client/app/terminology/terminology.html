@@ -12,16 +12,11 @@
                 </div>
 
               </div>
-
               <div class="panel-body">
                 <div class="form-group">
                   <select class="form-control" ng-model="$ctrl.searchText">
                     <option value="" disabled selected>Select Terminology...</option>
-                    <option>Laboratorio</option>
-                    <option value="HOJA_CONSTANTES">Hoja Constantes</option>
-                    <option value="ANTIBIOTICOS">Antibioticos</option>
-                    <option value="ATHOS PRINCIPIOS ACTIVOS">Principios Activos</option>
-
+                    <option ng-repeat="terminology in $ctrl.sourceNames" value="{{terminology.terminology}}">{{terminology.terminology}}</option>
                   </select>
                 </div>
                 <div class="inner-addon left-addon">
