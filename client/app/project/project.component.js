@@ -10,7 +10,6 @@ export class ProjectComponent {
   newProject = {};
   projectSelected = {};
   newUser = '';
-
   /*@ngInject*/
   constructor($http, Auth, $mdDialog, $scope) {
     this.$http = $http;
@@ -34,10 +33,17 @@ export class ProjectComponent {
       $mdDialog.hide();
     };
   }
-  saveProject(Auth) {
+  saveProject() {
+    let getCurrentUser2 = this.getCurrentUser();
+
     this.$http.post('api/projects', this.newProject)
-      .then(() => {
-        this.getCurrentUser = Auth.getCurrentUserSync;
+      .then(body => {
+        if(body && body.status === 201) {
+          getCurrentUser2.projects.push(body.data);
+        }
+      })
+      .catch(err => {
+        console.log('Err', err);
       });
     //no rula el then
   }

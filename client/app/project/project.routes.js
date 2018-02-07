@@ -5,6 +5,12 @@ export default function($stateProvider) {
   $stateProvider
     .state('project', {
       url: '/project',
-      template: '<project></project>'
+      template: '<project></project>',
+      controller($state, Auth) {
+        'ngInject';
+        if(!Auth.isLoggedInSync()){
+          $state.go('login');
+        };
+      }
     });
 }

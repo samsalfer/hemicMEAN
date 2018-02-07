@@ -18,6 +18,7 @@ export class ValidationComponent {
     this.$http = $http;
     this.forms = [];
     this.getCurrentUser = Auth.getCurrentUserSync;
+    this.isAdmin = Auth.isAdminSync;
   }
   $onInit() {
     let $http = this.$http;

@@ -83,14 +83,15 @@ export function index(req, res) {
         .then(respondWithResult(res))
         .catch(handleError(res));
     } else {
-      return Form.find({statusForm: 'accepted'}).exec()
-        .then(forms =>
-          Form.find({user: user.id}).exec()
-            .then(forms2 => {
-              forms2 = _.uniqBy(forms2.concat(forms), 'id');
-              return res.json(forms2);
-            })
-        );
+      return Form.find({project: req.user.projects}).exec()
+        .then(forms => {
+          return res.json(forms);
+          // Form.find({user: user.id}).exec()
+          //   .then(forms2 => {
+          //     forms2 = _.uniqBy(forms2.concat(forms), 'id');
+          //     return res.json(forms2);
+          //   })
+        });
     }
   }
   return res.status(403).end('Forbidden');
