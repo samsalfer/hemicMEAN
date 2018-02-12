@@ -32,11 +32,23 @@
                     </div>
                   </div>
                   <div class="col-sm-9">
-                    <h3>{{$ctrl.formSelected.name}}</h3>
+                    <div>
+                      <h3 style="display:inline;">{{$ctrl.formSelected.name}}</h3>
+                      <span ng-show="$ctrl.formSelected.statusForm === 'accepted'"  class="label label-success">Publish</span>
+                      <span ng-show="$ctrl.formSelected.statusForm === 'pending'" class="label label-warning">Working</span>
+                      <span ng-show="$ctrl.formSelected.statusForm === 'denied'"  class="label label-danger">Rejected</span>
+                    </div>
+                    <br>
                     <uib-tabset active="activeJustified" justified="true">
                       <uib-tab index="0" heading="Form">
                         <div class="panel panel-default">
                           <div class="panel-body">
+                            <div style="text-align: center;">
+                              <span ng-show="$ctrl.isAdmin()" class="label label-success" ng-click="$ctrl.accept($ctrl.formSelected)">Publish</span>
+                              <span ng-show="$ctrl.isAdmin()" class="label label-warning">Working</span>
+                              <span ng-show="$ctrl.isAdmin()" class="label label-danger" ng-click="$ctrl.deny($ctrl.formSelected)">Rejected</span>
+                            </div>
+                            <br>
                             <!--Formulario previsualización-->
                             <div class="col-sm-12 simpleDemo">
                               <!--- CON SECCIONES COMIENZO -->
@@ -306,9 +318,6 @@
                         <div class="panel panel-default">
                           <div class="panel-body">
                             <h4>{{$ctrl.formSelected.statusForm}}</h4>
-
-                            <a ng-show="$ctrl.isAdmin()" ng-click="$ctrl.accept($ctrl.formSelected)" class="icon accept"><span class="fa  fa-check-square fa-2x"></span></a>
-                              <a ng-show="$ctrl.isAdmin()" ng-click="$ctrl.deny($ctrl.formSelected)" class="icon deny"><span class="fa fa-times fa-2x"></span></a>
 
                             <div class="progress">
                               <div class="progress-bar progress-bar-success" role="progressbar" style="width:{{$ctrl.widthAccepted}}%">
