@@ -105,7 +105,7 @@ export class TerminologyComponent {
         this.source = res.data;
         this.sourceNames = _.uniqBy(this.source, 'terminology');
       });
-    this.getTerminologies('');
+    // this.getTerminologies('');
 
     $scope.showModelForm = function(modelElement) {
       $mdDialog.show({

@@ -22,7 +22,7 @@
                   </div>
                   <div class="col-sm-9">
                     <h3>{{$ctrl.projectSelected.name}}</h3>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                    <p>{{$ctrl.projectSelected.description}} </p>
 
                     <table class="table table-striped">
                       <thead>
@@ -88,7 +88,7 @@
                   </div>
                   <div class="form-group">
                     <label>Description</label>
-                    <input class="form-control" id="description" placeholder="Description">
+                    <input class="form-control" id="description" placeholder="Description" ng-model="$ctrl.newProject.description">
                   </div>
             </md-content>
           </md-dialog-content>
