@@ -89,6 +89,7 @@ export class TerminologyComponent {
   typeForCreate = -1;
   searchText='';
   searchText2='';
+  limit = 50;
   /*@ngInject*/
   constructor($scope, $mdDialog, $http, Auth) {
     this.message = 'Hello';
@@ -118,12 +119,12 @@ export class TerminologyComponent {
     };
   }
 
-  getTerminologies(filter) {
-    this.$http.get('api/terminologys?filter=' + filter)
-      .then(res => {
-        this.source = res.data;
-      });
-  }
+  // getTerminologies(filter) {
+  //   this.$http.get('api/terminologys?filter=' + filter)
+  //     .then(res => {
+  //       this.source = res.data;
+  //     });
+  // }
   addAll() {
     this.selectList = this.selectList.concat(this.source);
     this.source = [];

@@ -14,14 +14,14 @@
               </div>
               <div class="panel-body">
                 <div class="form-group">
-                  <select class="form-control" ng-model="$ctrl.searchText">
+                  <select class="form-control" ng-model="$ctrl.searchText" ng-change="$ctrl.limit = 50">
                     <option value="" disabled selected>Select Terminology...</option>
                     <option ng-repeat="terminology in $ctrl.sourceNames" value="{{terminology.terminology}}">{{terminology.terminology}}</option>
                   </select>
                 </div>
                 <div class="inner-addon left-addon">
                   <i class="glyphicon glyphicon-search"></i>
-                  <input type="text" class="form-control" ng-model="$ctrl.searchText2" placeholder="Type for search"/>
+                  <input type="text" class="form-control" ng-model="$ctrl.searchText2" ng-change="$ctrl.limit = 50" placeholder="Type for search"/>
                 </div>
                 <hr>
                 <button ng-click="$ctrl.addSelectLinkeName()" type="button" class="btn moveall btn-default" title="Import term">
@@ -35,9 +35,11 @@
                 </button>
                 <div class="form-group">
                   <select ng-model="$ctrl.selections" multiple class="form-control" id="sel1" style="height: 20vh;">
-                    <option ng-repeat="term in $ctrl.source | filter:{terminology:$ctrl.searchText} | filter:$ctrl.searchText2 | limitTo: 10" ng-value="term">{{term.display}}</option>
+                    <option ng-repeat="term in $ctrl.source | filter:{terminology:$ctrl.searchText} | filter:$ctrl.searchText2 | limitTo: $ctrl.limit" ng-value="term">{{term.display}}</option>
                   </select>
+                  <p><a ng-click="$ctrl.limit = $ctrl.limit + 50">Load 50 more</a></p>
                 </div>
+
 
               </div>
             </div>
