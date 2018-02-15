@@ -202,8 +202,6 @@ export class StructureComponent {
     this.$http = $http;
     this.getCurrentUser = Auth.getCurrentUserSync;
 
-
-
     // this.searchText = '';
     // this.message = 'Hello';
     // this.data = [
@@ -417,6 +415,7 @@ export class StructureComponent {
   }
 
   saveForm() {
+    let getCurrentUser2 = this.getCurrentUser();
     // Esto funcionaba!
     let object = {
       name: this.nameForm,
@@ -426,44 +425,22 @@ export class StructureComponent {
       form: this.modelForm,
       mode: 'structure',
     }
-    console.log(object);
-    // Esto funcionaba!
+    // Hago que lo cree y cargo en memoria
     this.$http.post('api/forms', object)
+      .then(body => {
+        if(body && body.status === 201) {
+          getCurrentUser2.projects.find(x => x._id === body.data.project).forms.push(body.data);
+        }
+      })
+        .catch(err => {
+          console.log('Err', err);
+        })
       .then(() => {
         this.$http.get('api/forms')
           .then(res => {
             this.modelFormCustom = res.data;
           });
       });
-    //HASTA AQUI
-    // let object = {
-    //   name: this.nameForm,
-    //   form: [],
-    // };
-    // this.modelForm.forEach(element => {
-    //   if(element.type !== 'section') {
-    //     this.$http.post('api/elements', element)
-    //      .then(res => {
-    //        console.log(res);
-    //        console.log(res.data._id);
-    //        object.form.push(res.data._id);
-    //        console.log(object);
-    //      });
-    //   } else {
-    //     console.log('SECTIONNNNN NOOOOOOOOOOOOOOOOOOOOOO');
-    //   }
-    // });
-    // console.log('Antes de :', object);
-    // this.$http.post('api/forms', object).then(res1 => {
-    //   console.log(res1.data);
-    //   this.$http.get('api/forms')
-    //     .then(res => {
-    //       this.modelFormCustom = res.data;
-    //       console.log(res);
-    //       console.log('---------------------------');
-    //       console.log(this.modelFormCustom);
-    //     });
-    // });
   }
   // Change view form/structure
   viewStructure() {

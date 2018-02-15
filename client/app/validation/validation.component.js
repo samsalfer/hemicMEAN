@@ -37,6 +37,10 @@ export class ValidationComponent {
     formValidation.statusForm = 'accepted';
     this.updateForm(formValidation);
   }
+  working(formValidation) {
+    formValidation.statusForm = 'pending';
+    this.updateForm(formValidation);
+  }
   // Creado para el cambio de estadisticas de los usuarios en un formulario ( si aceptan o no el formulario )
   changeStateForm(state) {
     console.log(state);

@@ -164,6 +164,7 @@ export class TerminologyComponent {
   }
   //funcion para guardar el formulario
   saveForm() {
+    let getCurrentUser2 = this.getCurrentUser();
     let object = {
       name: this.nameForm,
       form: this.modelForm,
@@ -171,6 +172,14 @@ export class TerminologyComponent {
       mode: 'terminology',
     }
     this.$http.post('api/forms', object)
+      .then(body => {
+        if(body && body.status === 201) {
+          getCurrentUser2.projects.find(x => x._id === body.data.project).forms.push(body.data);
+        }
+      })
+      .catch(err => {
+        console.log('Err', err);
+      })
       .then(() => {
         this.$http.get('api/forms')
           .then(res => {

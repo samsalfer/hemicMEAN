@@ -24,7 +24,15 @@
                           <label>{{project.name}}</label>
                           <input type="checkbox" />
                           <ol>
-                            <li ng-repeat="form in project.forms" class="file"><a ng-click="$ctrl.selectFormById(form._id)">{{form.name}}</a></li>
+
+                            <li ng-repeat="form in project.forms" class="file">
+                              <a ng-click="$ctrl.selectFormById(form._id)">
+                                <span ng-if="form.mode === 'form' "><i class="fa fa-file-text-o" aria-hidden="true"></i></span>
+                                <span ng-if="form.mode === 'structure' "><i class="fa fa-share-alt" aria-hidden="true"></i></span>
+                                <span ng-if="form.mode === 'terminology' "><i class="fa fa-book" aria-hidden="true"></i></span>
+                                {{form.name}}
+                              </a>
+                            </li>
                           </ol>
                         </li>
                       </ol>
@@ -45,7 +53,7 @@
                           <div class="panel-body">
                             <div style="text-align: center;">
                               <span ng-show="$ctrl.isAdmin()" class="label label-success" ng-click="$ctrl.accept($ctrl.formSelected)">Publish</span>
-                              <span ng-show="$ctrl.isAdmin()" class="label label-warning">Working</span>
+                              <span ng-show="$ctrl.isAdmin()" class="label label-warning" ng-click="$ctrl.working($ctrl.formSelected)">Working</span>
                               <span ng-show="$ctrl.isAdmin()" class="label label-danger" ng-click="$ctrl.deny($ctrl.formSelected)">Rejected</span>
                             </div>
                             <br>

@@ -422,7 +422,8 @@ export class CompositionComponent {
   }
 
   saveForm() {
-    // Esto funcionaba!
+    let getCurrentUser2 = this.getCurrentUser();
+
     let object = {
       name: this.nameForm,
       version: this.versionForm,
@@ -431,9 +432,16 @@ export class CompositionComponent {
       form: this.modelForm,
       mode: 'form',
     }
-    console.log(object);
     // Esto funcionaba!
     this.$http.post('api/forms', object)
+      .then(body => {
+        if(body && body.status === 201) {
+          getCurrentUser2.projects.find(x => x._id === body.data.project).forms.push(body.data);
+        }
+      })
+      .catch(err => {
+        console.log('Err', err);
+      })
       .then(() => {
         this.$http.get('api/forms')
           .then(res => {
