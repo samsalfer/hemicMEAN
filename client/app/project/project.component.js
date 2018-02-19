@@ -35,7 +35,7 @@ export class ProjectComponent {
   }
   saveProject() {
     let getCurrentUser2 = this.getCurrentUser();
-
+    console.log(this.newProject);
     this.$http.post('api/projects', this.newProject)
       .then(body => {
         if(body && body.status === 201) {

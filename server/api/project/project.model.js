@@ -18,7 +18,16 @@ var ProjectSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  type: String
+  type: String,
+  description: String,
+  acronym: String,
+  confidenciality: {
+    type: String,
+    enum: ['public', 'private'],
+    required: false
+  },
+  orgnanizationsInvolved: String,
+  language: String
 });
 
 registerEvents(ProjectSchema);
