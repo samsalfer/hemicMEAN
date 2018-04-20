@@ -83,7 +83,7 @@ export function index(req, res) {
         .then(respondWithResult(res))
         .catch(handleError(res));
     } else {
-      return Form.find({project: req.user.projects}).exec()
+      return Form.find({project: req.user.projects}).populate({path:'form', model:'Element'}).exec()
         .then(forms => {
           return res.json(forms);
           // Form.find({user: user.id}).exec()
