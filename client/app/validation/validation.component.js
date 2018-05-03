@@ -14,11 +14,13 @@ export class ValidationComponent {
   widthRejected = 0;
 
   /*@ngInject*/
-  constructor($http, Auth) {
+  constructor($http, Auth, $mdDialog, $scope) {
     this.$http = $http;
     this.forms = [];
     this.getCurrentUser = Auth.getCurrentUserSync;
     this.isAdmin = Auth.isAdminSync;
+    this.$mdDialog = $mdDialog;
+    this.$scope = $scope;
   }
   $onInit() {
     let $http = this.$http;
@@ -26,6 +28,19 @@ export class ValidationComponent {
       .then(res => {
         this.forms = res.data;
       });
+
+    let $mdDialog = this.$mdDialog;
+    let $scope = this.$scope;
+
+    $scope.showModelForm = function(modelElement) {
+      $mdDialog.show({
+        contentElement: modelElement,
+        parent: angular.element(document.body)
+      });
+    }
+    $scope.hideModelForm = function() {
+      $mdDialog.hide();
+    };
   }
   //Se puede cambiar solo un atributo??? cómo es la sentencia?
   //Change the status of forms
@@ -85,6 +100,19 @@ export class ValidationComponent {
     form.messages.push(aux);
     this.message = '';
     this.updateForm(form);
+  }
+
+  removeForm(formValidation){
+    let getCurrentUser2 = this.getCurrentUser();
+
+
+    this.$http.delete('api/forms/' + formValidation._id)
+      .then(res => {
+        var project = getCurrentUser2.projects.find(x => x._id === formValidation.project._id);
+        var index = _.findIndex(project.forms, { '_id':formValidation._id});
+        project.forms.splice(index, 1);
+        this.formSelected = {};
+      });
   }
 }
 
