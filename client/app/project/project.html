@@ -109,3 +109,36 @@
   </div>
 </div>
 
+<!--Modal confirm-->
+<div style="visibility: hidden">
+  <div class="md-dialog-container" layout="row" class="profile" layout-wrap id="modelConfirm">
+    <md-dialog flex="50" style="max-width: 30%;">
+      <md-toolbar>
+        <div class="md-toolbar-tools dialog-header">
+          Alert!
+          <span flex></span>
+          <md-button class="md-icon-button" aria-label="buttonHide" ng-click="hideModelForm()">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </md-button>
+        </div>
+      </md-toolbar>
+      <md-dialog-content>
+        <div style="padding-top: 10px" class="container-fluid container-fixed-lg">
+          <div class="form-group">
+            <label class="control-label ">Are you sure you want to delete this form?</label>
+          </div>
+        </div>
+      </md-dialog-content>
+      <md-dialog-actions layout="row">
+
+        <span flex></span>
+        <md-button ng-click="$ctrl.removeForm($ctrl.formSelected);hideModelForm();" >
+          Confirm
+        </md-button>
+        <md-button ng-click="hideModelForm()" style="margin-right:20px;" >
+          Cancel
+        </md-button>
+      </md-dialog-actions>
+    </md-dialog>
+  </div>
+</div>

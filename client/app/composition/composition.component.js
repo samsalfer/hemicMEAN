@@ -42,10 +42,12 @@ export class CompositionComponent {
       options: [
         {
           display: 'Option 1',
-          value: false
+          value: false,
+          code: 'Option 1'
         }, {
           display: 'Option 2',
-          value: false
+          value: false,
+          code: 'Option 2'
         }
       ]
     }, {
@@ -58,10 +60,12 @@ export class CompositionComponent {
       options: [
         {
           display: 'Option 1',
-          value: 'Option 1'
+          value: 'Option 1',
+          code: 'Option 1'
         }, {
           display: 'Option 2',
-          value: 'Option 2'
+          value: 'Option 2',
+          code: 'Option 2'
         }
       ]
     }, {
@@ -83,10 +87,12 @@ export class CompositionComponent {
       options: [
         {
           display: 'Option 1',
-          value: 'Option 1'
+          value: 'Option 1',
+          code: 'Option 1'
         }, {
           display: 'Option 2',
-          value: 'Option 2'
+          value: 'Option 2',
+          code: 'Option 2'
         }
       ]
     }, {
