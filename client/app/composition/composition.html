@@ -175,7 +175,8 @@
                             dnd-effect-allowed="move"
                             dnd-selected="list.selected = m"
                             ng-class="{'selected': list.selected === m}"
-                            ng-include="m.typeShow + '.html'">
+                            ng-include="m.typeShow + '.html'"
+                            ng-click="$ctrl.chooseModel(null,m)">
 
                         </li>
                       </ul>
@@ -226,7 +227,7 @@
                         <!--Añado una variable para controlar cuando el ratón entra en el div para mostrar los botones de editar y borrar-->
                     <script type="text/ng-template" id="item.html">
                       <div class="item">
-                        <div class="formComponent" ng-mouseenter="showHeaderButtons=true" ng-mouseleave="showHeaderButtons=false" >
+                        <div class="formComponent"  ng-mouseenter="showHeaderButtons=true" ng-mouseleave="showHeaderButtons=false" >
 
                           <!--Muestra si el combinar está activo-->
                           <span class="formLabel" ng-show="showCombineButton">
@@ -396,13 +397,13 @@
                                         <input type="text" class="form-control" ng-model="v.code" >
                                       </div>
                                       <div class="col-sm-2">
-                                        <md-button class="delete" ng-click="$ctrl.deleteOptionInCheck(i,j)"><i class="fa fa-times" style="color: #d9534f;" aria-hidden="true"></i></md-button>
+                                        <md-button class="delete" ng-click="$ctrl.deleteOptionInCheck(null, m, i,j)"><i class="fa fa-times" style="color: #d9534f;" aria-hidden="true"></i></md-button>
                                       </div>
                                     </div>
                                     <div class="col-sm-10">
                                     </div>
                                     <div class="col-sm-2">
-                                      <md-button class="delete" ng-click="$ctrl.addOptionInCheck(i)"><i class="fa fa-plus" style="color: #5cb85c;" aria-hidden="true"></i></md-button>
+                                      <md-button class="delete" ng-click="$ctrl.addOptionInCheck(null, m, i)"><i class="fa fa-plus" style="color: #5cb85c;" aria-hidden="true"></i></md-button>
                                     </div>
                                   </div>
                                 </div>

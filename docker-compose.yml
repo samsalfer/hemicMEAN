@@ -7,3 +7,15 @@ services:
      - 8080:8080
     volumes:
      - ./:/opt/mean.js
+    links:
+     - mongodb2
+    depends_on:
+     - mongodb2
+  mongodb2:
+    image: mongo:latest
+    container_name: "mongodb2"
+    volumes:
+     - ./data/db:/data/db
+    ports:
+     - 27017:27017
+    command: mongod --smallfiles --logpath=/dev/null # --quiet 

@@ -135,6 +135,16 @@ export class CompositionComponent {
       multiple: true,
       container: [
       ]
+    }, , {
+      type: 'tab',
+      typeStructure: 'text',
+      typeShow: 'container',
+      class: 'header',
+      header: 'Tab',
+      value: '',
+      multiple: true,
+      container: [
+      ]
     }, {
       type: 'file',
       typeStructure: 'file',
@@ -165,7 +175,15 @@ export class CompositionComponent {
     }
   ];
   modelFormCustom = [];
-  modelForm = [];
+  modelForm = [{
+    type: 'section',
+    typeStructure: 'text',
+    typeShow: 'container',
+    class: 'header',
+    header: 'Section',
+    value: '',
+    container: [
+    ]}];
   nameForm = '';
   languageForm = '';
   projectForm = '';
@@ -205,6 +223,9 @@ export class CompositionComponent {
     //   }
     // ]
   // ];
+  modelsN;
+  modelz;
+
   /*@ngInject*/
   constructor($scope, $mdToast, $mdDialog, $http, Auth) {
     this.$scope = $scope;
@@ -299,49 +320,106 @@ export class CompositionComponent {
   }
 
   addText() {
-    this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[0])));
+    this.selectCorrectObject(0);
+    // this.modelForm[0].container.push(JSON.parse(JSON.stringify(this.modelFormBasic[0])));
   }
   addNumber() {
-    this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[1])));
+    this.selectCorrectObject(1);
+    // this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[1])));
   }
   addCheck() {
-    this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[2])));
+    this.selectCorrectObject(2);
+
+    // this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[2])));
   }
   addSelect() {
-    this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[3])));
+    this.selectCorrectObject(3);
+
+    // this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[3])));
   }
   addTextArea() {
-    this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[4])));
+    this.selectCorrectObject(4);
+
+    // this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[4])));
   }
   addRadioGroup() {
-    this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[5])));
+    this.selectCorrectObject(5);
+
+    // this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[5])));
   }
   addHeader() {
-    this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[6])));
+    this.selectCorrectObject(6);
+
+    // this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[6])));
   }
   addParagraph() {
-    this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[7])));
+    this.selectCorrectObject(7);
+
+    // this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[7])));
   }
   addDateField() {
-    this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[8])));
+    this.selectCorrectObject(8);
+
+    // this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[8])));
   }
   addSection() {
-    this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[9])));
+    this.selectCorrectObject(9);
+
+    // this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[9])));
   }
   addTable() {
-    this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[10])));
+    this.selectCorrectObject(10);
+
+    // this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[10])));
   }
   addFile() {
-    this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[11])));
+    this.selectCorrectObject(11);
+
+    // this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[11])));
   }
   addMagnitude() {
-    this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[12])));
+    this.selectCorrectObject(12);
+
+    // this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[12])));
   }
   addAutocalculated() {
-    this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[13])));
+    this.selectCorrectObject(13);
+
+    // this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[13])));
+  }
+
+  //guardo cuando pulso un elemento
+  chooseModel(modelsN, modelz){
+    this.modelsN = modelsN;
+    this.modelz = modelz;
+    this.selectCorrectObject();
+  }
+
+  //selecciono el objecto correcto dentro de una sección y le añado el elemento
+  selectCorrectObject(elementId){
+    let models = this.modelsN ? this.modelsN : this.modelForm;
+    if(this.modelz) {
+      let index = models.indexOf(this.modelz);
+      if (index < 0) {
+        models.forEach(m => {
+          if (m.type === 'section') {
+            this.modelsN = m.container;
+            this.modelz = this.modelz;
+            this.selectCorrectObject();
+          }
+        });
+      } else {
+        models.splice(index + 1, 0, JSON.parse(JSON.stringify(this.modelFormBasic[elementId])));
+      }
+    }
+    else{
+      models.push(JSON.parse(JSON.stringify(this.modelFormBasic[elementId])));
+    }
   }
   deleteObject(modelsN, model) {
     console.log(model);
+    this.modelsN = null;
+    this.modelz = null;
     let models = modelsN ? modelsN : this.modelForm;
     let index = models.indexOf(model);
     if(index < 0) {
@@ -355,13 +433,35 @@ export class CompositionComponent {
     }
   }
   clear() {
+    this.modelsN = null;
+    this.modelz = null;
     this.modelForm.splice(0);
   }
-  addOptionInCheck(index) {
-    this.modelForm[index].options.push({display: 'new option', value: false});
+  addOptionInCheck(modelsN, model, indexOption) {
+    let models = modelsN ? modelsN : this.modelForm;
+    let index = models.indexOf(model);
+    if(index < 0) {
+      models.forEach(m => {
+        if(m.type === 'section') {
+          this.addOptionInCheck(m.container, model, indexOption);
+        }
+      });
+    } else {
+      models[indexOption].options.push({display: 'new option', value: false});
+    }
   }
-  deleteOptionInCheck(i, j) {
-    this.modelForm[i].options.splice(j, 1);
+  deleteOptionInCheck(modelsN, model,i, j) {
+    let models = modelsN ? modelsN : this.modelForm;
+    let index = models.indexOf(model);
+    if(index < 0) {
+      models.forEach(m => {
+        if(m.type === 'section') {
+          this.deleteOptionInCheck(m.container, model,i, j);
+        }
+      });
+    } else {
+      models[i].options.splice(j, 1);
+    }
   }
   // selected() {
   //   this.showCombination = true;
