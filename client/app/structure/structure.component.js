@@ -155,6 +155,26 @@ export class StructureComponent {
       maxValue: 1000,
       minValue: 0,
       value: 0
+    },
+    {
+      type: 'select',
+      typeStructure: 'complex',
+      typeShow: 'item',
+      index: true,
+      value: '',
+      class: 'form_model',
+      header: 'Index',
+      options: [
+        {
+          display: 'Option 1',
+          value: 'Option 1',
+          code: 'Value 1'
+        }, {
+          display: 'Option 2',
+          value: 'Option 2',
+          code: 'Value 2'
+        }
+      ]
     }
   ];
   modelFormCustom = [];
@@ -326,6 +346,9 @@ export class StructureComponent {
   }
   addAutocalculated() {
     this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[13])));
+  }
+  addIndex() {
+    this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[14])));
   }
   deleteObject(modelsN, model) {
     console.log(model);
