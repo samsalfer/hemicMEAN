@@ -21,7 +21,7 @@
                     <div class="treeGlobal">
                       <ol class="tree">
                         <li ng-repeat="project in $ctrl.getCurrentUser().projects">
-                          <label>{{project.name}}</label>
+                          <label ng-click="$ctrl.selectProjectById(project._id)">{{project.name}}</label>
                           <input type="checkbox" />
                           <ol>
 
@@ -38,6 +38,36 @@
                       </ol>
 
                     </div>
+                  </div>
+                  <div class="col-sm-9" ng-show="$ctrl.projectSelected.name">
+                    <h3>{{$ctrl.projectSelected.name}}</h3>
+                    <p>{{$ctrl.projectSelected.description}} </p>
+
+                    <table class="table table-striped">
+                      <thead>
+                      <tr>
+                        <th>User</th>
+                        <th>Email</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr ng-repeat="user in $ctrl.projectSelected.users">
+                        <td>{{user.name}}</td>
+                        <td>{{user.email}}</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <input type="text" class="form-control" ng-model="$ctrl.newUser">
+                        </td>
+                        <td>
+                          <button type="button" ng-click="$ctrl.addUserProject()" id="save-action" class="btn btn-primary">
+                            Add User
+                          </button>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+
                   </div>
                   <div class="col-sm-9" ng-show="$ctrl.formSelected.statusForm">
                     <div>

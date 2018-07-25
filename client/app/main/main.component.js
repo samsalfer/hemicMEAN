@@ -39,7 +39,34 @@ export class MainController {
     }
   ];
   modelForm = [];
-  newThing = '';
+
+
+  vegetables = [
+    {
+      'name': 'Broccoli',
+      'type': 'Brassica'
+    },
+    {
+      'name': 'Cabbage',
+      'type': 'Brassica'
+    },
+    {
+      'name': 'Carrot',
+      'type': 'Umbelliferous'
+    },
+    {
+      'name': 'Lettuce',
+      'type': 'Composite'
+    },
+    {
+      'name': 'Spinach',
+      'type': 'Goosefoot'
+    }
+  ];
+
+  selectedVegetables = [];
+  selectedItem = null;
+  searchText = 'hola';
 
   /*@ngInject*/
   constructor($http, $scope, socket, eaTreeViewFactory) {
@@ -276,18 +303,24 @@ export class MainController {
   deleteOptionInCheck(i, j) {
     this.modelForm[i].options.splice(j, 1);
   }
-  addThing() {
-    if(this.newThing) {
-      this.$http.post('/api/things', {
-        name: this.newThing
-      });
-      this.newThing = '';
+
+  transformChip(chip) {
+    // If it is an object, it's already a known chip
+    if (angular.isObject(chip)) {
+      return chip;
     }
+
+    // Otherwise, create a new one
+    return { name: chip, type: 'new' };
   }
 
-  deleteThing(thing) {
-    this.$http.delete(`/api/things/${thing._id}`);
+  querySearch () {
+    // var results = this.vegetables.filter(query);
+    // return results;
+
+    return this.vegetables.filter(veggie => { return veggie.name.indexOf(this.searchText) === 0});
   }
+
 
 }
 

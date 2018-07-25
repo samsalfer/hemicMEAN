@@ -12,6 +12,7 @@ export class ValidationComponent {
   message='';
   widthAccepted = 0;
   widthRejected = 0;
+  projectSelected = {};
 
   /*@ngInject*/
   constructor($http, Auth, $mdDialog, $scope) {
@@ -89,10 +90,20 @@ export class ValidationComponent {
   }
   selectFormById(formId) {
     let $http = this.$http;
+    this.projectSelected = {};
     $http.get('api/forms/' + formId)
       .then(res => {
         this.formSelected = res.data;
         this.changeGraphics();
+      });
+  }
+  selectProjectById(projectId) {
+    let $http = this.$http;
+    this.formSelected = {};
+    $http.get('api/projects/' + projectId)
+      .then(res => {
+        this.projectSelected = res.data;
+        console.log(this.projectSelected);
       });
   }
   sendMessage(form) {

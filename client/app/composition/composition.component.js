@@ -23,7 +23,7 @@ export class CompositionComponent {
       class: 'form_model',
       header: 'Text Field',
       value: '',
-      maxLength: 2
+      maxLength: 100
     }, {
       type: 'number',
       typeStructure: 'simple',
@@ -75,7 +75,7 @@ export class CompositionComponent {
       class: 'form_model',
       header: 'Text Area',
       value: '',
-      maxLength: 2,
+      maxLength: 100,
       rows: 4
     }, {
       type: 'radioGroup',
@@ -135,16 +135,6 @@ export class CompositionComponent {
       multiple: true,
       container: [
       ]
-    }, , {
-      type: 'tab',
-      typeStructure: 'text',
-      typeShow: 'container',
-      class: 'header',
-      header: 'Tab',
-      value: '',
-      multiple: true,
-      container: [
-      ]
     }, {
       type: 'file',
       typeStructure: 'file',
@@ -172,18 +162,50 @@ export class CompositionComponent {
       maxValue: 1000,
       minValue: 0,
       value: 0
+    }, {
+      type: 'tab',
+      typeStructure: 'text',
+      typeShow: 'container',
+      class: 'header',
+      header: 'Tab',
+      value: '',
+      hidden: false,
+      container: [
+      ]
+    },
+    {
+      type: 'select',
+      typeStructure: 'complex',
+      typeShow: 'item',
+      value: '',
+      class: 'form_model',
+      header: 'Index',
+      options: [
+        {
+          display: 'Option 1',
+          value: 'Option 1',
+          code: 'Value 1'
+        }, {
+          display: 'Option 2',
+          value: 'Option 2',
+          code: 'Value 2'
+        }
+      ]
     }
   ];
   modelFormCustom = [];
-  modelForm = [{
-    type: 'section',
-    typeStructure: 'text',
-    typeShow: 'container',
-    class: 'header',
-    header: 'Section',
-    value: '',
-    container: [
-    ]}];
+  modelForm = [
+    {
+      type: 'tab',
+      typeStructure: 'text',
+      typeShow: 'container',
+      class: 'header',
+      header: 'Tab',
+      value: '',
+      hidden: true,
+      container: [
+      ]
+    }];
   nameForm = '';
   languageForm = '';
   projectForm = '';
@@ -225,6 +247,7 @@ export class CompositionComponent {
   // ];
   modelsN;
   modelz;
+  keepGoing = true;
 
   /*@ngInject*/
   constructor($scope, $mdToast, $mdDialog, $http, Auth) {
@@ -387,30 +410,58 @@ export class CompositionComponent {
 
     // this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[13])));
   }
+  addTab() {
+    this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[14])));
+  }
+  addIndex() {
+    this.selectCorrectObject(15);
+  }
 
   //guardo cuando pulso un elemento
   chooseModel(modelsN, modelz){
     this.modelsN = modelsN;
     this.modelz = modelz;
-    this.selectCorrectObject();
+    // this.selectCorrectObject();
+  }
+
+  hiddeTabs(index){
+    this.modelForm.forEach(m => {
+      if(m.type == 'tab'){
+        m.hidden = false;
+      }
+    });
+    this.modelForm[index].hidden = true;
+    this.chooseModel(null, this.modelForm[index]);
   }
 
   //selecciono el objecto correcto dentro de una sección y le añado el elemento
   selectCorrectObject(elementId){
     let models = this.modelsN ? this.modelsN : this.modelForm;
+    this.keepGoing = true;
     if(this.modelz) {
+      console.log(models);
       let index = models.indexOf(this.modelz);
       if (index < 0) {
         models.forEach(m => {
-          if (m.type === 'section') {
+          if ((m.type === 'section' || m.type === 'tab') && this.keepGoing) {
+            console.log('entra a cambiar el modelSN');
             this.modelsN = m.container;
             this.modelz = this.modelz;
-            this.selectCorrectObject();
+            this.selectCorrectObject(elementId);
           }
         });
       } else {
-        models.splice(index + 1, 0, JSON.parse(JSON.stringify(this.modelFormBasic[elementId])));
+        if(models[index].type == 'tab'){
+          var zone = models[index].container;
+          zone.push(JSON.parse(JSON.stringify(this.modelFormBasic[elementId])));
+          this.keepGoing = false;
+        }
+        else {
+          models.splice(index + 1, 0, JSON.parse(JSON.stringify(this.modelFormBasic[elementId])));
+          this.keepGoing = false;
+        }
       }
+
     }
     else{
       models.push(JSON.parse(JSON.stringify(this.modelFormBasic[elementId])));
@@ -424,7 +475,7 @@ export class CompositionComponent {
     let index = models.indexOf(model);
     if(index < 0) {
       models.forEach(m => {
-        if(m.type === 'section') {
+        if(m.type === 'section' || m.type === 'tab') {
           this.deleteObject(m.container, model);
         }
       });
@@ -442,7 +493,7 @@ export class CompositionComponent {
     let index = models.indexOf(model);
     if(index < 0) {
       models.forEach(m => {
-        if(m.type === 'section') {
+        if(m.type === 'section' || m.type === 'tab') {
           this.addOptionInCheck(m.container, model, indexOption);
         }
       });
@@ -455,7 +506,7 @@ export class CompositionComponent {
     let index = models.indexOf(model);
     if(index < 0) {
       models.forEach(m => {
-        if(m.type === 'section') {
+        if(m.type === 'section' || m.type === 'tab') {
           this.deleteOptionInCheck(m.container, model,i, j);
         }
       });
@@ -508,7 +559,7 @@ export class CompositionComponent {
     let index = models.indexOf(model);
     if(index < 0) {
       models.forEach(m => {
-        if(m.type === 'section') {
+        if(m.type === 'section' || m.type === 'tab') {
           this.changeType(m.container, model, type);
         }
       });
@@ -611,7 +662,7 @@ export class CompositionComponent {
       oldOptions[1].forEach(combineB => {
         newOptions.push({
           display: combineA.display + ' - ' + combineB.display,
-          value: combineA.value + ' - ' + combineB.value
+          code: combineA.code + ' | ' + combineB.code
         });
       });
     });

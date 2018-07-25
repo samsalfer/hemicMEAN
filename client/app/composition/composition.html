@@ -164,6 +164,13 @@
                         <!--</div>-->
                       <!--</li>-->
                     <!--</ul>-->
+                    <uib-tabset active="active">
+                      <uib-tab index="0" heading="+" ng-click="$ctrl.addTab()"></uib-tab>
+                      <uib-tab index="$index+1" ng-repeat="object in $ctrl.modelForm" heading="{{object.header}}" ng-if="object.type == 'tab'" ng-click="$ctrl.hiddeTabs($index)">
+                      </uib-tab>
+                    </uib-tabset>
+                    <!--<p ng-repeat="object in $ctrl.modelForm" ng-if="object.type == 'section'" ng-init="object.hidden = true;" ng-click="object.hidden = !object.hidden;"> {{object.type}}</p>-->
+
                     <!--- CON SECCIONES COMIENZO -->
                     <small ng-show="showCombineButton" id="combinecombineHelp" class="form-text text-muted">For correct combination you should check 2 inputs with options and pulse Confirm Combine</small>
 
@@ -176,8 +183,8 @@
                             dnd-selected="list.selected = m"
                             ng-class="{'selected': list.selected === m}"
                             ng-include="m.typeShow + '.html'"
-                            ng-click="$ctrl.chooseModel(null,m)">
-
+                            ng-click="$ctrl.chooseModel(null,m)"
+                            ng-if="!(m.hidden == false && m.type == 'tab')">
                         </li>
                       </ul>
                     </script>
@@ -193,9 +200,9 @@
                         </li>
                       </ul>
                     </script>
-
                     <script type="text/ng-template" id="container.html">
                       <div class="container-element box item box-blue">
+                        {{m.hidden}}
                         <div class="formComponent" ng-mouseenter="showHeaderButtons=true" ng-mouseleave="showHeaderButtons=false" >
                           <span class="{{m.class}} formLabel">{{m.header}}<span ng-if="m.required===true">*</span></span>
                           <md-button class="delete" ng-show="showHeaderButtons" ng-click="$ctrl.deleteObject(null,m)"><i class="fa fa-times" style="color: #d9534f;" aria-hidden="true" aria-label="delete"></i></md-button>
@@ -494,6 +501,8 @@
                         Magnitude</button>
                       <button ng-click="$ctrl.addAutocalculated()"><i class="fa fa-calculator" aria-hidden="true"></i>
                         Autocalculated</button>
+                      <button ng-click="$ctrl.addIndex()"><i class="fa fa-calculator" aria-hidden="true"></i>
+                        Index</button>
                     </div>
                     <div class="form-actions">
                       <button type="button" ng-click="$ctrl.clear()" id="clear-action" class="btn btn-danger">Clear</button>
