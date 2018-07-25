@@ -211,6 +211,8 @@ export class CompositionComponent {
   projectForm = '';
   versionForm = '';
 
+
+  listTypeSelect = {};
   example = [];
     // [
     //   {

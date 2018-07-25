@@ -202,7 +202,6 @@
                     </script>
                     <script type="text/ng-template" id="container.html">
                       <div class="container-element box item box-blue">
-                        {{m.hidden}}
                         <div class="formComponent" ng-mouseenter="showHeaderButtons=true" ng-mouseleave="showHeaderButtons=false" >
                           <span class="{{m.class}} formLabel">{{m.header}}<span ng-if="m.required===true">*</span></span>
                           <md-button class="delete" ng-show="showHeaderButtons" ng-click="$ctrl.deleteObject(null,m)"><i class="fa fa-times" style="color: #d9534f;" aria-hidden="true" aria-label="delete"></i></md-button>
@@ -216,6 +215,13 @@
                                 <label class="control-label col-sm-2" for="label">Label:</label>
                                 <div class="col-sm-10">
                                   <input type="text" class="form-control" id="label" ng-model="m.header" >
+                                </div>
+                              </div>
+                              <!--Code-->
+                              <div class="form-group">
+                                <label class="control-label col-sm-2" for="code1">Code:</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="code1" ng-model="m.code" >
                                 </div>
                               </div>
                             </form>
