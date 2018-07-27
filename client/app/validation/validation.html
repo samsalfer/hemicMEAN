@@ -71,7 +71,7 @@
                   </div>
                   <div class="col-sm-9" ng-show="$ctrl.formSelected.statusForm">
                     <div>
-                      <a ng-click="showModelForm('#modelConfirm')" class="icon deny"><span class="fa fa-trash fa-2x"></span></a>
+                      <!--<a ng-click="showModelForm('#modelConfirm')" class="icon deny"><span class="fa fa-trash fa-2x"></span></a>-->
                       <h3 style="display:inline;">{{$ctrl.formSelected.name}}</h3>
                       <span ng-show="$ctrl.formSelected.statusForm === 'accepted'"  class="label label-success">Publish</span>
                       <span ng-show="$ctrl.formSelected.statusForm === 'pending'" class="label label-warning">Working</span>
@@ -82,11 +82,6 @@
                       <uib-tab index="0" heading="Form">
                         <div class="panel panel-default">
                           <div class="panel-body">
-                            <div style="text-align: center;">
-                              <span ng-show="$ctrl.isAdmin()" class="label label-success" ng-click="$ctrl.accept($ctrl.formSelected)">Publish</span>
-                              <span ng-show="$ctrl.isAdmin()" class="label label-warning" ng-click="$ctrl.working($ctrl.formSelected)">Working</span>
-                              <span ng-show="$ctrl.isAdmin()" class="label label-danger" ng-click="$ctrl.deny($ctrl.formSelected)">Rejected</span>
-                            </div>
                             <br>
                             <!--Formulario previsualización-->
                             <div class="col-sm-12 simpleDemo">
@@ -310,7 +305,7 @@
                                                   <input type="text" id="optionCheckbox" class="form-control" ng-model="v.display" >
                                                 </div>
                                                 <div class="col-sm-5">
-                                                  <input type="text" class="form-control" ng-model="v.display" >
+                                                  <input type="text" class="form-control" ng-model="v.code" >
                                                 </div>
                                               </div>
                                             </div>
@@ -348,6 +343,47 @@
                               </div>
                               <!--- CON SECCCIONES FIN ---->
                             </div>
+                          </div>
+                        </div>
+                      </uib-tab>
+                      <uib-tab index="3" heading="Details">
+
+                        <!--Detalles del formulario-->
+                        <div class="panel panel-default">
+                          <div class="panel-body">
+                            <div style="text-align: center;">
+                              <span ng-show="$ctrl.isAdmin()" class="label label-success" ng-click="$ctrl.accept($ctrl.formSelected)">Publish</span>
+                              <span ng-show="$ctrl.isAdmin()" class="label label-warning" ng-click="$ctrl.working($ctrl.formSelected)">Working</span>
+                              <span ng-show="$ctrl.isAdmin()" class="label label-danger" ng-click="$ctrl.deny($ctrl.formSelected)">Rejected</span>
+                            </div>
+
+                            <div class="form-group">
+                              <label>Description</label>
+                              <input class="form-control" id="description" placeholder="" ng-model="$ctrl.newProject.description">
+                            </div>
+                            <div class="form-group">
+                              <label>Keywords</label>
+                              <input class="form-control" id="description" placeholder="" ng-model="$ctrl.newProject.description">
+                            </div>
+                            <div class="form-group">
+                              <label>Purpose</label>
+                              <input class="form-control" id="description" placeholder="" ng-model="$ctrl.newProject.description">
+                            </div>
+                            <div class="form-group">
+                              <label>Use</label>
+                              <input class="form-control" id="description" placeholder="" ng-model="$ctrl.newProject.description">
+                            </div>
+                            <div class="form-group">
+                              <label>Misuse</label>
+                              <input class="form-control" id="description" placeholder="" ng-model="$ctrl.newProject.description">
+                            </div>
+                            <div class="form-group">
+                              <label>References</label>
+                              <input class="form-control" id="description" placeholder="" ng-model="$ctrl.newProject.description">
+                            </div>
+
+                            <h4><a ng-click="showModelForm('#modelConfirm')" class="icon deny"><span class="fa fa-trash"> Delete Form</span></a></h4>
+
                           </div>
                         </div>
                       </uib-tab>
@@ -393,12 +429,29 @@
                           <div class="panel-body">
                             <div class="row">
                               <div class="col-sm-12 panel-title" >
-                               Research Platforms
+                                Health Platforms
                               </div>
                             </div>
                             <div class="row">
                               <div class="col-sm-4">
                                 <a target="_blank" href="https://www.juntadeandalucia.es/servicioandaluzdesalud/hhuuvr/esaludpre/MirthOperaciones/HEMIC_IB/{{$ctrl.formSelected._id}}">
+                                  <img class="resize"  src="assets/images/Diraya.jpg" alt="...">
+                                </a>
+                              </div>
+                              <div class="col-sm-4">
+                              </div>
+                              <div class="col-sm-4">
+                              </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                              <div class="col-sm-12 panel-title" >
+                               Research Platforms
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-sm-4">
+                                <a target="_blank" href="https://www.juntadeandalucia.es/servicioandaluzdesalud/hhuuvr/esaludpre/MirthOperaciones/HEMIC_G/{{$ctrl.formSelected._id}}">
                                   <img class="resize"  src="assets/images/ITCBio_logo.jpg" alt="...">
                                 </a>
                               </div>

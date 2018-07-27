@@ -301,6 +301,9 @@
                               <input type="file" class="form-control">
                             </div>
                             <!--Autocalculated-->
+                            <div ng-if="m.type === 'auto' ">
+                              <button class="btn btn-default" ng-click="$ctrl.clearAllItems(); showModelForm('#autoForm')" id="autoForm1">CallModal</button>
+                            </div>
                           </div>
                           <!--------------------Edition view----------------->
                           <div ng-if="m.edit" style="padding:10px">
@@ -434,6 +437,31 @@
                                     <button class="btn btn-default" ng-click="$ctrl.changeType(null, m, 3)">Select</button>
                                     <button class="btn btn-default" ng-click="$ctrl.changeType(null, m, 2)">CheckBox</button>
                                     <button class="btn btn-default" ng-click="$ctrl.changeType(null, m, 5)">Radio Group</button>
+                                  </div>
+                                </div>
+                                <!--Conditional screen || Temporal-->
+                                <div class="form-group" ng-if="$ctrl.flagForm && m.type!='file' && m.type!='header' && m.type!='auto'">
+                                  <label class="control-label col-sm-2" for="conditional">Conditional view:</label>
+                                  <div class="col-sm-10">
+                                    <div class="col-sm-1 checkbox">
+                                      <label><input type="checkbox" id="conditional" ng-model="m.conditional" ng-click="$ctrl.clearAllItems()"> </label>
+                                    </div>
+                                    <div ng-if="m.conditional == true ">
+                                      <div class="col-sm-4">
+                                        <select class="form-control" id="selCond" ng-model="m.conditionalSelect">
+                                          <option ng-repeat="option in $ctrl.allSelectItems" ng-value="option">
+                                            {{option.header}}
+                                          </option>
+                                        </select>
+                                      </div>
+                                      <div class="col-sm-4">
+                                        <select class="form-control" id="selCond2" ng-model="m.conditionalRequest">
+                                          <option ng-repeat="request in m.conditionalSelect.options">
+                                            {{request.display}}
+                                          </option>
+                                        </select>
+                                      </div>
+                                    </div>
                                   </div>
                                 </div>
                               </form>
@@ -609,6 +637,45 @@
         </md-dialog-content>
         <md-dialog-actions layout="row">
           <button type="button" ng-click="$ctrl.saveForm();hideModelForm()" class="btn btn-primary btn-block">Save</button>
+        </md-dialog-actions>
+
+      </md-dialog>
+    </div>
+  </div>
+
+  <!--Modal Autocalculate-->
+  <div style="visibility: hidden">
+    <div class="md-dialog-container" layout="row" class="profile" layout-wrap id="autoForm">
+      <md-dialog flex="50">
+        <md-toolbar>
+          <div class="md-toolbar-tools dialog-header">
+            Creator
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="hideModelForm()">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </md-button>
+          </div>
+        </md-toolbar>
+        <md-dialog-content>
+          <div class="panel panel-default">
+            <div class="panel-body">
+
+              </md-input-container>
+              <button ng-click="$ctrl.operator=$ctrl.operator+'+'"class="btn btn-default " ng-click="">+</button>
+              <button ng-click="$ctrl.operator=$ctrl.operator+'-'"class="btn btn-default " ng-click="">-</button>
+              <button ng-click="$ctrl.operator=$ctrl.operator+'*'" class="btn btn-default " ng-click="">*</button>
+              <button ng-click="$ctrl.operator=$ctrl.operator+'/'" class="btn btn-default " ng-click="">/</button>
+              <button ng-click="$ctrl.operator=$ctrl.operator+'('" class="btn btn-default " ng-click="">(</button>
+              <button ng-click="$ctrl.operator=$ctrl.operator+')'" class="btn btn-default " ng-click="">)</button>
+              <button class="btn btn-default " ng-click="$ctrl.operator=$ctrl.operator+item.header+' ';" ng-repeat="item in $ctrl.allItemsForm">{{item.header}}</button>
+
+              </br>
+              <input style="margin-top:23px" ng-model="$ctrl.operator" class="form-control"/>
+            </div>
+
+          </div>        </md-dialog-content>
+        <md-dialog-actions layout="row">
+          <button type="button" class="btn btn-primary btn-block">Copy Data</button>
         </md-dialog-actions>
 
       </md-dialog>

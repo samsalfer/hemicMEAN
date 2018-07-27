@@ -210,6 +210,8 @@ export class CompositionComponent {
   languageForm = '';
   projectForm = '';
   versionForm = '';
+  allItemsForm = [];
+  allSelectItems = [];
 
   example = [];
     // [
@@ -292,7 +294,7 @@ export class CompositionComponent {
     let $mdToast = this.$mdToast;
     let $mdDialog = this.$mdDialog;
     let $http = this.$http;
-
+    this.chooseModel(null, this.modelForm[0]);
     $http.get('api/forms')
       .then(res => {
         this.modelFormCustom = res.data;
@@ -343,70 +345,70 @@ export class CompositionComponent {
   }
 
   addText() {
-    this.selectCorrectObject(0);
+    this.selectCorrectObject(JSON.parse(JSON.stringify(this.modelFormBasic[0])));
     // this.modelForm[0].container.push(JSON.parse(JSON.stringify(this.modelFormBasic[0])));
   }
   addNumber() {
-    this.selectCorrectObject(1);
+    this.selectCorrectObject(JSON.parse(JSON.stringify(this.modelFormBasic[1])));
     // this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[1])));
   }
   addCheck() {
-    this.selectCorrectObject(2);
+    this.selectCorrectObject(JSON.parse(JSON.stringify(this.modelFormBasic[2])));
 
     // this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[2])));
   }
   addSelect() {
-    this.selectCorrectObject(3);
+    this.selectCorrectObject(JSON.parse(JSON.stringify(this.modelFormBasic[3])));
 
     // this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[3])));
   }
   addTextArea() {
-    this.selectCorrectObject(4);
+    this.selectCorrectObject(JSON.parse(JSON.stringify(this.modelFormBasic[4])));
 
     // this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[4])));
   }
   addRadioGroup() {
-    this.selectCorrectObject(5);
+    this.selectCorrectObject(JSON.parse(JSON.stringify(this.modelFormBasic[5])));
 
     // this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[5])));
   }
   addHeader() {
-    this.selectCorrectObject(6);
+    this.selectCorrectObject(JSON.parse(JSON.stringify(this.modelFormBasic[6])));
 
     // this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[6])));
   }
   addParagraph() {
-    this.selectCorrectObject(7);
+    this.selectCorrectObject(JSON.parse(JSON.stringify(this.modelFormBasic[7])));
 
     // this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[7])));
   }
   addDateField() {
-    this.selectCorrectObject(8);
+    this.selectCorrectObject(JSON.parse(JSON.stringify(this.modelFormBasic[8])));
 
     // this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[8])));
   }
   addSection() {
-    this.selectCorrectObject(9);
+    this.selectCorrectObject(JSON.parse(JSON.stringify(this.modelFormBasic[9])));
 
     // this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[9])));
   }
   addTable() {
-    this.selectCorrectObject(10);
+    this.selectCorrectObject(JSON.parse(JSON.stringify(this.modelFormBasic[10])));
 
     // this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[10])));
   }
   addFile() {
-    this.selectCorrectObject(11);
+    this.selectCorrectObject(JSON.parse(JSON.stringify(this.modelFormBasic[11])));
 
     // this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[11])));
   }
   addMagnitude() {
-    this.selectCorrectObject(12);
+    this.selectCorrectObject(JSON.parse(JSON.stringify(this.modelFormBasic[12])));
 
     // this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[12])));
   }
   addAutocalculated() {
-    this.selectCorrectObject(13);
+    this.selectCorrectObject(JSON.parse(JSON.stringify(this.modelFormBasic[13])));
 
     // this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[13])));
   }
@@ -414,7 +416,7 @@ export class CompositionComponent {
     this.modelForm.push(JSON.parse(JSON.stringify(this.modelFormBasic[14])));
   }
   addIndex() {
-    this.selectCorrectObject(15);
+    this.selectCorrectObject(JSON.parse(JSON.stringify(this.modelFormBasic[15])));
   }
 
   //guardo cuando pulso un elemento
@@ -435,7 +437,7 @@ export class CompositionComponent {
   }
 
   //selecciono el objecto correcto dentro de una sección y le añado el elemento
-  selectCorrectObject(elementId){
+  selectCorrectObject(element){
     let models = this.modelsN ? this.modelsN : this.modelForm;
     this.keepGoing = true;
     if(this.modelz) {
@@ -447,24 +449,24 @@ export class CompositionComponent {
             console.log('entra a cambiar el modelSN');
             this.modelsN = m.container;
             this.modelz = this.modelz;
-            this.selectCorrectObject(elementId);
+            this.selectCorrectObject(element);
           }
         });
       } else {
         if(models[index].type == 'tab'){
           var zone = models[index].container;
-          zone.push(JSON.parse(JSON.stringify(this.modelFormBasic[elementId])));
+          zone.push(element);
           this.keepGoing = false;
         }
         else {
-          models.splice(index + 1, 0, JSON.parse(JSON.stringify(this.modelFormBasic[elementId])));
+          models.splice(index + 1, 0, element);
           this.keepGoing = false;
         }
       }
 
     }
     else{
-      models.push(JSON.parse(JSON.stringify(this.modelFormBasic[elementId])));
+      models.push(element);
     }
   }
   deleteObject(modelsN, model) {
@@ -537,7 +539,8 @@ export class CompositionComponent {
 
   addFormCustom(form) {
     form.forEach(f => {
-      this.modelForm.push(angular.copy(f));
+      this.selectCorrectObject(angular.copy(f));
+      // this.modelForm.push(angular.copy(f));
     });
   }
 
@@ -578,6 +581,30 @@ export class CompositionComponent {
     }
   }
 
+
+  // Consigue todos los elementos del formulario
+  getAllItems(container){
+    container.forEach(i => {
+      if(i.typeShow == 'container'){
+        this.getAllItems(i.container);
+      }
+      else{
+        this.allItemsForm.push(i);
+        if(i.typeStructure == 'complex')
+          this.allSelectItems.push(i);
+      }
+    })
+  }
+
+  //limpia allItemsForm
+  clearAllItems(){
+    console.log('Entra');
+    this.allItemsForm = [];
+    this.allSelectItems = [];
+
+    this.getAllItems(this.modelForm);
+
+  }
   saveForm() {
     let getCurrentUser2 = this.getCurrentUser();
 
