@@ -130,6 +130,13 @@
                                             <input type="text" class="form-control" id="label" ng-model="m.header" >
                                           </div>
                                         </div>
+                                        <!--Code-->
+                                        <div class="form-group">
+                                          <label class="control-label col-sm-2" for="code1">Code:</label>
+                                          <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="code1" ng-model="m.code" >
+                                          </div>
+                                        </div>
                                       </form>
                                       <!--close button-->
                                       <div class="row">
@@ -382,7 +389,7 @@
                               <input class="form-control" id="description" placeholder="" ng-model="$ctrl.newProject.description">
                             </div>
 
-                            <h4><a ng-click="showModelForm('#modelConfirm')" class="icon deny"><span class="fa fa-trash"> Delete Form</span></a></h4>
+                            <h4><a ng-click="showModelForm('#modelConfirm')" class="icon deny"><span class="fa fa-trash"> Delete Form</span></a> </h4>
 
                           </div>
                         </div>
@@ -392,8 +399,8 @@
                         <!--Mensajes de usuarios-->
                         <div class="panel panel-default">
                           <div class="panel-body">
-                            <h4>{{$ctrl.formSelected.statusForm}}</h4>
-
+                            <h4>Level of agreement:</h4>
+                            <!--{{$ctrl.formSelected.statusForm}}-->
                             <div class="progress">
                               <div class="progress-bar progress-bar-success" role="progressbar" style="width:{{$ctrl.widthAccepted}}%">
                                 Accepted
@@ -402,8 +409,9 @@
                                 Rejected
                               </div>
                             </div>
-                            <a ng-click="$ctrl.changeStateForm(true)" class="icon accept"><span class="fa  fa-thumbs-o-up fa-2x"></span></a>
-                            <a ng-click="$ctrl.changeStateForm(false)" class="icon deny"><span class="fa fa-times fa-2x"></span></a>
+                            <h5>Are you agree the defined Form?</h5>
+                            <a ng-click="$ctrl.changeStateForm(true)" class="icon accept"><span class="fa  fa-thumbs-o-up fa-2x"></span> Yes</a>
+                            <a ng-click="$ctrl.changeStateForm(false)" class="icon deny"><span class="fa fa-times fa-2x"></span> No</a>
                             <ul class="list-group user-list">
                               <li class="list-group-item" ng-repeat="n in $ctrl.formSelected.messages track by $index">
                                 <div class="user-info">
@@ -415,7 +423,7 @@
                             <div class="col-sm-10">
 
                               <div class="form-group">
-                                <input class="form-control" ng-keydown="$event.keyCode === 13 && $ctrl.sendMessage($ctrl.formSelected)" ng-model="$ctrl.message" class="form-control" rows="5" id="message"></input>
+                                <input class="form-control" ng-keydown="$event.keyCode === 13 && $ctrl.sendMessage($ctrl.formSelected)" ng-model="$ctrl.message" class="form-control" rows="5" id="message" placeholder="Send a Message"></input>
                               </div>
                             </div>
                             <div class="col-sm-2">

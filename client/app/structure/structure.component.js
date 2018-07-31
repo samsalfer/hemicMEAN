@@ -181,6 +181,7 @@ export class StructureComponent {
   modelForm = [];
   nameForm = '';
   example = [];
+  allItemsForm = [];
   // [
   //   {
   //     type: 'text',
@@ -437,6 +438,25 @@ export class StructureComponent {
     }
   }
 
+  // Consigue todos los elementos del formulario
+  getAllItems(container){
+    container.forEach(i => {
+      if(i.typeShow == 'container'){
+        this.getAllItems(i.container);
+      }
+      else{
+        this.allItemsForm.push(i);
+      }
+    })
+  }
+
+  //limpia allItemsForm
+  clearAllItems(){
+    console.log('Entra');
+    this.allItemsForm = [];
+    this.getAllItems(this.modelForm);
+
+  }
   saveForm() {
     let getCurrentUser2 = this.getCurrentUser();
     // Esto funcionaba!

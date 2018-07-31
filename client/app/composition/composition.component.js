@@ -674,6 +674,7 @@ export class CompositionComponent {
   }
   combineFunction() {
     var oldHeaderCombine = '';
+    var oldCodeCombine = '';
     var oldOptions = [];
     var newOptions = [];
     var modelAux = JSON.parse(JSON.stringify(this.modelFormBasic[3]));
@@ -681,9 +682,13 @@ export class CompositionComponent {
     this.combineElements.forEach(m => {
       m.selectCombineElement = false; //pongo el select a falso en la interfaz
       oldHeaderCombine += m.header + '-';
+      oldCodeCombine += m.code + '|';
+
       oldOptions.push(m.options);
     });
     oldHeaderCombine = oldHeaderCombine.slice(0, -1);
+    oldCodeCombine = oldCodeCombine.slice(0, -1);
+
 
     oldOptions[0].forEach(combineA => {
       oldOptions[1].forEach(combineB => {
@@ -694,6 +699,7 @@ export class CompositionComponent {
       });
     });
     modelAux.header = oldHeaderCombine;
+    modelAux.code = oldCodeCombine;
     modelAux.options = newOptions;
     this.modelForm.push(JSON.parse(JSON.stringify(modelAux)));
     this.combineElements = [];
