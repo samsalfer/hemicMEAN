@@ -438,6 +438,11 @@ export class StructureComponent {
     }
   }
 
+  copyItem(item){
+
+    this.modelForm.push(angular.copy(item));
+
+  }
   // Consigue todos los elementos del formulario
   getAllItems(container){
     container.forEach(i => {

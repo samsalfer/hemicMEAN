@@ -581,6 +581,11 @@ export class CompositionComponent {
     }
   }
 
+  copyItem(item){
+
+    this.selectCorrectObject(angular.copy(item));
+
+  }
 
   // Consigue todos los elementos del formulario
   getAllItems(container){

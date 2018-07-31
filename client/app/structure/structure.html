@@ -195,6 +195,7 @@
                           <span class="{{m.class}} formLabel">{{m.header}}<span ng-if="m.required===true">*</span></span>
                           <md-button class="delete" ng-show="showHeaderButtons" ng-click="$ctrl.deleteObject(null,m)"><i class="fa fa-times" style="color: #d9534f;" aria-hidden="true" aria-label="delete"></i></md-button>
                           <md-button class="edit" ng-show="showHeaderButtons" ng-click=" m.edit=true "><i class="fa fa-pencil" style="color: #105cb6;" aria-hidden="true" aria-label="edit"></i></md-button>
+                          <md-button class="edit" ng-show="showHeaderButtons" ng-click="$ctrl.copyItem(m)"><i class="fa fa-clone" style="color: #105cb6;" aria-hidden="true" aria-label="clone"></i></md-button>
                         </div>
                         <!--Editar para la sección-->
                         <div ng-if="m.edit" style="padding:10px">
@@ -234,6 +235,8 @@
 
                           <md-button class="delete" ng-show="showHeaderButtons" dnd-list="[]" ng-click="$ctrl.deleteObject(null,m)"><i class="fa fa-times" style="color: #d9534f;" aria-hidden="true" aria-label="delete"></i></md-button>
                           <md-button class="edit" ng-show="showHeaderButtons" ng-click=" m.edit=true "><i class="fa fa-pencil" style="color: #105cb6;" aria-hidden="true" aria-label="edit"></i></md-button>
+                          <md-button class="edit" ng-show="showHeaderButtons" ng-click="$ctrl.copyItem(m)"><i class="fa fa-clone" style="color: #105cb6;" aria-hidden="true" aria-label="clone"></i></md-button>
+
                           <md-button uib-tooltip="{{m.helptext}}" class="delete" ng-show="showHeaderButtons" dnd-list="[]" ng-click=""><i class="fa fa-question" style="color: #3c763d;" aria-hidden="true" aria-label="help"></i></md-button>
 
                           <div ng-if="!m.edit">
@@ -480,7 +483,7 @@
                         Magnitude</button>
                       <button ng-click="$ctrl.addAutocalculated()"><i class="fa fa-calculator" aria-hidden="true"></i>
                         Autocalculated</button>
-                      <button ng-click="$ctrl.addIndex()"><i class="fa fa-calculator" aria-hidden="true"></i>
+                      <button ng-click="$ctrl.addIndex()"><i class="fa fa-list-ol" aria-hidden="true"></i>
                         Index</button>
                     </div>
                     <div class="form-actions">
