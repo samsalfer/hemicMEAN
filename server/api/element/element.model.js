@@ -25,6 +25,7 @@ let ElementSchema = new mongoose.Schema({
   rows: Number,
   defaultValue: String,
   code: String,
+  unit: String,
   terminology: String,
   version: String
 });
