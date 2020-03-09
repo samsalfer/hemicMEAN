@@ -9,6 +9,8 @@ import User from '../api/user/user.model';
 import Structure from '../api/structure/structure.model';
 import Element from '../api/element/element.model';
 import Terminology from '../api/terminology/terminology.model';
+import Project from '../api/project/project.model';
+
 import Form from '../api/form/form.model';
 import Q from 'q';
 import config from './environment/';
@@ -49,81 +51,81 @@ export default function seedDatabaseIfNeeded() {
     //   })
     //   .then(() => console.log('finished populating things'))
     //   .catch(err => console.log('error populating things', err));
-    let users = [
-      {
-        provider: 'local',
-        name: 'Test User',
-        email: 'test@example.com',
-        password: 'test'
-      }, {
-        provider: 'local',
-        role: 'admin',
-        name: 'Admin',
-        email: 'admin@example.com',
-        password: 'admin'
-      }];
-    let structures = [
-      {
-        idStructure: 'Prescripción',
-        version: '0',
-        name: 'Escala APGAR',
-        codeTerm: 'xxxx',
-        idPath: 'at0001',
-        lifeCycle: 'lifeCycle1',
-        language: 'Spanish'
-      },
-      {
-        idStructure: 'Vacuna',
-        version: '0',
-        name: 'Escala RAU',
-        codeTerm: 'xxxx',
-        idPath: 'at0001',
-        lifeCycle: 'lifeCycle2',
-        language: 'Spanish'
-      },
-      {
-        idStructure: 'Enfermedad',
-        version: '0',
-        name: 'Escala PERF',
-        codeTerm: 'xxxx',
-        idPath: 'at0001',
-        lifeCycle: 'lifeCycle3',
-        language: 'Spanish'
-      }];
-    let elements = [
-      {
-        structures: [],
-        name: 'Dosis',
-        codeTerm: 'cccc',
-        typeData: 'pq',
-        terms: [
-          {
-            name: 'Units',
-            datas: ['mg', 'g', 'kg']
-          },
-          {
-            name: 'Amount',
-            datas: [10, 100, 1000]
-          }
-        ]
-      },
-      {
-        structures: [],
-        name: 'Principio activo',
-        codeTerm: 'cccc',
-        typeData: 'real',
-        terms: [
-          {
-            name: 'Principio activo',
-            datas: ['Bilastina', 'Cetirizina']
-          }, {
-            name: 'Presentación',
-            datas: ['Comprimido', 'Pulv Nasal']
-          }
-        ]
-      }
-
-    ];
+    // let users = [
+    //   {
+    //     provider: 'local',
+    //     name: 'Test User',
+    //     email: 'test@example.com',
+    //     password: 'test'
+    //   }, {
+    //     provider: 'local',
+    //     role: 'admin',
+    //     name: 'Admin',
+    //     email: 'admin@example.com',
+    //     password: 'admin'
+    //   }];
+    // let structures = [
+    //   {
+    //     idStructure: 'Prescripción',
+    //     version: '0',
+    //     name: 'Escala APGAR',
+    //     codeTerm: 'xxxx',
+    //     idPath: 'at0001',
+    //     lifeCycle: 'lifeCycle1',
+    //     language: 'Spanish'
+    //   },
+    //   {
+    //     idStructure: 'Vacuna',
+    //     version: '0',
+    //     name: 'Escala RAU',
+    //     codeTerm: 'xxxx',
+    //     idPath: 'at0001',
+    //     lifeCycle: 'lifeCycle2',
+    //     language: 'Spanish'
+    //   },
+    //   {
+    //     idStructure: 'Enfermedad',
+    //     version: '0',
+    //     name: 'Escala PERF',
+    //     codeTerm: 'xxxx',
+    //     idPath: 'at0001',
+    //     lifeCycle: 'lifeCycle3',
+    //     language: 'Spanish'
+    //   }];
+    // let elements = [
+    //   {
+    //     structures: [],
+    //     name: 'Dosis',
+    //     codeTerm: 'cccc',
+    //     typeData: 'pq',
+    //     terms: [
+    //       {
+    //         name: 'Units',
+    //         datas: ['mg', 'g', 'kg']
+    //       },
+    //       {
+    //         name: 'Amount',
+    //         datas: [10, 100, 1000]
+    //       }
+    //     ]
+    //   },
+    //   {
+    //     structures: [],
+    //     name: 'Principio activo',
+    //     codeTerm: 'cccc',
+    //     typeData: 'real',
+    //     terms: [
+    //       {
+    //         name: 'Principio activo',
+    //         datas: ['Bilastina', 'Cetirizina']
+    //       }, {
+    //         name: 'Presentación',
+    //         datas: ['Comprimido', 'Pulv Nasal']
+    //       }
+    //     ]
+    //   }
+    //
+    // ];
 
     User.find({}).remove()
       .then(() => {
@@ -147,38 +149,43 @@ export default function seedDatabaseIfNeeded() {
           .catch(err => console.log('error remove forms: ', err));
       })
       .then(() => {
-        return User.create(users)
-          .then(() => console.log('finished populating users'))
-          .catch(err => console.log('error populating users', err));
+        return Project.find({}).remove()
+          .then(() => console.log('remove projects'))
+          .catch(err => console.log('error remove forms: ', err));
       })
-      .then(() => {
-        return Structure.create(structures)
-          .then(() => console.log('finished populating structures'))
-          .catch(err => console.log('error populating structures', err));
-      })
-      .then(() => {
-        return Structure.findOne({idStructure: 'Prescripción'}).exec()
-          .then(structure => {
-            elements.forEach(element => {
-              element.structures.push(structure._id);
-            });
-            return Element.create(elements)
-              .then(elements2 => {
-                let idsElements = [];
-                elements2.forEach(element2 => {
-                  idsElements.push(element2._id);
-                });
-                return idsElements;
-              })
-              .then(elements3 => {
-                return Structure.findByIdAndUpdate(structure._id, {elements: elements3}).exec()
-                  .then(() => console.log('finished populating structures with elements'))
-                  .catch(err => console.log('error populating structures with elements', err));
-              })
-              .then(() => console.log('finished populating elements'))
-              .catch(err => console.log('error populating elements', err));
-          });
-      });
+      // .then(() => {
+      //   return User.create(users)
+      //     .then(() => console.log('finished populating users'))
+      //     .catch(err => console.log('error populating users', err));
+      // })
+      // .then(() => {
+      //   return Structure.create(structures)
+      //     .then(() => console.log('finished populating structures'))
+      //     .catch(err => console.log('error populating structures', err));
+      // })
+      // .then(() => {
+      //   return Structure.findOne({idStructure: 'Prescripción'}).exec()
+      //     .then(structure => {
+      //       elements.forEach(element => {
+      //         element.structures.push(structure._id);
+      //       });
+      //       return Element.create(elements)
+      //         .then(elements2 => {
+      //           let idsElements = [];
+      //           elements2.forEach(element2 => {
+      //             idsElements.push(element2._id);
+      //           });
+      //           return idsElements;
+      //         })
+      //         .then(elements3 => {
+      //           return Structure.findByIdAndUpdate(structure._id, {elements: elements3}).exec()
+      //             .then(() => console.log('finished populating structures with elements'))
+      //             .catch(err => console.log('error populating structures with elements', err));
+      //         })
+      //         .then(() => console.log('finished populating elements'))
+      //         .catch(err => console.log('error populating elements', err));
+      //     });
+      // });
 
   }
 }
